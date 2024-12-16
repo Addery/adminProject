@@ -1,0 +1,10 @@
+
+*.png
+*.csv
+*.ini
+*.txt
+*.rar
+/vue2/lardavme/node_modules
+/vue2/ladar(2)/ladar/node_modules
+/vue2/ladar/node_modules
+/front_vue/node_modules
