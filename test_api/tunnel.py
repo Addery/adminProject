@@ -10,17 +10,21 @@
 import requests
 
 
+ip = "http://127.0.0.1"
+port = "5000"
+
+
 def tunnel_add():
     """
     添加隧道
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/tunnel_db/addTunnel"
+    url = f"{ip}:{port}/api/outer/tunnel_db/addTunnel"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
-        "TunCode": "1006",
+        "TunCode": "1007",
         "TunName": "name",
         "LinkMan": "link",
         "Phone": "12346",
@@ -37,13 +41,13 @@ def tunnel_delete():
     删除隧道
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/tunnel_db/deleteTunnel"
+    url = f"{ip}:{port}/api/outer/tunnel_db/deleteTunnel"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
-        "TunCode": "1002",
-        "ProCode": "1003"
+        "TunCode": "1007",
+        "ProCode": "1004"
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -55,16 +59,17 @@ def tunnel_update():
     删除隧道
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/tunnel_db/updateTunnel"
+    url = f"{ip}:{port}/api/outer/tunnel_db/updateTunnel"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
-        "TunCode": "1004",
+        "TunCode": "1007",
         "ProCode": "1002",
         "LinkMan": "123",
         "Phone": "123456",
         "TunName": "name",
+        "High": "6",
         "OldTunCode": "1006",
         "OldProCode": "1004"
     }
@@ -78,7 +83,7 @@ def tunnel_select():
     隧道信息
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/tunnel_db/selectTunnel"
+    url = f"{ip}:{port}/api/outer/tunnel_db/selectTunnel"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -92,7 +97,7 @@ def tunnel_select():
 
 
 def tunnel_info_search_by_column():
-    url = "http://127.0.0.1:8023/api/outer/tunnel_db/searchTunnelByColumn"
+    url = f"{ip}:{port}/api/outer/tunnel_db/searchTunnelByColumn"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -106,8 +111,8 @@ def tunnel_info_search_by_column():
 
 
 if __name__ == "__main__":
-    tunnel_add()
+    # tunnel_add()
     # tunnel_delete()
     # tunnel_update()
     # tunnel_select()
-    # tunnel_info_search_by_column()
+    tunnel_info_search_by_column()

@@ -11,10 +11,10 @@
 from flask import jsonify, request, Blueprint
 from pymysql.cursors import DictCursor
 
-from outer.routes.local.status_code.baseHttpStatus import BaseHttpStatus
-from outer.routes.local.status_code.projectHttpStatus import ProjectHttpStatus
-from outer.utils.util_database import DBUtils
-from outer.routes.local.status_code.userHttpStatus import UserHttpStatus
+from routes.local.status_code.baseHttpStatus import BaseHttpStatus
+from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
+from utils.util_database import DBUtils
+from routes.local.status_code.userHttpStatus import UserHttpStatus
 
 user_db = Blueprint('user_db', __name__)
 
@@ -28,8 +28,8 @@ def user_login():
     try:
         data = request.json
         # 获取用户登录信息
-        username = data.get('username')
-        password = data.get('password')
+        username = data.get('UserName')
+        password = data.get('PassWord')
         pro_code = data.get('ProCode')
     except Exception as e:
         return jsonify({"code": BaseHttpStatus.GET_DATA_ERROR.value, "msg": "登录失败", "data": {str(e)}}), 200
@@ -100,7 +100,7 @@ def user_add():
         username = data.get("UserName")
         password = data.get("PassWord")
         real_name = data.get("RealName")
-        role_class = data.get("RoleClass")
+        role_class = data.get("RoleClass", 1)
         role_id = data.get("RoleID", 1)
         phone = data.get("Phone")
         pro_code = data.get("ProCode")
@@ -109,7 +109,7 @@ def user_add():
         return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {str(e)}}), 200
 
     # 校验必填字段
-    if not all([username, password, real_name, role_class, phone, pro_code]):
+    if not all([username, password, real_name, phone, pro_code]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
@@ -366,12 +366,12 @@ def user_permission_modify():
         data = request.json
         username = data.get('UserName')
         pro_code = data.get('ProCode')
-        role_id = data.get('RoleID')
+        role_class = data.get('RoleClass', 1)
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '权限修改失败', 'data': {str(e)}}), 200
 
     # 校验必填字段
-    if not all([username, pro_code, str(role_id)]):
+    if not all([username, pro_code, str(role_class)]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
@@ -389,9 +389,9 @@ def user_permission_modify():
             return jsonify({'code': UserHttpStatus.NO_USER.value, 'msg': '用户不存在', 'data': {}}), 200
 
         sql = """
-        UPDATE user SET RoleID = %s WHERE UserName = %s AND ProCode = %s
+        UPDATE user SET RoleClass = %s WHERE UserName = %s AND ProCode = %s
         """
-        rows = cursor.execute(sql, (role_id, username, pro_code))
+        rows = cursor.execute(sql, (role_class, username, pro_code))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:

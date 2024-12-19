@@ -22,9 +22,9 @@ import open3d as o3d
 from pandas import DataFrame
 from pymysql.cursors import DictCursor
 
-from outer.rabiitmq.construct import PointCloudData, Tunnel
-from outer.routes.local.status_code.baseHttpStatus import BaseHttpStatus
-from outer.utils.util_database import DBUtils
+from rabiitmq.construct import PointCloudData, Tunnel
+from routes.local.status_code.baseHttpStatus import BaseHttpStatus
+from utils.util_database import DBUtils
 
 
 def df2pcd(data: DataFrame) -> PointCloud:

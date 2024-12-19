@@ -9,7 +9,7 @@
 """
 from flask import jsonify, request, Blueprint
 
-from outer.utils.util_database import DBUtils
+from utils.util_database import DBUtils
 
 
 basic_local_db = Blueprint('basic_local_db', __name__)

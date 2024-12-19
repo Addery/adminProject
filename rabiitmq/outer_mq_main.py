@@ -7,7 +7,7 @@
 @lastEditTime: 
 @Description: 
 """
-from outer.rabiitmq.receive import OuterMainQueue
+from rabiitmq.receive import OuterMainQueue
 
 omq = OuterMainQueue()
 omq.run()

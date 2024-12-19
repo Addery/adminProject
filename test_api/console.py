@@ -10,23 +10,27 @@
 import requests
 
 
+ip = "http://127.0.0.1"
+port = "5000"
+
+
 def console_add():
     """
     添加中控设备
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/console_db/addConsole"
+    url = f"{ip}:{port}/api/outer/console_db/addConsole"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
-        "ConEquipCode": "1005",
+        "ConEquipCode": "1001",
         "ConEquipName": "e_name",
         "ConEquipIP": "localhost",
-        "ProCode": "1005",
-        "TunCode": "1006",
-        "WorkSurCode": "1002",
-        "StruCode": "1003",
+        "ProCode": "1001",
+        "TunCode": "1001",
+        "WorkSurCode": "1001",
+        "StruCode": "1001",
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -38,13 +42,13 @@ def console_delete():
     删除
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/console_db/deleteConsole"
+    url = f"{ip}:{port}/api/outer/console_db/deleteConsole"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
         "ConEquipCode": "1005",
-        "WorkSurCode": "1004"
+        "WorkSurCode": "1002"
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -56,7 +60,7 @@ def console_update():
     更新
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/console_db/updateConsole"
+    url = f"{ip}:{port}/api/outer/console_db/updateConsole"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -68,8 +72,8 @@ def console_update():
         "TunCode": "1006",
         "ProCode": "1003",
         "StruCode": "1003",
-        "OldConEquipCode": "1005",
-        "OldWorkSurCode": "1002"
+        "OldConEquipCode": "1006",
+        "OldWorkSurCode": "1003"
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -81,7 +85,7 @@ def console_select():
     获取信息
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/console_db/selectConsole"
+    url = f"{ip}:{port}/api/outer/console_db/selectConsole"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -95,13 +99,13 @@ def console_select():
 
 
 def console_info_search_by_column():
-    url = "http://127.0.0.1:8023/api/outer/console_db/searchInfoByColumn"
+    url = f"{ip}:{port}/api/outer/console_db/searchInfoByColumn"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
         'item': 'ConEquipCode',
-        'value': '1001'
+        'value': '1002'
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -109,8 +113,8 @@ def console_info_search_by_column():
 
 
 if __name__ == "__main__":
-    # console_add()
+    console_add()
     # console_delete()
-    console_update()
+    # console_update()
     # console_select()
     # console_info_search_by_column()

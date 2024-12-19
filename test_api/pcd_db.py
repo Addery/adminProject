@@ -10,8 +10,12 @@
 import requests
 
 
+ip = "http://127.0.0.1"
+port = "5000"
+
+
 def log_by_code_or_date():
-    url = "http://127.0.0.1:8023/api/outer/pcd_db_op/logByCodeOrDate"
+    url = f"{ip}:{port}/api/outer/pcd_db_op/logByCodeOrDate"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -39,7 +43,7 @@ def log_by_code_or_date():
 
 
 def history_by_code_and_date():
-    url = "http://127.0.0.1:8023/api/outer/pcd_db_op/historyCodeAndDate"
+    url = f"{ip}:{port}/api/outer/pcd_db_op/historyCodeAndDate"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -60,7 +64,7 @@ def history_by_code_and_date():
 
 
 def compare():
-    url = "http://127.0.0.1:8023/api/outer/pcd_db_op/compare"
+    url = f"{ip}:{port}/api/outer/pcd_db_op/compare"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -101,8 +105,8 @@ def compare():
 
 
 if __name__ == "__main__":
-    # log_by_code_or_date()
-    history_by_code_and_date()
+    log_by_code_or_date()
+    # history_by_code_and_date()
     # compare()
 
 

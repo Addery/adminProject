@@ -10,8 +10,12 @@
 import requests
 
 
+ip = "http://127.0.0.1"
+port = "5000"
+
+
 def test_history():
-    url = "http://127.0.0.1:8023/outer/service/history"
+    url = f"{ip}:{port}/outer/service/history"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -35,7 +39,7 @@ def test_history():
 
 
 def test_tree():
-    url = "http://127.0.0.1:8023/api/outer/pcd_op/tree"
+    url = f"{ip}:{port}/api/outer/pcd_op/tree"
 
     headers = {
         'Content-Type': 'application/json'
@@ -56,7 +60,7 @@ def test_tree():
 
 
 def test_log():
-    url = "http://127.0.0.1:8024/outer/service/log"
+    url = f"{ip}:{port}/outer/service/log"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -81,8 +85,8 @@ def test_log():
 
 
 def test_log_data_visual():
-    url1 = "http://127.0.0.1:8024/outer/service/log"
-    url2 = "http://127.0.0.1:8024/outer/service/log_data_visual"
+    url1 = f"{ip}:{port}/outer/service/log"
+    url2 = f"{ip}:{port}/outer/service/log_data_visual"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -119,7 +123,7 @@ def test_log_data_visual():
 
 
 def test_compare():
-    url = "http://127.0.0.1:8024/outer/service/compare"
+    url = f"{ip}:{port}/outer/service/compare"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -153,7 +157,7 @@ def test_compare():
 
 
 def test_select_from_any_table():
-    url = "http://127.0.0.1:8023/api/outer/service/project/select"
+    url = f"{ip}:{port}/api/outer/service/project/select"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -170,7 +174,7 @@ def test_select_from_any_table():
 
 
 def test_insert_into_any_table():
-    url = "http://127.0.0.1:8023/api/any_table/insert"
+    url = f"{ip}:{port}/api/any_table/insert"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -193,7 +197,7 @@ def test_insert_into_any_table():
 
 
 def test_delete():
-    url = "http://127.0.0.1:8023/api/outer/project/delete"
+    url = f"{ip}:{port}/api/outer/project/delete"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -209,7 +213,7 @@ def test_delete():
 
 
 def test_update():
-    url = "http://127.0.0.1:8023/api/outer/project/update"
+    url = f"{ip}:{port}/api/outer/project/update"
     headers = {
         'Content-Type': 'application/json'
     }

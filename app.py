@@ -5,22 +5,22 @@
 @LastEditors: zhang_zhiyi
 @version: 1.0
 @lastEditTime: 
-@Description: 
+@Description: app启动脚本
 """
 
 from flask import Flask
 from flask_cors import CORS
 
-from outer.routes.local.equipment.console import console_db
-from outer.routes.local.equipment.data import data_acq_db
-from outer.routes.local.log.anomaly import anomaly_db
-from outer.routes.local.pcd.pcd_db_op import pcd_db_op
-from outer.routes.local.project.project import project_db
-from outer.routes.local.project.structure import structure_db
-from outer.routes.local.project.tunnel import tunnel_db
-from outer.routes.local.project.work_surface import work_surface_db
-from outer.routes.local.pcd.pcd_file_op import pcd_file_op
-from outer.routes.local.user.user import user_db
+from routes.local.equipment.console import console_db
+from routes.local.equipment.data import data_acq_db
+from routes.local.log.anomaly import anomaly_db
+from routes.local.pcd.pcd_db_op import pcd_db_op
+from routes.local.project.project import project_db
+from routes.local.project.structure import structure_db
+from routes.local.project.tunnel import tunnel_db
+from routes.local.project.work_surface import work_surface_db
+from routes.local.pcd.pcd_file_op import pcd_file_op
+from routes.local.user.user import user_db
 
 
 app = Flask(__name__)

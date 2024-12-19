@@ -11,12 +11,16 @@
 import requests
 
 
+ip = "http://127.0.0.1"
+port = "5000"
+
+
 def structure_add():
     """
     添加结构物
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/structure_db/addStructure"
+    url = f"{ip}:{port}/api/outer/structure_db/addStructure"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -37,7 +41,7 @@ def structure_delete():
     删除结构物
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/structure_db/deleteStructure"
+    url = f"{ip}:{port}/api/outer/structure_db/deleteStructure"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -54,14 +58,14 @@ def structure_update():
     删除结构物
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/structure_db/updateStructure"
+    url = f"{ip}:{port}/api/outer/structure_db/updateStructure"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
-        "OldStruCode": "1003",
-        "StruCode": "1003",
-        "StruName": "test",
+        "OldStruCode": "1002",
+        "StruCode": "1002",
+        "StruName": "default",
         "FirWarningLevel": "2",
         "SecWarningLevel": "4",
         "ThirWarningLevel": "6"
@@ -76,7 +80,7 @@ def structure_select():
     隧道信息
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/structure_db/selectStructure"
+    url = f"{ip}:{port}/api/outer/structure_db/selectStructure"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -90,13 +94,13 @@ def structure_select():
 
 
 def structure_info_search_by_column():
-    url = "http://127.0.0.1:8023/api/outer/structure_db/searchStructureByColumn"
+    url = f"{ip}:{port}/api/outer/structure_db/searchStructureByColumn"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
         'item': 'StruCode',
-        'value': '1003'
+        'value': '1002'
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())

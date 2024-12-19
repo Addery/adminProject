@@ -25,3 +25,1080 @@
 2024-12-16 10:47:08,737 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
 2024-12-16 10:47:08,738 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
 2024-12-16 10:47:08,739 - INFO - 127.0.0.1 - - [16/Dec/2024 10:47:08] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 11:16:28,512 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 11:16:28,540 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 11:16:28,542 - INFO - 127.0.0.1 - - [16/Dec/2024 11:16:28] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 11:16:42,960 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 11:16:42,972 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 11:16:42,973 - INFO - 127.0.0.1 - - [16/Dec/2024 11:16:42] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 14:37:28,326 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:37:28,366 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:37:28,371 - INFO - 127.0.0.1 - - [16/Dec/2024 14:37:28] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 14:37:34,285 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:37:34,287 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:37:34,287 - INFO - 127.0.0.1 - - [16/Dec/2024 14:37:34] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 14:37:37,927 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:37:37,950 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:37:37,951 - INFO - 127.0.0.1 - - [16/Dec/2024 14:37:37] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 14:37:41,172 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:37:41,174 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:37:41,174 - INFO - 127.0.0.1 - - [16/Dec/2024 14:37:41] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 14:38:14,753 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:38:14,754 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:38:14,756 - INFO - 127.0.0.1 - - [16/Dec/2024 14:38:14] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 14:38:19,300 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:38:19,301 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:38:19,305 - INFO - 127.0.0.1 - - [16/Dec/2024 14:38:19] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 14:38:25,910 - INFO - 127.0.0.1 - - [16/Dec/2024 14:38:25] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 14:38:30,563 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:38:30,564 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:38:30,565 - INFO - 127.0.0.1 - - [16/Dec/2024 14:38:30] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 14:38:39,901 - INFO - 127.0.0.1 - - [16/Dec/2024 14:38:39] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 14:39:27,642 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:39:27,646 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:39:27,689 - INFO - 127.0.0.1 - - [16/Dec/2024 14:39:27] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-16 14:39:43,464 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:39:43,482 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:39:43,487 - INFO - 127.0.0.1 - - [16/Dec/2024 14:39:43] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-16 14:39:49,356 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:39:49,357 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:39:49,358 - INFO - 127.0.0.1 - - [16/Dec/2024 14:39:49] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-16 14:39:52,270 - INFO - 127.0.0.1 - - [16/Dec/2024 14:39:52] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-16 14:39:59,161 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:39:59,162 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:39:59,163 - INFO - 127.0.0.1 - - [16/Dec/2024 14:39:59] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-16 14:41:34,138 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:41:34,139 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:41:34,140 - INFO - 127.0.0.1 - - [16/Dec/2024 14:41:34] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-16 14:41:47,190 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:41:47,215 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:41:47,220 - INFO - 127.0.0.1 - - [16/Dec/2024 14:41:47] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-16 14:41:52,782 - INFO - 127.0.0.1 - - [16/Dec/2024 14:41:52] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-16 14:42:03,226 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:42:03,227 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:42:03,228 - INFO - 127.0.0.1 - - [16/Dec/2024 14:42:03] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-16 14:42:44,711 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:42:44,712 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:42:44,713 - INFO - 127.0.0.1 - - [16/Dec/2024 14:42:44] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-16 14:44:11,467 - INFO - 127.0.0.1 - - [16/Dec/2024 14:44:11] "POST /api/outer/user_db/selectUser HTTP/1.1" 200 -
+2024-12-16 14:44:20,170 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:44:20,172 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:44:20,180 - INFO - 127.0.0.1 - - [16/Dec/2024 14:44:20] "POST /api/outer/user_db/selectUser HTTP/1.1" 200 -
+2024-12-16 14:44:45,093 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:44:45,109 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:44:45,114 - INFO - 127.0.0.1 - - [16/Dec/2024 14:44:45] "POST /api/outer/user_db/selectUser HTTP/1.1" 200 -
+2024-12-16 14:46:00,707 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:46:00,708 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:46:00,712 - INFO - 127.0.0.1 - - [16/Dec/2024 14:46:00] "POST /api/outer/user_db/selectUser HTTP/1.1" 200 -
+2024-12-16 14:46:05,443 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:46:05,454 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:46:05,456 - INFO - 127.0.0.1 - - [16/Dec/2024 14:46:05] "POST /api/outer/user_db/selectUser HTTP/1.1" 200 -
+2024-12-16 14:47:26,135 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:47:26,152 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:47:26,153 - INFO - 127.0.0.1 - - [16/Dec/2024 14:47:26] "POST /api/outer/user_db/setUserPassword HTTP/1.1" 200 -
+2024-12-16 14:47:43,471 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:47:43,482 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:47:43,487 - INFO - 127.0.0.1 - - [16/Dec/2024 14:47:43] "POST /api/outer/user_db/setUserPassword HTTP/1.1" 200 -
+2024-12-16 14:48:13,706 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:48:13,724 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:48:13,724 - INFO - 127.0.0.1 - - [16/Dec/2024 14:48:13] "POST /api/outer/user_db/setUserPassword HTTP/1.1" 200 -
+2024-12-16 14:50:26,561 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:50:26,578 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:50:26,583 - INFO - 127.0.0.1 - - [16/Dec/2024 14:50:26] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 14:50:29,299 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:50:29,321 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:50:29,323 - INFO - 127.0.0.1 - - [16/Dec/2024 14:50:29] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 14:50:42,340 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:50:42,341 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:50:42,341 - INFO - 127.0.0.1 - - [16/Dec/2024 14:50:42] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 14:50:48,437 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 14:50:48,451 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 14:50:48,454 - INFO - 127.0.0.1 - - [16/Dec/2024 14:50:48] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 14:50:54,590 - INFO - 127.0.0.1 - - [16/Dec/2024 14:50:54] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:00:14,645 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:00:14,648 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:00:14,649 - INFO - 127.0.0.1 - - [16/Dec/2024 15:00:14] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 15:00:31,853 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:00:31,871 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:00:31,872 - INFO - 127.0.0.1 - - [16/Dec/2024 15:00:31] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 15:00:34,226 - INFO - 127.0.0.1 - - [16/Dec/2024 15:00:34] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 15:00:45,574 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:00:45,575 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:00:45,581 - INFO - 127.0.0.1 - - [16/Dec/2024 15:00:45] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 15:00:54,128 - INFO - 127.0.0.1 - - [16/Dec/2024 15:00:54] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 15:01:29,886 - INFO - 127.0.0.1 - - [16/Dec/2024 15:01:29] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 15:02:19,355 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:02:19,357 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:02:19,358 - INFO - 127.0.0.1 - - [16/Dec/2024 15:02:19] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 15:02:26,765 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:02:26,766 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:02:26,768 - INFO - 127.0.0.1 - - [16/Dec/2024 15:02:26] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 15:02:32,697 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:02:32,708 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:02:32,936 - INFO - 127.0.0.1 - - [16/Dec/2024 15:02:32] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 15:02:43,049 - INFO - 127.0.0.1 - - [16/Dec/2024 15:02:43] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 15:02:46,833 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:02:46,835 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:02:46,835 - INFO - 127.0.0.1 - - [16/Dec/2024 15:02:46] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-16 15:02:54,971 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:02:54,988 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:02:54,989 - INFO - 127.0.0.1 - - [16/Dec/2024 15:02:54] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 15:02:57,976 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:02:57,992 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:02:57,993 - INFO - 127.0.0.1 - - [16/Dec/2024 15:02:57] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 15:03:01,506 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:03:01,507 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:03:01,508 - INFO - 127.0.0.1 - - [16/Dec/2024 15:03:01] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 15:03:04,427 - INFO - 127.0.0.1 - - [16/Dec/2024 15:03:04] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-16 15:03:18,977 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:03:18,978 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:03:18,979 - INFO - 127.0.0.1 - - [16/Dec/2024 15:03:18] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-16 15:03:24,297 - INFO - 127.0.0.1 - - [16/Dec/2024 15:03:24] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-16 15:03:26,877 - INFO - 127.0.0.1 - - [16/Dec/2024 15:03:26] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-16 15:03:30,233 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:03:30,266 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:03:30,270 - INFO - 127.0.0.1 - - [16/Dec/2024 15:03:30] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-16 15:03:49,888 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:03:49,889 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:03:49,889 - INFO - 127.0.0.1 - - [16/Dec/2024 15:03:49] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-16 15:03:55,892 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:03:55,893 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:03:55,894 - INFO - 127.0.0.1 - - [16/Dec/2024 15:03:55] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-16 15:04:01,521 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:04:01,534 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:04:01,538 - INFO - 127.0.0.1 - - [16/Dec/2024 15:04:01] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-16 15:04:10,315 - INFO - 127.0.0.1 - - [16/Dec/2024 15:04:10] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-16 15:04:21,716 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:04:21,717 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:04:21,720 - INFO - 127.0.0.1 - - [16/Dec/2024 15:04:21] "POST /api/outer/user_db/selectUser HTTP/1.1" 200 -
+2024-12-16 15:05:50,333 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:05:50,336 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:05:50,337 - INFO - 127.0.0.1 - - [16/Dec/2024 15:05:50] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:06:20,054 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:06:20,055 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:06:20,070 - INFO - 127.0.0.1 - - [16/Dec/2024 15:06:20] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:06:22,707 - INFO - 127.0.0.1 - - [16/Dec/2024 15:06:22] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:06:25,147 - INFO - 127.0.0.1 - - [16/Dec/2024 15:06:25] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:06:27,684 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:06:27,685 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:06:27,720 - ERROR - Exception on /api/outer/user_db/modifyUserPermission [POST]
+Traceback (most recent call last):
+  File "E:\07-code\tunnelProject\adminProject\routes\local\user\user.py", line 394, in user_permission_modify
+    rows = cursor.execute(sql, (role_id, username, pro_code))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1048, "Column 'RoleClass' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "E:\07-code\tunnelProject\adminProject\routes\local\user\user.py", line 400, in user_permission_modify
+    return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '»®œﬁ–ﬁ∏ƒ ß∞‹', 'data': {str(e)}}), 200
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\__init__.py", line 234, in dumps
+    return cls(
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type set is not JSON serializable
+2024-12-16 15:06:27,910 - INFO - 127.0.0.1 - - [16/Dec/2024 15:06:27] "[35m[1mPOST /api/outer/user_db/modifyUserPermission HTTP/1.1[0m" 500 -
+2024-12-16 15:07:24,619 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:07:24,631 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:07:24,632 - INFO - 127.0.0.1 - - [16/Dec/2024 15:07:24] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:07:36,120 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:07:36,135 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:07:36,136 - ERROR - Exception on /api/outer/user_db/modifyUserPermission [POST]
+Traceback (most recent call last):
+  File "E:\07-code\tunnelProject\adminProject\routes\local\user\user.py", line 394, in user_permission_modify
+    rows = cursor.execute(sql, (role_class, username, pro_code))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1048, "Column 'RoleClass' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "E:\07-code\tunnelProject\adminProject\routes\local\user\user.py", line 400, in user_permission_modify
+    return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '»®œﬁ–ﬁ∏ƒ ß∞‹', 'data': {str(e)}}), 200
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\__init__.py", line 234, in dumps
+    return cls(
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type set is not JSON serializable
+2024-12-16 15:07:36,138 - INFO - 127.0.0.1 - - [16/Dec/2024 15:07:36] "[35m[1mPOST /api/outer/user_db/modifyUserPermission HTTP/1.1[0m" 500 -
+2024-12-16 15:10:32,694 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:10:32,696 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:10:32,696 - INFO - 127.0.0.1 - - [16/Dec/2024 15:10:32] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:10:40,737 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:10:40,755 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:10:40,756 - INFO - 127.0.0.1 - - [16/Dec/2024 15:10:40] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:10:59,245 - INFO - 127.0.0.1 - - [16/Dec/2024 15:10:59] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:11:03,166 - INFO - 127.0.0.1 - - [16/Dec/2024 15:11:03] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:11:15,345 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:11:15,358 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:11:15,359 - INFO - 127.0.0.1 - - [16/Dec/2024 15:11:15] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:11:20,138 - INFO - 127.0.0.1 - - [16/Dec/2024 15:11:20] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:11:43,528 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:11:43,531 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:11:43,536 - INFO - 127.0.0.1 - - [16/Dec/2024 15:11:43] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:11:51,330 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:11:51,331 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:11:51,350 - INFO - 127.0.0.1 - - [16/Dec/2024 15:11:51] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:11:55,712 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:11:55,713 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:11:55,714 - INFO - 127.0.0.1 - - [16/Dec/2024 15:11:55] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:11:58,706 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:11:58,723 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:11:58,726 - INFO - 127.0.0.1 - - [16/Dec/2024 15:11:58] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-16 15:16:47,585 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:16:47,586 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:16:47,587 - INFO - 127.0.0.1 - - [16/Dec/2024 15:16:47] "POST /api/outer/user_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 15:17:08,366 - INFO - 127.0.0.1 - - [16/Dec/2024 15:17:08] "POST /api/outer/user_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 15:17:19,664 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:17:19,665 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:17:19,666 - INFO - 127.0.0.1 - - [16/Dec/2024 15:17:19] "POST /api/outer/user_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 15:17:28,752 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:17:28,753 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:17:28,754 - INFO - 127.0.0.1 - - [16/Dec/2024 15:17:28] "POST /api/outer/user_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 15:34:35,828 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:34:35,830 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:34:35,836 - INFO - 127.0.0.1 - - [16/Dec/2024 15:34:35] "POST /api/outer/user_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 15:34:41,286 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:34:41,307 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:34:41,308 - INFO - 127.0.0.1 - - [16/Dec/2024 15:34:41] "POST /api/outer/user_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 15:40:03,272 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:40:03,274 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:40:03,337 - INFO - 127.0.0.1 - - [16/Dec/2024 15:40:03] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:40:05,176 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:40:05,177 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:40:05,178 - INFO - 127.0.0.1 - - [16/Dec/2024 15:40:05] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:41:04,520 - INFO - 127.0.0.1 - - [16/Dec/2024 15:41:04] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:41:09,559 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:41:09,561 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:41:09,561 - INFO - 127.0.0.1 - - [16/Dec/2024 15:41:09] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:41:20,418 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:41:20,419 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:41:20,420 - INFO - 127.0.0.1 - - [16/Dec/2024 15:41:20] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:42:22,762 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:42:22,763 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:42:22,763 - INFO - 127.0.0.1 - - [16/Dec/2024 15:42:22] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:42:32,573 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:42:32,588 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:42:32,589 - INFO - 127.0.0.1 - - [16/Dec/2024 15:42:32] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:42:36,271 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:42:36,272 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:42:36,273 - INFO - 127.0.0.1 - - [16/Dec/2024 15:42:36] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:42:39,644 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:42:39,661 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:42:39,663 - INFO - 127.0.0.1 - - [16/Dec/2024 15:42:39] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:42:43,086 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:42:43,103 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:42:43,105 - INFO - 127.0.0.1 - - [16/Dec/2024 15:42:43] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:42:49,994 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:42:50,017 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:42:50,019 - INFO - 127.0.0.1 - - [16/Dec/2024 15:42:50] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:42:54,962 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:42:54,973 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:42:54,975 - INFO - 127.0.0.1 - - [16/Dec/2024 15:42:54] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:43:00,246 - INFO - 127.0.0.1 - - [16/Dec/2024 15:43:00] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-16 15:46:04,986 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:46:04,999 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:46:05,000 - INFO - 127.0.0.1 - - [16/Dec/2024 15:46:05] "POST /api/outer/anomaly_db/deleteAnomaly HTTP/1.1" 200 -
+2024-12-16 15:46:19,435 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:46:19,447 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:46:19,452 - INFO - 127.0.0.1 - - [16/Dec/2024 15:46:19] "POST /api/outer/anomaly_db/deleteAnomaly HTTP/1.1" 200 -
+2024-12-16 15:46:25,725 - INFO - 127.0.0.1 - - [16/Dec/2024 15:46:25] "POST /api/outer/anomaly_db/deleteAnomaly HTTP/1.1" 200 -
+2024-12-16 15:49:15,795 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:49:15,797 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:49:15,800 - INFO - 127.0.0.1 - - [16/Dec/2024 15:49:15] "POST /api/outer/anomaly_db/selectAnomalyLog HTTP/1.1" 200 -
+2024-12-16 15:49:36,800 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:49:36,818 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:49:36,820 - INFO - 127.0.0.1 - - [16/Dec/2024 15:49:36] "POST /api/outer/anomaly_db/selectAnomalyLog HTTP/1.1" 200 -
+2024-12-16 15:53:31,290 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:53:31,291 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:53:31,293 - INFO - 127.0.0.1 - - [16/Dec/2024 15:53:31] "POST /api/outer/anomaly_db/selectAnomalyLogDesc HTTP/1.1" 200 -
+2024-12-16 15:56:12,930 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:56:12,948 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:56:12,950 - INFO - 127.0.0.1 - - [16/Dec/2024 15:56:12] "POST /api/outer/anomaly_db/searchLogByColumn HTTP/1.1" 200 -
+2024-12-16 15:56:27,447 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:56:27,448 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:56:27,449 - INFO - 127.0.0.1 - - [16/Dec/2024 15:56:27] "POST /api/outer/anomaly_db/searchLogByColumn HTTP/1.1" 200 -
+2024-12-16 15:56:36,516 - INFO - 127.0.0.1 - - [16/Dec/2024 15:56:36] "POST /api/outer/anomaly_db/searchLogByColumn HTTP/1.1" 200 -
+2024-12-16 15:56:54,936 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:56:54,938 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:56:54,939 - INFO - 127.0.0.1 - - [16/Dec/2024 15:56:54] "POST /api/outer/anomaly_db/searchDescByColumn HTTP/1.1" 200 -
+2024-12-16 15:57:13,112 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:57:13,133 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:57:13,134 - INFO - 127.0.0.1 - - [16/Dec/2024 15:57:13] "POST /api/outer/anomaly_db/searchDescByColumn HTTP/1.1" 200 -
+2024-12-16 15:57:46,200 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 15:57:46,221 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 15:57:46,223 - INFO - 127.0.0.1 - - [16/Dec/2024 15:57:46] "POST /api/outer/anomaly_db/searchDescByColumn HTTP/1.1" 200 -
+2024-12-16 15:57:57,240 - INFO - 127.0.0.1 - - [16/Dec/2024 15:57:57] "POST /api/outer/anomaly_db/searchDescByColumn HTTP/1.1" 200 -
+2024-12-16 16:05:15,380 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:05:15,381 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:05:15,385 - INFO - 127.0.0.1 - - [16/Dec/2024 16:05:15] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-16 16:05:22,858 - INFO - 127.0.0.1 - - [16/Dec/2024 16:05:22] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-16 16:05:25,938 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:05:25,951 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:05:25,952 - INFO - 127.0.0.1 - - [16/Dec/2024 16:05:25] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-16 16:05:29,926 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:05:29,941 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:05:29,942 - INFO - 127.0.0.1 - - [16/Dec/2024 16:05:29] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-16 16:05:33,759 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:05:33,760 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:05:33,760 - INFO - 127.0.0.1 - - [16/Dec/2024 16:05:33] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-16 16:05:38,680 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:05:38,703 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:05:38,704 - INFO - 127.0.0.1 - - [16/Dec/2024 16:05:38] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-16 16:05:43,738 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:05:43,761 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:05:43,763 - INFO - 127.0.0.1 - - [16/Dec/2024 16:05:43] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-16 16:06:16,005 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:06:16,023 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:06:16,025 - INFO - 127.0.0.1 - - [16/Dec/2024 16:06:16] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-16 16:06:39,016 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:06:39,017 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:06:39,018 - INFO - 127.0.0.1 - - [16/Dec/2024 16:06:39] "POST /api/outer/console_db/deleteConsole HTTP/1.1" 200 -
+2024-12-16 16:06:48,406 - INFO - 127.0.0.1 - - [16/Dec/2024 16:06:48] "POST /api/outer/console_db/deleteConsole HTTP/1.1" 200 -
+2024-12-16 16:06:52,166 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:06:52,180 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:06:52,183 - INFO - 127.0.0.1 - - [16/Dec/2024 16:06:52] "POST /api/outer/console_db/deleteConsole HTTP/1.1" 200 -
+2024-12-16 16:07:40,158 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:07:40,170 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:07:40,171 - INFO - 127.0.0.1 - - [16/Dec/2024 16:07:40] "POST /api/outer/console_db/updateConsole HTTP/1.1" 200 -
+2024-12-16 16:08:54,445 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:08:54,462 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:08:54,467 - INFO - 127.0.0.1 - - [16/Dec/2024 16:08:54] "POST /api/outer/console_db/updateConsole HTTP/1.1" 200 -
+2024-12-16 16:09:05,858 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:09:05,859 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:09:05,861 - INFO - 127.0.0.1 - - [16/Dec/2024 16:09:05] "POST /api/outer/console_db/updateConsole HTTP/1.1" 200 -
+2024-12-16 16:09:37,701 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:09:37,702 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:09:37,705 - INFO - 127.0.0.1 - - [16/Dec/2024 16:09:37] "POST /api/outer/console_db/selectConsole HTTP/1.1" 200 -
+2024-12-16 16:09:51,778 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:09:51,779 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:09:51,784 - INFO - 127.0.0.1 - - [16/Dec/2024 16:09:51] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-16 16:09:58,661 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:09:58,662 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:09:58,664 - INFO - 127.0.0.1 - - [16/Dec/2024 16:09:58] "POST /api/outer/console_db/selectConsole HTTP/1.1" 200 -
+2024-12-16 16:10:12,067 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:10:12,090 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:10:12,091 - INFO - 127.0.0.1 - - [16/Dec/2024 16:10:12] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 16:10:21,985 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:10:21,995 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:10:21,996 - INFO - 127.0.0.1 - - [16/Dec/2024 16:10:21] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 16:14:42,680 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:14:42,682 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:14:42,683 - INFO - 127.0.0.1 - - [16/Dec/2024 16:14:42] "POST /api/outer/data_acq_db/addDataAcq HTTP/1.1" 200 -
+2024-12-16 16:15:03,965 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:15:03,986 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:15:03,990 - INFO - 127.0.0.1 - - [16/Dec/2024 16:15:03] "POST /api/outer/data_acq_db/addDataAcq HTTP/1.1" 200 -
+2024-12-16 16:15:11,108 - INFO - 127.0.0.1 - - [16/Dec/2024 16:15:11] "POST /api/outer/data_acq_db/addDataAcq HTTP/1.1" 200 -
+2024-12-16 16:15:15,530 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:15:15,531 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:15:15,532 - INFO - 127.0.0.1 - - [16/Dec/2024 16:15:15] "POST /api/outer/data_acq_db/addDataAcq HTTP/1.1" 200 -
+2024-12-16 16:15:29,413 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:15:29,428 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:15:29,430 - INFO - 127.0.0.1 - - [16/Dec/2024 16:15:29] "POST /api/outer/data_acq_db/deleteDataAcq HTTP/1.1" 200 -
+2024-12-16 16:15:37,090 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:15:37,103 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:15:37,104 - INFO - 127.0.0.1 - - [16/Dec/2024 16:15:37] "POST /api/outer/data_acq_db/deleteDataAcq HTTP/1.1" 200 -
+2024-12-16 16:15:55,176 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:15:55,196 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:15:55,199 - INFO - 127.0.0.1 - - [16/Dec/2024 16:15:55] "POST /api/outer/data_acq_db/deleteDataAcq HTTP/1.1" 200 -
+2024-12-16 16:15:59,921 - INFO - 127.0.0.1 - - [16/Dec/2024 16:15:59] "POST /api/outer/data_acq_db/deleteDataAcq HTTP/1.1" 200 -
+2024-12-16 16:16:44,019 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:16:44,021 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:16:44,022 - INFO - 127.0.0.1 - - [16/Dec/2024 16:16:44] "POST /api/outer/data_acq_db/updateDataAcq HTTP/1.1" 200 -
+2024-12-16 16:17:11,499 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:17:11,516 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:17:11,520 - INFO - 127.0.0.1 - - [16/Dec/2024 16:17:11] "POST /api/outer/data_acq_db/updateDataAcq HTTP/1.1" 200 -
+2024-12-16 16:17:17,767 - INFO - 127.0.0.1 - - [16/Dec/2024 16:17:17] "POST /api/outer/data_acq_db/updateDataAcq HTTP/1.1" 200 -
+2024-12-16 16:17:21,915 - INFO - 127.0.0.1 - - [16/Dec/2024 16:17:21] "POST /api/outer/data_acq_db/updateDataAcq HTTP/1.1" 200 -
+2024-12-16 16:17:24,988 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:17:24,999 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:17:25,000 - INFO - 127.0.0.1 - - [16/Dec/2024 16:17:25] "POST /api/outer/data_acq_db/updateDataAcq HTTP/1.1" 200 -
+2024-12-16 16:17:32,766 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:17:32,787 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:17:32,788 - INFO - 127.0.0.1 - - [16/Dec/2024 16:17:32] "POST /api/outer/data_acq_db/updateDataAcq HTTP/1.1" 200 -
+2024-12-16 16:17:57,393 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:17:57,415 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:17:57,417 - INFO - 127.0.0.1 - - [16/Dec/2024 16:17:57] "POST /api/outer/data_acq_db/selectDataAcq HTTP/1.1" 200 -
+2024-12-16 16:18:06,077 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:18:06,096 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:18:06,098 - INFO - 127.0.0.1 - - [16/Dec/2024 16:18:06] "POST /api/outer/data_acq_db/selectDataAcq HTTP/1.1" 200 -
+2024-12-16 16:18:14,007 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:18:14,008 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:18:14,009 - INFO - 127.0.0.1 - - [16/Dec/2024 16:18:14] "POST /api/outer/data_acq_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 16:18:23,238 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:18:23,264 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:18:23,266 - INFO - 127.0.0.1 - - [16/Dec/2024 16:18:23] "POST /api/outer/data_acq_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 16:18:29,785 - INFO - 127.0.0.1 - - [16/Dec/2024 16:18:29] "POST /api/outer/data_acq_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 16:18:35,269 - INFO - 127.0.0.1 - - [16/Dec/2024 16:18:35] "POST /api/outer/data_acq_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-16 16:22:59,853 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:22:59,875 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:22:59,877 - INFO - 127.0.0.1 - - [16/Dec/2024 16:22:59] "POST /api/outer/pcd_db_op/logByCodeOrDate HTTP/1.1" 200 -
+2024-12-16 16:23:09,894 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:23:09,910 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:23:09,911 - INFO - 127.0.0.1 - - [16/Dec/2024 16:23:09] "POST /api/outer/pcd_db_op/logByCodeOrDate HTTP/1.1" 200 -
+2024-12-16 16:23:22,015 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:23:22,015 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:23:22,017 - INFO - 127.0.0.1 - - [16/Dec/2024 16:23:22] "POST /api/outer/pcd_db_op/logByCodeOrDate HTTP/1.1" 200 -
+2024-12-16 16:25:01,340 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:25:01,359 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:25:01,360 - INFO - 127.0.0.1 - - [16/Dec/2024 16:25:01] "POST /api/outer/pcd_db_op/logByCodeOrDate HTTP/1.1" 200 -
+2024-12-16 16:25:05,368 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:25:05,386 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:25:05,388 - INFO - 127.0.0.1 - - [16/Dec/2024 16:25:05] "POST /api/outer/pcd_db_op/logByCodeOrDate HTTP/1.1" 200 -
+2024-12-16 16:28:39,266 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:28:39,268 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:28:39,269 - INFO - 127.0.0.1 - - [16/Dec/2024 16:28:39] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:29:55,699 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:29:55,723 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:29:55,724 - ERROR - Exception on /api/outer/pcd_db_op/historyCodeAndDate [POST]
+Traceback (most recent call last):
+  File "E:\07-code\tunnelProject\adminProject\routes\local\pcd\pcd_db_op.py", line 71, in history_by_code_and_date
+    if not data_is_overdue(filters):
+  File "E:\07-code\tunnelProject\adminProject\utils\util_pcd.py", line 1280, in data_is_overdue
+    columns_time = datetime(year, month, day, hour, minute, second)
+TypeError: an integer is required (got type NoneType)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "E:\07-code\tunnelProject\adminProject\routes\local\pcd\pcd_db_op.py", line 103, in history_by_code_and_date
+    return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': 'ºÏÀ˜ ß∞‹', 'data': {str(e)}}), 200
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\__init__.py", line 234, in dumps
+    return cls(
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type set is not JSON serializable
+2024-12-16 16:29:55,860 - INFO - 127.0.0.1 - - [16/Dec/2024 16:29:55] "[35m[1mPOST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1[0m" 500 -
+2024-12-16 16:30:05,679 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:30:05,698 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:30:05,698 - ERROR - Exception on /api/outer/pcd_db_op/historyCodeAndDate [POST]
+Traceback (most recent call last):
+  File "E:\07-code\tunnelProject\adminProject\routes\local\pcd\pcd_db_op.py", line 71, in history_by_code_and_date
+    if not data_is_overdue(filters):
+  File "E:\07-code\tunnelProject\adminProject\utils\util_pcd.py", line 1280, in data_is_overdue
+    columns_time = datetime(year, month, day, hour, minute, second)
+TypeError: an integer is required (got type NoneType)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "E:\07-code\tunnelProject\adminProject\routes\local\pcd\pcd_db_op.py", line 103, in history_by_code_and_date
+    return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': 'ºÏÀ˜ ß∞‹', 'data': {str(e)}}), 200
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\__init__.py", line 234, in dumps
+    return cls(
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type set is not JSON serializable
+2024-12-16 16:30:05,699 - INFO - 127.0.0.1 - - [16/Dec/2024 16:30:05] "[35m[1mPOST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1[0m" 500 -
+2024-12-16 16:33:10,023 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:33:10,026 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:33:10,026 - INFO - 127.0.0.1 - - [16/Dec/2024 16:33:10] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:33:16,483 - INFO - 127.0.0.1 - - [16/Dec/2024 16:33:16] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:33:34,120 - INFO - 127.0.0.1 - - [16/Dec/2024 16:33:34] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:33:40,962 - INFO - 127.0.0.1 - - [16/Dec/2024 16:33:40] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:34:53,574 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:34:53,576 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:34:53,576 - INFO - 127.0.0.1 - - [16/Dec/2024 16:34:53] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:34:58,897 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:34:58,898 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:34:58,898 - ERROR - Exception on /api/outer/pcd_db_op/historyCodeAndDate [POST]
+Traceback (most recent call last):
+  File "E:\07-code\tunnelProject\adminProject\routes\local\pcd\pcd_db_op.py", line 76, in history_by_code_and_date
+    if not data_is_overdue(filters):
+  File "E:\07-code\tunnelProject\adminProject\utils\util_pcd.py", line 1280, in data_is_overdue
+    columns_time = datetime(year, month, day, hour, minute, second)
+TypeError: an integer is required (got type NoneType)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "E:\07-code\tunnelProject\adminProject\routes\local\pcd\pcd_db_op.py", line 108, in history_by_code_and_date
+    return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': 'ºÏÀ˜ ß∞‹', 'data': {str(e)}}), 200
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\__init__.py", line 234, in dumps
+    return cls(
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type set is not JSON serializable
+2024-12-16 16:34:58,900 - INFO - 127.0.0.1 - - [16/Dec/2024 16:34:58] "[35m[1mPOST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1[0m" 500 -
+2024-12-16 16:35:40,099 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:35:40,120 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:35:40,120 - INFO - 127.0.0.1 - - [16/Dec/2024 16:35:40] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:35:43,821 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:35:43,822 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:35:43,823 - ERROR - Exception on /api/outer/pcd_db_op/historyCodeAndDate [POST]
+Traceback (most recent call last):
+  File "E:\07-code\tunnelProject\adminProject\routes\local\pcd\pcd_db_op.py", line 76, in history_by_code_and_date
+    if not data_is_overdue(filters):
+  File "E:\07-code\tunnelProject\adminProject\utils\util_pcd.py", line 1280, in data_is_overdue
+    columns_time = datetime(year, month, day, hour, minute, second)
+TypeError: an integer is required (got type NoneType)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "E:\07-code\tunnelProject\adminProject\routes\local\pcd\pcd_db_op.py", line 108, in history_by_code_and_date
+    return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': 'ºÏÀ˜ ß∞‹', 'data': {str(e)}}), 200
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\__init__.py", line 234, in dumps
+    return cls(
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type set is not JSON serializable
+2024-12-16 16:35:43,823 - INFO - 127.0.0.1 - - [16/Dec/2024 16:35:43] "[35m[1mPOST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1[0m" 500 -
+2024-12-16 16:35:48,737 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:35:48,761 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:35:48,761 - ERROR - Exception on /api/outer/pcd_db_op/historyCodeAndDate [POST]
+Traceback (most recent call last):
+  File "E:\07-code\tunnelProject\adminProject\routes\local\pcd\pcd_db_op.py", line 76, in history_by_code_and_date
+    if not data_is_overdue(filters):
+  File "E:\07-code\tunnelProject\adminProject\utils\util_pcd.py", line 1280, in data_is_overdue
+    columns_time = datetime(year, month, day, hour, minute, second)
+TypeError: an integer is required (got type NoneType)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "E:\07-code\tunnelProject\adminProject\routes\local\pcd\pcd_db_op.py", line 108, in history_by_code_and_date
+    return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': 'ºÏÀ˜ ß∞‹', 'data': {str(e)}}), 200
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\__init__.py", line 234, in dumps
+    return cls(
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type set is not JSON serializable
+2024-12-16 16:35:48,762 - INFO - 127.0.0.1 - - [16/Dec/2024 16:35:48] "[35m[1mPOST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1[0m" 500 -
+2024-12-16 16:37:44,000 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:37:44,003 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:37:44,003 - INFO - 127.0.0.1 - - [16/Dec/2024 16:37:44] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:37:46,136 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:37:46,156 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:37:46,156 - INFO - 127.0.0.1 - - [16/Dec/2024 16:37:46] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:37:50,187 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:37:50,189 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:37:50,189 - INFO - 127.0.0.1 - - [16/Dec/2024 16:37:50] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:38:16,684 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:38:16,686 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:38:16,686 - INFO - 127.0.0.1 - - [16/Dec/2024 16:38:16] "POST /api/outer/pcd_db_op/historyCodeAndDate HTTP/1.1" 200 -
+2024-12-16 16:39:08,827 - INFO - 127.0.0.1 - - [16/Dec/2024 16:39:08] "POST /api/outer/pcd_db_op/compare HTTP/1.1" 200 -
+2024-12-16 16:39:15,259 - INFO - 127.0.0.1 - - [16/Dec/2024 16:39:15] "POST /api/outer/pcd_db_op/compare HTTP/1.1" 200 -
+2024-12-16 16:39:34,275 - INFO - 127.0.0.1 - - [16/Dec/2024 16:39:34] "POST /api/outer/pcd_db_op/compare HTTP/1.1" 200 -
+2024-12-16 16:47:16,589 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:47:16,592 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:47:16,594 - INFO - 127.0.0.1 - - [16/Dec/2024 16:47:16] "POST /api/outer/project_db/addProject HTTP/1.1" 200 -
+2024-12-16 16:47:19,658 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:47:19,674 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:47:19,676 - INFO - 127.0.0.1 - - [16/Dec/2024 16:47:19] "POST /api/outer/project_db/addProject HTTP/1.1" 200 -
+2024-12-16 16:47:32,806 - INFO - 127.0.0.1 - - [16/Dec/2024 16:47:32] "POST /api/outer/project_db/addProject HTTP/1.1" 200 -
+2024-12-16 16:47:45,434 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:47:45,444 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:47:45,448 - INFO - 127.0.0.1 - - [16/Dec/2024 16:47:45] "POST /api/outer/project_db/deleteProject HTTP/1.1" 200 -
+2024-12-16 16:47:50,579 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:47:50,591 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:47:50,592 - INFO - 127.0.0.1 - - [16/Dec/2024 16:47:50] "POST /api/outer/project_db/deleteProject HTTP/1.1" 200 -
+2024-12-16 16:51:02,465 - INFO - 127.0.0.1 - - [16/Dec/2024 16:51:02] "POST /api/outer/project_db/deleteProject HTTP/1.1" 200 -
+2024-12-16 16:51:24,781 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:51:24,801 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:51:24,805 - INFO - 127.0.0.1 - - [16/Dec/2024 16:51:24] "POST /api/outer/project_db/updateProject HTTP/1.1" 200 -
+2024-12-16 16:51:47,010 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:51:47,033 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:51:47,036 - INFO - 127.0.0.1 - - [16/Dec/2024 16:51:47] "POST /api/outer/project_db/updateProject HTTP/1.1" 200 -
+2024-12-16 16:51:48,374 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:51:48,375 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:51:48,379 - INFO - 127.0.0.1 - - [16/Dec/2024 16:51:48] "POST /api/outer/project_db/updateProject HTTP/1.1" 200 -
+2024-12-16 16:51:50,167 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:51:50,180 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:51:50,183 - INFO - 127.0.0.1 - - [16/Dec/2024 16:51:50] "POST /api/outer/project_db/updateProject HTTP/1.1" 200 -
+2024-12-16 16:51:51,777 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:51:51,794 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:51:51,799 - INFO - 127.0.0.1 - - [16/Dec/2024 16:51:51] "POST /api/outer/project_db/updateProject HTTP/1.1" 200 -
+2024-12-16 16:51:59,920 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:51:59,935 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:51:59,936 - INFO - 127.0.0.1 - - [16/Dec/2024 16:51:59] "POST /api/outer/project_db/updateProject HTTP/1.1" 200 -
+2024-12-16 16:52:03,383 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:52:03,407 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:52:03,411 - INFO - 127.0.0.1 - - [16/Dec/2024 16:52:03] "POST /api/outer/project_db/updateProject HTTP/1.1" 200 -
+2024-12-16 16:52:12,548 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:52:12,562 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:52:12,563 - INFO - 127.0.0.1 - - [16/Dec/2024 16:52:12] "POST /api/outer/project_db/updateProject HTTP/1.1" 200 -
+2024-12-16 16:52:16,828 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:52:16,848 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:52:16,852 - INFO - 127.0.0.1 - - [16/Dec/2024 16:52:16] "POST /api/outer/project_db/updateProject HTTP/1.1" 200 -
+2024-12-16 16:52:20,259 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:52:20,260 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:52:20,264 - INFO - 127.0.0.1 - - [16/Dec/2024 16:52:20] "POST /api/outer/project_db/updateProject HTTP/1.1" 200 -
+2024-12-16 16:53:20,198 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:53:20,198 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:53:20,203 - INFO - 127.0.0.1 - - [16/Dec/2024 16:53:20] "POST /api/outer/project_db/selectProject HTTP/1.1" 200 -
+2024-12-16 16:53:41,061 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:53:41,088 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:53:41,097 - INFO - 127.0.0.1 - - [16/Dec/2024 16:53:41] "POST /api/outer/project_db/selectProject HTTP/1.1" 200 -
+2024-12-16 16:53:43,603 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:53:43,618 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:53:43,621 - INFO - 127.0.0.1 - - [16/Dec/2024 16:53:43] "POST /api/outer/project_db/selectProject HTTP/1.1" 200 -
+2024-12-16 16:53:46,190 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:53:46,210 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:53:46,212 - INFO - 127.0.0.1 - - [16/Dec/2024 16:53:46] "POST /api/outer/project_db/selectProject HTTP/1.1" 200 -
+2024-12-16 16:53:55,558 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:53:55,579 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:53:55,580 - INFO - 127.0.0.1 - - [16/Dec/2024 16:53:55] "POST /api/outer/project_db/searchProjectByColumn HTTP/1.1" 200 -
+2024-12-16 16:54:00,307 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:54:00,329 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:54:00,330 - INFO - 127.0.0.1 - - [16/Dec/2024 16:54:00] "POST /api/outer/project_db/searchProjectByColumn HTTP/1.1" 200 -
+2024-12-16 16:54:02,534 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 16:54:02,552 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 16:54:02,553 - INFO - 127.0.0.1 - - [16/Dec/2024 16:54:02] "POST /api/outer/project_db/searchProjectByColumn HTTP/1.1" 200 -
+2024-12-16 17:01:07,190 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:01:07,204 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:01:07,207 - INFO - 127.0.0.1 - - [16/Dec/2024 17:01:07] "POST /api/outer/structure_db/addStructure HTTP/1.1" 200 -
+2024-12-16 17:01:17,325 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:01:17,338 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:01:17,339 - INFO - 127.0.0.1 - - [16/Dec/2024 17:01:17] "POST /api/outer/structure_db/addStructure HTTP/1.1" 200 -
+2024-12-16 17:01:25,275 - INFO - 127.0.0.1 - - [16/Dec/2024 17:01:25] "POST /api/outer/structure_db/addStructure HTTP/1.1" 200 -
+2024-12-16 17:01:36,772 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:01:36,790 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:01:36,793 - INFO - 127.0.0.1 - - [16/Dec/2024 17:01:36] "POST /api/outer/structure_db/deleteStructure HTTP/1.1" 200 -
+2024-12-16 17:01:43,149 - INFO - 127.0.0.1 - - [16/Dec/2024 17:01:43] "POST /api/outer/structure_db/deleteStructure HTTP/1.1" 200 -
+2024-12-16 17:01:52,861 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:01:52,862 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:01:52,862 - INFO - 127.0.0.1 - - [16/Dec/2024 17:01:52] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:01:58,697 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:01:58,721 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:01:58,722 - INFO - 127.0.0.1 - - [16/Dec/2024 17:01:58] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:02:10,694 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:02:10,712 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:02:10,713 - INFO - 127.0.0.1 - - [16/Dec/2024 17:02:10] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:02:20,148 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:02:20,149 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:02:20,150 - INFO - 127.0.0.1 - - [16/Dec/2024 17:02:20] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:02:28,370 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:02:28,371 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:02:28,373 - INFO - 127.0.0.1 - - [16/Dec/2024 17:02:28] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:02:33,100 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:02:33,120 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:02:33,121 - INFO - 127.0.0.1 - - [16/Dec/2024 17:02:33] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:02:43,307 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:02:43,329 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:02:43,329 - INFO - 127.0.0.1 - - [16/Dec/2024 17:02:43] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:02:51,517 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:02:51,530 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:02:51,531 - INFO - 127.0.0.1 - - [16/Dec/2024 17:02:51] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:02:53,644 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:02:53,667 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:02:53,668 - INFO - 127.0.0.1 - - [16/Dec/2024 17:02:53] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:04:49,390 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:04:49,403 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:04:49,404 - INFO - 127.0.0.1 - - [16/Dec/2024 17:04:49] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:06:16,732 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:06:16,734 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:06:16,735 - INFO - 127.0.0.1 - - [16/Dec/2024 17:06:16] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:06:39,850 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:06:39,853 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:06:39,854 - INFO - 127.0.0.1 - - [16/Dec/2024 17:06:39] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:07:33,395 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:07:33,397 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:07:33,410 - INFO - 127.0.0.1 - - [16/Dec/2024 17:07:33] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:08:36,853 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:08:36,855 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:08:36,861 - INFO - 127.0.0.1 - - [16/Dec/2024 17:08:36] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:09:11,669 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:09:11,671 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:09:11,672 - INFO - 127.0.0.1 - - [16/Dec/2024 17:09:11] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:09:15,125 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:09:15,140 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:09:15,144 - INFO - 127.0.0.1 - - [16/Dec/2024 17:09:15] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:09:24,469 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:09:24,492 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:09:24,496 - INFO - 127.0.0.1 - - [16/Dec/2024 17:09:24] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:09:28,491 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:09:28,511 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:09:28,513 - INFO - 127.0.0.1 - - [16/Dec/2024 17:09:28] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:09:39,226 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:09:39,251 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:09:39,253 - ERROR - Exception on /api/outer/structure_db/updateStructure [POST]
+Traceback (most recent call last):
+  File "E:\07-code\tunnelProject\adminProject\routes\local\project\structure.py", line 211, in structure_update
+    rows = cursor.execute(sql, (code, name, fir_level, sec_level, thir_level, old_code))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry '1001' for key 'structure.StruCode'")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "E:\07-code\tunnelProject\adminProject\routes\local\project\structure.py", line 217, in structure_update
+    return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '–ﬁ∏ƒ ß∞‹', 'data': {str(e)}}), 200
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\__init__.py", line 234, in dumps
+    return cls(
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "E:\Anaconda\envs\tunnel_project\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "E:\Anaconda\envs\tunnel_project\lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type set is not JSON serializable
+2024-12-16 17:09:39,334 - INFO - 127.0.0.1 - - [16/Dec/2024 17:09:39] "[35m[1mPOST /api/outer/structure_db/updateStructure HTTP/1.1[0m" 500 -
+2024-12-16 17:10:03,009 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:10:03,011 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:10:03,011 - INFO - 127.0.0.1 - - [16/Dec/2024 17:10:03] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:10:15,238 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:10:15,239 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:10:15,243 - INFO - 127.0.0.1 - - [16/Dec/2024 17:10:15] "POST /api/outer/structure_db/selectStructure HTTP/1.1" 200 -
+2024-12-16 17:10:20,798 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:10:20,800 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:10:20,801 - INFO - 127.0.0.1 - - [16/Dec/2024 17:10:20] "POST /api/outer/structure_db/searchStructureByColumn HTTP/1.1" 200 -
+2024-12-16 17:10:27,665 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:10:27,677 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:10:27,678 - INFO - 127.0.0.1 - - [16/Dec/2024 17:10:27] "POST /api/outer/structure_db/searchStructureByColumn HTTP/1.1" 200 -
+2024-12-16 17:10:38,266 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:10:38,277 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:10:38,278 - INFO - 127.0.0.1 - - [16/Dec/2024 17:10:38] "POST /api/outer/structure_db/updateStructure HTTP/1.1" 200 -
+2024-12-16 17:15:33,243 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:15:33,245 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:15:33,246 - INFO - 127.0.0.1 - - [16/Dec/2024 17:15:33] "POST /api/outer/tunnel_db/addTunnel HTTP/1.1" 200 -
+2024-12-16 17:15:53,525 - INFO - 127.0.0.1 - - [16/Dec/2024 17:15:53] "POST /api/outer/tunnel_db/addTunnel HTTP/1.1" 200 -
+2024-12-16 17:15:57,878 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:15:57,879 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:15:57,880 - INFO - 127.0.0.1 - - [16/Dec/2024 17:15:57] "POST /api/outer/tunnel_db/addTunnel HTTP/1.1" 200 -
+2024-12-16 17:16:04,557 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:16:04,558 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:16:04,561 - INFO - 127.0.0.1 - - [16/Dec/2024 17:16:04] "POST /api/outer/tunnel_db/addTunnel HTTP/1.1" 200 -
+2024-12-16 17:16:20,710 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:16:20,726 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:16:20,726 - INFO - 127.0.0.1 - - [16/Dec/2024 17:16:20] "POST /api/outer/tunnel_db/deleteTunnel HTTP/1.1" 200 -
+2024-12-16 17:16:22,963 - INFO - 127.0.0.1 - - [16/Dec/2024 17:16:22] "POST /api/outer/tunnel_db/deleteTunnel HTTP/1.1" 200 -
+2024-12-16 17:16:27,601 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:16:27,622 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:16:27,625 - INFO - 127.0.0.1 - - [16/Dec/2024 17:16:27] "POST /api/outer/tunnel_db/deleteTunnel HTTP/1.1" 200 -
+2024-12-16 17:16:39,960 - INFO - 127.0.0.1 - - [16/Dec/2024 17:16:39] "POST /api/outer/tunnel_db/updateTunnel HTTP/1.1" 200 -
+2024-12-16 17:17:18,347 - INFO - 127.0.0.1 - - [16/Dec/2024 17:17:18] "POST /api/outer/tunnel_db/updateTunnel HTTP/1.1" 200 -
+2024-12-16 17:18:32,253 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:18:32,254 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:18:32,255 - INFO - 127.0.0.1 - - [16/Dec/2024 17:18:32] "POST /api/outer/tunnel_db/updateTunnel HTTP/1.1" 200 -
+2024-12-16 17:18:45,539 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:18:45,557 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:18:45,561 - INFO - 127.0.0.1 - - [16/Dec/2024 17:18:45] "POST /api/outer/tunnel_db/updateTunnel HTTP/1.1" 200 -
+2024-12-16 17:18:54,143 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:18:54,144 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:18:54,145 - INFO - 127.0.0.1 - - [16/Dec/2024 17:18:54] "POST /api/outer/tunnel_db/updateTunnel HTTP/1.1" 200 -
+2024-12-16 17:19:01,850 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:19:01,851 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:19:01,852 - INFO - 127.0.0.1 - - [16/Dec/2024 17:19:01] "POST /api/outer/tunnel_db/updateTunnel HTTP/1.1" 200 -
+2024-12-16 17:19:04,514 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:19:04,515 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:19:04,516 - INFO - 127.0.0.1 - - [16/Dec/2024 17:19:04] "POST /api/outer/tunnel_db/updateTunnel HTTP/1.1" 200 -
+2024-12-16 17:35:44,727 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:35:44,729 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:35:44,730 - INFO - 127.0.0.1 - - [16/Dec/2024 17:35:44] "POST /api/outer/tunnel_db/updateTunnel HTTP/1.1" 200 -
+2024-12-16 17:36:05,619 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:36:05,620 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:36:05,621 - INFO - 127.0.0.1 - - [16/Dec/2024 17:36:05] "POST /api/outer/tunnel_db/selectTunnel HTTP/1.1" 200 -
+2024-12-16 17:36:17,092 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:36:17,094 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:36:17,096 - INFO - 127.0.0.1 - - [16/Dec/2024 17:36:17] "POST /api/outer/tunnel_db/searchTunnelByColumn HTTP/1.1" 200 -
+2024-12-16 17:36:28,813 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-16 17:36:28,814 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-16 17:36:28,815 - INFO - 127.0.0.1 - - [16/Dec/2024 17:36:28] "POST /api/outer/tunnel_db/searchTunnelByColumn HTTP/1.1" 200 -
+2024-12-17 09:09:31,270 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 09:09:31,314 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 09:09:31,405 - INFO - 127.0.0.1 - - [17/Dec/2024 09:09:31] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-17 09:10:59,392 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 09:10:59,416 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 09:10:59,417 - INFO - 127.0.0.1 - - [17/Dec/2024 09:10:59] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-17 09:11:05,250 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 09:11:05,251 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 09:11:05,252 - INFO - 127.0.0.1 - - [17/Dec/2024 09:11:05] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-17 09:23:12,091 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 09:23:12,107 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 09:23:12,144 - INFO - 127.0.0.1 - - [17/Dec/2024 09:23:12] "POST /api/outer/user_db/login HTTP/1.1" 200 -
+2024-12-17 09:53:20,113 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 09:53:20,117 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 09:53:20,119 - INFO - 127.0.0.1 - - [17/Dec/2024 09:53:20] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-17 09:53:30,376 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 09:53:30,388 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 09:53:30,419 - INFO - 127.0.0.1 - - [17/Dec/2024 09:53:30] "POST /api/outer/user_db/addUser HTTP/1.1" 200 -
+2024-12-17 10:12:09,169 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:12:09,173 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:12:09,193 - INFO - 127.0.0.1 - - [17/Dec/2024 10:12:09] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-17 10:12:30,643 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:12:30,644 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:12:30,645 - INFO - 127.0.0.1 - - [17/Dec/2024 10:12:30] "POST /api/outer/user_db/deleteUser HTTP/1.1" 200 -
+2024-12-17 10:17:10,431 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:17:10,456 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:17:10,457 - INFO - 127.0.0.1 - - [17/Dec/2024 10:17:10] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-17 10:17:25,419 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:17:25,431 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:17:25,432 - INFO - 127.0.0.1 - - [17/Dec/2024 10:17:25] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-17 10:17:37,063 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:17:37,084 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:17:37,087 - INFO - 127.0.0.1 - - [17/Dec/2024 10:17:37] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-17 10:19:01,671 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:19:01,691 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:19:01,692 - INFO - 127.0.0.1 - - [17/Dec/2024 10:19:01] "POST /api/outer/user_db/updateUser HTTP/1.1" 200 -
+2024-12-17 10:28:53,015 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:28:53,046 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:28:53,067 - INFO - 127.0.0.1 - - [17/Dec/2024 10:28:53] "POST /api/outer/user_db/setUserPassword HTTP/1.1" 200 -
+2024-12-17 10:29:00,240 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:29:00,241 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:29:00,242 - INFO - 127.0.0.1 - - [17/Dec/2024 10:29:00] "POST /api/outer/user_db/setUserPassword HTTP/1.1" 200 -
+2024-12-17 10:29:14,078 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:29:14,103 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:29:14,104 - INFO - 127.0.0.1 - - [17/Dec/2024 10:29:14] "POST /api/outer/user_db/setUserPassword HTTP/1.1" 200 -
+2024-12-17 10:29:20,260 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:29:20,274 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:29:20,276 - INFO - 127.0.0.1 - - [17/Dec/2024 10:29:20] "POST /api/outer/user_db/setUserPassword HTTP/1.1" 200 -
+2024-12-17 10:37:53,485 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 10:37:53,486 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 10:37:53,488 - INFO - 127.0.0.1 - - [17/Dec/2024 10:37:53] "POST /api/outer/user_db/searchInfoByColumn HTTP/1.1" 200 -
+2024-12-17 11:04:44,033 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:04:44,036 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:04:44,037 - INFO - 127.0.0.1 - - [17/Dec/2024 11:04:44] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-17 11:04:53,871 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:04:53,897 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:04:53,898 - INFO - 127.0.0.1 - - [17/Dec/2024 11:04:53] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-17 11:05:02,794 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:05:02,795 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:05:02,797 - INFO - 127.0.0.1 - - [17/Dec/2024 11:05:02] "POST /api/outer/user_db/modifyUserPermission HTTP/1.1" 200 -
+2024-12-17 11:19:12,187 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:19:12,189 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:19:12,278 - INFO - 127.0.0.1 - - [17/Dec/2024 11:19:12] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-17 11:19:22,774 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:19:22,775 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:19:22,783 - INFO - 127.0.0.1 - - [17/Dec/2024 11:19:22] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-17 11:19:28,359 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:19:28,380 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:19:28,383 - INFO - 127.0.0.1 - - [17/Dec/2024 11:19:28] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-17 11:19:58,668 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:19:58,682 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:19:58,707 - INFO - 127.0.0.1 - - [17/Dec/2024 11:19:58] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-17 11:20:14,254 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:20:14,279 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:20:14,282 - INFO - 127.0.0.1 - - [17/Dec/2024 11:20:14] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-17 11:20:17,628 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:20:17,651 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:20:17,654 - INFO - 127.0.0.1 - - [17/Dec/2024 11:20:17] "POST /api/outer/console_db/addConsole HTTP/1.1" 200 -
+2024-12-17 11:20:21,956 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:20:21,957 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:20:21,980 - INFO - 127.0.0.1 - - [17/Dec/2024 11:20:21] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-17 11:20:48,076 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:20:48,102 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:20:48,106 - INFO - 127.0.0.1 - - [17/Dec/2024 11:20:48] "POST /api/outer/data_acq_db/addDataAcq HTTP/1.1" 200 -
+2024-12-17 11:22:55,355 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:22:55,369 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:22:55,381 - INFO - 127.0.0.1 - - [17/Dec/2024 11:22:55] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-17 11:22:58,405 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:22:58,429 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:22:58,430 - INFO - 127.0.0.1 - - [17/Dec/2024 11:22:58] "POST /api/outer/anomaly_db/addAnomaly HTTP/1.1" 200 -
+2024-12-17 11:28:26,454 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:28:26,455 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:28:26,458 - INFO - 127.0.0.1 - - [17/Dec/2024 11:28:26] "POST /api/outer/anomaly_db/deleteAnomaly HTTP/1.1" 200 -
+2024-12-17 11:30:27,785 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:30:27,797 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:30:27,846 - INFO - 127.0.0.1 - - [17/Dec/2024 11:30:27] "POST /api/outer/anomaly_db/selectAnomalyLog HTTP/1.1" 200 -
+2024-12-17 11:33:15,752 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:33:15,754 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:33:15,817 - INFO - 127.0.0.1 - - [17/Dec/2024 11:33:15] "POST /api/outer/anomaly_db/selectAnomalyLogDesc HTTP/1.1" 200 -
+2024-12-17 11:37:23,336 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 11:37:23,338 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 11:37:23,340 - INFO - 127.0.0.1 - - [17/Dec/2024 11:37:23] "POST /api/outer/anomaly_db/searchLogByColumn HTTP/1.1" 200 -
+2024-12-17 15:39:47,071 - INFO -  ˝æ›ø‚≈‰÷√≥…π¶º”‘ÿ
+2024-12-17 15:39:47,076 - INFO - MySQL ˝æ›ø‚¡¨Ω”≥…π¶
+2024-12-17 15:39:47,104 - INFO - 127.0.0.1 - - [17/Dec/2024 15:39:47] "POST /api/outer/pcd_db_op/logByCodeOrDate HTTP/1.1" 200 -

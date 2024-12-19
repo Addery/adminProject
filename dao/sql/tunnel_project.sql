@@ -110,7 +110,7 @@ CREATE TABLE user
     UserName  VARCHAR(32)  NOT NULL COMMENT '用户名称',
     PassWord  VARCHAR(16)  NOT NULL COMMENT '用户密码',
     RealName  Varchar(32)  NOT NULL COMMENT '真实姓名',
-    RoleClass VARCHAR(128) NOT NULL COMMENT '角色名称/职称',
+    RoleClass INT DEFAULT 1 COMMENT '角色名称/职称 0: 管理员, 1: 普通用户',
     RoleID    INT DEFAULT 1 COMMENT '角色编号/工号',
     Phone     VARCHAR(11)  NOT NULL COMMENT '用户联系电话',
     ProCode   VARCHAR(128) NOT NULL COMMENT '项目编号，外键',

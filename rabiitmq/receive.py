@@ -16,8 +16,8 @@ import threading
 
 import pika
 
-from outer.utils.util_database import DBUtils
-from outer.utils.util_pcd import write_init, write_single_df, write_single_log, recreate_init_file, write_single_log_db
+from utils.util_database import DBUtils
+from utils.util_pcd import write_init, write_single_df, write_single_log, recreate_init_file, write_single_log_db
 from construct import Tunnel
 
 
@@ -70,7 +70,7 @@ class Queue(object):
     """
     队列相关参数列
     """
-    CONFIG_PATH = '../config/main_queue.ini'
+    CONFIG_PATH = '../config/rabbitmq_config.ini'
 
     def __init__(self):
         config = configparser.ConfigParser()

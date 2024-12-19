@@ -22,7 +22,7 @@ from open3d.cpu.pybind.geometry import PointCloud
 from pandas import DataFrame
 import open3d as o3d
 
-from outer.utils.util_rabbitmq import get_line, is_init, pcd2df, find_max_folder, compare_df_len
+from utils.util_rabbitmq import get_line, is_init, pcd2df, find_max_folder, compare_df_len
 
 
 def write_df2pcd(now: datetime.datetime, datas: List[DataFrame], path) -> None:

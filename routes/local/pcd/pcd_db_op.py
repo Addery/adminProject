@@ -17,10 +17,10 @@ from flask import jsonify, request, Blueprint
 from pymysql.cursors import DictCursor
 import open3d as o3d
 
-from outer.routes.local.status_code.baseHttpStatus import BaseHttpStatus
-from outer.routes.local.status_code.pcdHttpStatus import PCDHttpStatus
-from outer.utils.util_database import DBUtils
-from outer.utils.util_pcd import get_path, get_history, get_path_by_time, get_pcd_list, compare_log_information, \
+from routes.local.status_code.baseHttpStatus import BaseHttpStatus
+from routes.local.status_code.pcdHttpStatus import PCDHttpStatus
+from utils.util_database import DBUtils
+from utils.util_pcd import get_path, get_history, get_path_by_time, get_pcd_list, compare_log_information, \
     get_xyz_rgb_list, data_is_overdue
 
 pcd_db_op = Blueprint('pcd_db_op', __name__)
@@ -51,18 +51,23 @@ def history_by_code_and_date():
         data = request.json
         filters = {
             "DataAcqEquipCode": data.get('DataAcqEquipCode', None),
-            "Year": data.get('Year', None),
-            "Month": data.get('Month', None),
-            "Day": data.get('Day', None),
-            "Hour": data.get('Hour', None),
-            "Minute": data.get('Minute', None),
-            "Second": data.get('Second', None)
+            "Year": data.get('Year', 0),
+            "Month": data.get('Month', 0),
+            "Day": data.get('Day', 0),
+            "Hour": data.get('Hour', 0),
+            "Minute": data.get('Minute', 0),
+            "Second": data.get('Second', 0)
         }
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '检索失败', 'data': {str(e)}}), 200
     con = None
     cursor = None
     try:
+        # 校验必填字段
+        if not all([filters.get('DataAcqEquipCode'), str(filters.get('Year')), str(filters.get('Month')),
+                    str(filters.get('Day')), str(filters.get('Hour')), str(filters.get('Minute')),
+                    str(filters.get('Second'))]):
+            return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
         dbu = DBUtils()
         con = dbu.connection(cursor_class=DictCursor)
         cursor = con.cursor()
@@ -126,12 +131,12 @@ def compare():
                 "StruCode": root.get('StruCode', None),
                 "ConEquipCode": root.get('ConEquipCode', None),
                 "DataAcqEquipCode": root.get('DataAcqEquipCode', None),
-                "Year": root.get('Year', None),
-                "Month": root.get('Month', None),
-                "Day": root.get('Day', None),
-                "Hour": root.get('Hour', None),
-                "Minute": root.get('Minute', None),
-                "Second": root.get('Second', None)
+                "Year": root.get('Year', 0),
+                "Month": root.get('Month', 0),
+                "Day": root.get('Day', 0),
+                "Hour": root.get('Hour', 0),
+                "Minute": root.get('Minute', 0),
+                "Second": root.get('Second', 0)
             },
             'comparison': {
                 "ProCode": comparison.get('ProCode', None),
@@ -140,12 +145,12 @@ def compare():
                 "StruCode": comparison.get('StruCode', None),
                 "ConEquipCode": comparison.get('ConEquipCode', None),
                 "DataAcqEquipCode": comparison.get('DataAcqEquipCode', None),
-                "Year": comparison.get('Year', None),
-                "Month": comparison.get('Month', None),
-                "Day": comparison.get('Day', None),
-                "Hour": comparison.get('Hour', None),
-                "Minute": comparison.get('Minute', None),
-                "Second": comparison.get('Second', None)
+                "Year": comparison.get('Year', 0),
+                "Month": comparison.get('Month', 0),
+                "Day": comparison.get('Day', 0),
+                "Hour": comparison.get('Hour', 0),
+                "Minute": comparison.get('Minute', 0),
+                "Second": comparison.get('Second', 0)
             }
         }
     except Exception as e:
@@ -156,12 +161,13 @@ def compare():
         root, comparison = filters.get('root'), filters.get('comparison')
         # 校验必填字段
         if not all([root.get('ProCode'), root.get('TunCode'), root.get('WorkSurCode'), root.get('StruCode'),
-                    root.get('ConEquipCode'), root.get('DataAcqEquipCode'), root.get('Year'), root.get('Month'),
-                    root.get('Day'), root.get('Hour'), root.get('Minute'), root.get('Second'),
-                    comparison.get('ProCode'), comparison.get('TunCode'), comparison.get('WorkSurCode'),
-                    comparison.get('StruCode'), comparison.get('ConEquipCode'), comparison.get('DataAcqEquipCode'),
-                    comparison.get('Year'), comparison.get('Month'), comparison.get('Day'), comparison.get('Hour'),
-                    comparison.get('Minute'), comparison.get('Second')]):
+                    root.get('ConEquipCode'), root.get('DataAcqEquipCode'), str(root.get('Year')),
+                    str(root.get('Month')), str(root.get('Day')), str(root.get('Hour')), str(root.get('Minute')),
+                    str(root.get('Second')), comparison.get('ProCode'), comparison.get('TunCode'),
+                    comparison.get('WorkSurCode'), comparison.get('StruCode'), comparison.get('ConEquipCode'),
+                    comparison.get('DataAcqEquipCode'), str(comparison.get('Year')), str(comparison.get('Month')),
+                    comparison.get('Day'), str(comparison.get('Hour')), str(comparison.get('Minute')),
+                    str(comparison.get('Second'))]):
             return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
         # TODO: 判断是否是三天内的数据
         if not data_is_overdue(root) or not data_is_overdue(comparison):

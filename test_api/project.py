@@ -10,12 +10,16 @@
 import requests
 
 
+ip = "http://127.0.0.1"
+port = "5000"
+
+
 def project_add():
     """
     添加新项目
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/project_db/addProject"
+    url = f"{ip}:{port}/api/outer/project_db/addProject"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -36,7 +40,7 @@ def project_delete():
     删除项目
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/project_db/deleteProject"
+    url = f"{ip}:{port}/api/outer/project_db/deleteProject"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -53,7 +57,7 @@ def project_update():
     更新项目
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/project_db/updateProject"
+    url = f"{ip}:{port}/api/outer/project_db/updateProject"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -75,7 +79,7 @@ def project_select():
     项目信息
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/project_db/selectProject"
+    url = f"{ip}:{port}/api/outer/project_db/selectProject"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -89,7 +93,7 @@ def project_select():
 
 
 def project_info_search_by_column():
-    url = "http://127.0.0.1:8023/api/outer/project_db/searchProjectByColumn"
+    url = f"{ip}:{port}/api/outer/project_db/searchProjectByColumn"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -104,7 +108,7 @@ def project_info_search_by_column():
 
 if __name__ == '__main__':
     # project_add()
-    project_delete()
+    # project_delete()
     # project_update()
     # project_select()
-    # project_info_search_by_column()
+    project_info_search_by_column()

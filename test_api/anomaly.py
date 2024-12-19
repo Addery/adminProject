@@ -13,26 +13,30 @@ import time
 import requests
 
 
+ip = "http://127.0.0.1"
+port = "5000"
+
+
 def anomaly_add():
-    url = "http://127.0.0.1:8023/api/outer/anomaly_db/addAnomaly"
+    url = f"{ip}:{port}/api/outer/anomaly_db/addAnomaly"
     headers = {
         'Content-Type': 'application/json'
     }
     now = datetime.datetime.now()
     data = {
         "Identification": str(time.time()),
-        "DescCode": '1016',
+        "DescCode": '1017',
         "Degree": '1',
         "Region": [1, 2, 3],
         "Position": [(1, 2, 3), (1, 2, 3), (1, 2, 3)],
         "Bas": [3, 3, 3],
         "ProCode": '1001',
-        "TunCode": '1002',
-        "WorkSurCode": '1002',
+        "TunCode": '1001',
+        "WorkSurCode": '1001',
         "StruCode": '1001',
         "Mileage": '100',
-        "ConEquipCode": '1002',
-        "DataAcqEquipCode": '1002',
+        "ConEquipCode": '1001',
+        "DataAcqEquipCode": '1001',
         "AnomalyTime": f'{now.strftime("%Y-%m-%d %H:%M:%S")}'
     }
 
@@ -47,12 +51,12 @@ def anomaly_delete():
     删除
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/anomaly_db/deleteAnomaly"
+    url = f"{ip}:{port}/api/outer/anomaly_db/deleteAnomaly"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
-        "DescCode": "1003"
+        "DescCode": "1017"
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -64,7 +68,7 @@ def log_select():
     获取信息
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/anomaly_db/selectAnomalyLog"
+    url = f"{ip}:{port}/api/outer/anomaly_db/selectAnomalyLog"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -82,7 +86,7 @@ def desc_select():
     获取信息
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/anomaly_db/selectAnomalyLogDesc"
+    url = f"{ip}:{port}/api/outer/anomaly_db/selectAnomalyLogDesc"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -96,13 +100,13 @@ def desc_select():
 
 
 def log_search_by_column():
-    url = "http://127.0.0.1:8023/api/outer/anomaly_db/searchLogByColumn"
+    url = f"{ip}:{port}/api/outer/anomaly_db/searchLogByColumn"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
         'item': 'ProCode',
-        'value': '1001'
+        'value': '1003'
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -110,13 +114,13 @@ def log_search_by_column():
 
 
 def desc_search_by_column():
-    url = "http://127.0.0.1:8023/api/outer/anomaly_db/searchDescByColumn"
+    url = f"{ip}:{port}/api/outer/anomaly_db/searchDescByColumn"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
         'item': 'DescCode',
-        'value': '1001'
+        'value': '1730115219.1885593'
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -124,10 +128,9 @@ def desc_search_by_column():
 
 
 if __name__ == "__main__":
-    anomaly_add()
+    # anomaly_add()
     # anomaly_delete()
-    # console_update()
     # log_select()
     # desc_select()
     # log_search_by_column()
-    # desc_search_by_column()
+    desc_search_by_column()

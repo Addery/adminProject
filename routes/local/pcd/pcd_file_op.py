@@ -10,8 +10,8 @@
 import os.path
 from flask import jsonify, request, Blueprint
 
-from outer.routes.local.status_code.pcdHttpStatus import PCDHttpStatus
-from outer.utils.util_pcd import get_path, get_history, show_log, data_visual, compare_data
+from routes.local.status_code.pcdHttpStatus import PCDHttpStatus
+from utils.util_pcd import get_path, get_history, show_log, data_visual, compare_data
 
 pcd_file_op = Blueprint('pcd_file_op', __name__)
 

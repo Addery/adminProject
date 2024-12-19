@@ -11,10 +11,10 @@
 from flask import jsonify, request, Blueprint
 # from pymysql.cursors import DictCursor
 
-from outer.routes.local.status_code.baseHttpStatus import BaseHttpStatus
-from outer.routes.local.status_code.equipHttpStatus import EquipHttpStatus
-from outer.routes.local.status_code.projectHttpStatus import ProjectHttpStatus
-from outer.utils.util_database import DBUtils
+from routes.local.status_code.baseHttpStatus import BaseHttpStatus
+from routes.local.status_code.equipHttpStatus import EquipHttpStatus
+from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
+from utils.util_database import DBUtils
 
 console_db = Blueprint('console_db', __name__)
 

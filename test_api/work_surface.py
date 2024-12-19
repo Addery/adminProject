@@ -10,12 +10,16 @@
 import requests
 
 
+ip = "http://127.0.0.1"
+port = "5000"
+
+
 def work_surface_add():
     """
     添加隧道
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/work_surface_db/addWorkSur"
+    url = f"{ip}:{port}/api/outer/work_surface_db/addWorkSur"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -36,7 +40,7 @@ def work_surface_delete():
     删除隧道
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/work_surface_db/deleteWorkSur"
+    url = f"{ip}:{port}/api/outer/work_surface_db/deleteWorkSur"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -54,7 +58,7 @@ def work_surface_update():
     删除隧道
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/work_surface_db/updateWorkSur"
+    url = f"{ip}:{port}/api/outer/work_surface_db/updateWorkSur"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -77,7 +81,7 @@ def work_surface_select():
     隧道信息
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/work_surface_db/selectWorkSur"
+    url = f"{ip}:{port}/api/outer/work_surface_db/selectWorkSur"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -91,7 +95,7 @@ def work_surface_select():
 
 
 def work_surface_info_search_by_column():
-    url = "http://127.0.0.1:8023/api/outer/work_surface_db/searchWorkSurByColumn"
+    url = f"{ip}:{port}/api/outer/work_surface_db/searchWorkSurByColumn"
     headers = {
         'Content-Type': 'application/json'
     }

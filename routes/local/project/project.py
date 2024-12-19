@@ -12,9 +12,9 @@ from datetime import datetime
 from flask import jsonify, request, Blueprint
 # from pymysql.cursors import DictCursor
 
-from outer.routes.local.status_code.baseHttpStatus import BaseHttpStatus
-from outer.routes.local.status_code.projectHttpStatus import ProjectHttpStatus
-from outer.utils.util_database import DBUtils
+from routes.local.status_code.baseHttpStatus import BaseHttpStatus
+from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
+from utils.util_database import DBUtils
 
 project_db = Blueprint('project_db', __name__)
 

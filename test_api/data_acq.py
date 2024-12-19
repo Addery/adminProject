@@ -10,22 +10,26 @@
 import requests
 
 
+ip = "http://127.0.0.1"
+port = "5000"
+
+
 def data_acq_add():
     """
     添加数据采集器
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/data_acq_db/addDataAcq"
+    url = f"{ip}:{port}/api/outer/data_acq_db/addDataAcq"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
-        "DataAcqEquipCode": "1004",
+        "DataAcqEquipCode": "1001",
         "DataAcqEquipName": "name",
         "DataAcqEquipIP": "localhost",
         "DataAcqEquipInterval": "10",
         "Distance": "80",
-        "ConEquipCode": "1002",
+        "ConEquipCode": "1001",
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -37,13 +41,13 @@ def data_acq_delete():
     删除数据采集器
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/data_acq_db/deleteDataAcq"
+    url = f"{ip}:{port}/api/outer/data_acq_db/deleteDataAcq"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
-        "ConEquipCode": "1003",
-        "DataAcqEquipCode": "1001"
+        "ConEquipCode": "1002",
+        "DataAcqEquipCode": "1005"
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -55,7 +59,7 @@ def data_acq_update():
     更新数据采集器
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/data_acq_db/updateDataAcq"
+    url = f"{ip}:{port}/api/outer/data_acq_db/updateDataAcq"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -65,10 +69,10 @@ def data_acq_update():
         "DataAcqEquipIP": "localhost",
         "DataAcqEquipInterval": "10",
         "Distance": "100",
-        "ConEquipCode": "1003",
+        "ConEquipCode": "1002",
         "DataAcaEquipStatus": "1",
         "OldConEquipCode": "1002",
-        "OldDataAcqEquipCode": "1004"
+        "OldDataAcqEquipCode": "1005"
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -80,7 +84,7 @@ def data_acq_select():
     信息
     :return:
     """
-    url = "http://127.0.0.1:8023/api/outer/data_acq_db/selectDataAcq"
+    url = f"{ip}:{port}/api/outer/data_acq_db/selectDataAcq"
     headers = {
         'Content-Type': 'application/json'
     }
@@ -94,13 +98,13 @@ def data_acq_select():
 
 
 def data_acq_info_search_by_column():
-    url = "http://127.0.0.1:8023/api/outer/data_acq_db/searchInfoByColumn"
+    url = f"{ip}:{port}/api/outer/data_acq_db/searchInfoByColumn"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
         'item': 'ConEquipCode',
-        'value': '1001'
+        'value': '1002'
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())

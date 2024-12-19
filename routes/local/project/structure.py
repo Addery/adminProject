@@ -10,9 +10,9 @@
 
 from flask import jsonify, request, Blueprint
 
-from outer.routes.local.status_code.baseHttpStatus import BaseHttpStatus
-from outer.routes.local.status_code.projectHttpStatus import ProjectHttpStatus
-from outer.utils.util_database import DBUtils
+from routes.local.status_code.baseHttpStatus import BaseHttpStatus
+from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
+from utils.util_database import DBUtils
 
 structure_db = Blueprint('structure_db', __name__)
 
@@ -185,7 +185,7 @@ def structure_update():
         cursor = con.cursor()
 
         # 校验待修改的结构物信息是否已经存在
-        select_old_sql = "SELECT * From structure WHERE StruCode={}".format(f"'{old_code}'")
+        select_old_sql = "SELECT StruCode From structure WHERE StruCode={}".format(f"'{old_code}'")
         old_is_exist = DBUtils.is_exist(cursor, select_old_sql, old_code, ProjectHttpStatus.EXIST_CODE.value,
                                         "结构物信息存在")
         if not old_is_exist:
@@ -193,7 +193,7 @@ def structure_update():
                 {'code': ProjectHttpStatus.NO_FIND_CODE.value, 'msg': '待修改的结构物信息不存在', 'data': {}}), 200
 
         # 校验修改后的结构物信息是否被占用
-        select_sql = "SELECT * From structure WHERE StruCode={}".format(f"'{code}'")
+        select_sql = "SELECT StruCode From structure WHERE StruCode={}".format(f"'{code}'")
         is_exist = DBUtils.is_exist(cursor, select_sql, code, ProjectHttpStatus.EXIST_CODE.value,
                                     "结构物编号已经被使用")
         if is_exist and old_code != code:
