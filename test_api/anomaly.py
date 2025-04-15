@@ -13,8 +13,8 @@ import time
 import requests
 
 
-ip = "http://127.0.0.1"
-port = "5000"
+ip = "http://192.168.1.3"
+port = "8023"
 
 
 def anomaly_add():
@@ -127,10 +127,28 @@ def desc_search_by_column():
     print(response.status_code)
 
 
+def section_filter():
+    url = f"{ip}:{port}/api/outer/anomaly_db/sectionFilter"
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    start_time = datetime.datetime(2024, 10, 1, 0, 0, 0)
+    end_time = datetime.datetime(2024, 11, 1, 0, 0, 0)
+    data = {
+        "column": "AnomalyTime",
+        "start": start_time.strftime("%Y-%m-%d %H:%M:%S"),
+        "end": end_time.strftime("%Y-%m-%d %H:%M:%S")
+    }
+    response = requests.post(url, json=data, headers=headers)
+    print(response.json())
+    print(response.status_code)
+
+
 if __name__ == "__main__":
     # anomaly_add()
     # anomaly_delete()
     # log_select()
     # desc_select()
     # log_search_by_column()
-    desc_search_by_column()
+    # desc_search_by_column()
+    section_filter()

@@ -10,7 +10,6 @@
 import os
 import time
 from datetime import datetime
-import ast
 
 from pymysql.connections import Connection
 import logging
@@ -18,6 +17,8 @@ import configparser
 
 from pymysql.cursors import Cursor, DictCursor
 
+from dao.bin.local_db_table import TunnelTable, ProjectTable, WorkSurfaceTable, StructureTable, UserTable, \
+    AnomalyLogTable, AnomalyLodDescTable, EqControlTable, EqDataTable, PcdLogTable, RoleTable
 from rabiitmq.construct import Tunnel
 from routes.local.status_code.baseHttpStatus import BaseHttpStatus
 from routes.local.status_code.logHttpStatus import LogHttpStatus
@@ -33,21 +34,26 @@ class DBUtils(object):
     CURRENT_PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
     DEFAULT_CONFIG_PATH = os.path.join(CURRENT_PROJECT_PATH, "../config/database_config.ini")
     DEFAULT_LOG_PATH = os.path.join(CURRENT_PROJECT_PATH, "../log/database.log")
-    PROJECT_COLUMNS = ['ProCode', 'ProAddress', 'LinkMan', 'Phone', 'ProCreateTime', 'ProStatus']
-    TUNNEL_COLUMNS = ['TunCode', 'TunName', 'LinkMan', 'Phone', 'TunStatus', 'ProCode']
-    WORK_SURFACE_COLUMNS = ['WorkSurCode', 'WorkSurName', 'ProCode', 'TunCode']
-    STRUCTURE_COLUMNS = ['StruCode', 'StruName', 'FirWarningLevel', 'SecWarningLevel', 'ThirWarningLevel', 'ProCode',
-                         'TunCode', 'WorkSurCode']
-    CON_EQUIP_COLUMNS = ['ConEquipCode', 'ConEquipName', 'ConEquipIP', 'ProCode', 'TunCode', 'WorkSurCode', 'StruCode']
-    DATA_ACQ_EQUIP_COLUMNS = ['DataAcqEquipCode', 'DataAcqEquipName', 'DataAcqEquipIP', 'DataAcqEquipInterval',
-                              'Distance', 'DataAcqEquipStatus', 'ConEquipCode']
+    # PROJECT_COLUMNS = ['ProCode', 'ProAddress', 'LinkMan', 'Phone', 'ProCreateTime', 'ProStatus']
+    # TUNNEL_COLUMNS = ['TunCode', 'TunName', 'LinkMan', 'Phone', 'TunStatus', 'ProCode']
+    # WORK_SURFACE_COLUMNS = ['WorkSurCode', 'WorkSurName', 'ProCode', 'TunCode']
+    # STRUCTURE_COLUMNS = ['StruCode', 'StruName', 'FirWarningLevel', 'SecWarningLevel', 'ThirWarningLevel', 'ProCode',
+    #                      'TunCode', 'WorkSurCode']
+    # CON_EQUIP_COLUMNS = ['ConEquipCode', 'ConEquipName', 'ConEquipIP', 'ProCode', 'TunCode', 'WorkSurCode', 'StruCode']
+    # DATA_ACQ_EQUIP_COLUMNS = ['DataAcqEquipCode', 'DataAcqEquipName', 'DataAcqEquipIP', 'DataAcqEquipInterval',
+    #                           'Distance', 'DataAcqEquipStatus', 'ConEquipCode']
     COLUMNS = {
-        'project': PROJECT_COLUMNS,
-        'tunnel': TUNNEL_COLUMNS,
-        'work_surface': WORK_SURFACE_COLUMNS,
-        'structure': STRUCTURE_COLUMNS,
-        'central_control_equipment': CON_EQUIP_COLUMNS,
-        'data_acquisition_equipment': DATA_ACQ_EQUIP_COLUMNS
+        'project': ProjectTable().columns_dict(),
+        'tunnel': TunnelTable().columns_dict(),
+        'work_surface': WorkSurfaceTable().columns_dict(),
+        'structure': StructureTable().columns_dict(),
+        'user': UserTable().columns_dict(),
+        'anomaly_log': AnomalyLogTable().columns_dict(),
+        'anomaly_log_desc': AnomalyLodDescTable().columns_dict(),
+        'eq_control': EqControlTable().columns_dict(),
+        'eq_data': EqDataTable().columns_dict(),
+        'pcd_log': PcdLogTable().columns_dict(),
+        'role': RoleTable().columns_dict()
     }
 
     def __init__(self, config_path=None):
@@ -331,6 +337,12 @@ class DBUtils(object):
         return DBUtils.project_is_exist(cursor, sql, error_code, error_msg)
 
     @staticmethod
+    def normalize_field(value):
+        if value is None or str(value).strip() == "":
+            return None
+        return value
+
+    @staticmethod
     def paging_display(data, table_name, p, ps):
         """
         :param data: request.json
@@ -345,12 +357,28 @@ class DBUtils(object):
         SELECT * FROM users LIMIT 10 OFFSET 0;
         LIMIT 10 表示每次查询 10 条记录，OFFSET 0 表示从第 0 条记录开始（即第一页）
         """
+        filter_item = None
+        filter_value = None
+        search_text = None
         try:
             page = data.get('Page', p)
             page_size = data.get('PageSize', ps)
+            # 键值对筛选字段
+            filter_item = DBUtils.normalize_field(data.get('Item'))
+            filter_value = DBUtils.normalize_field(data.get('Value'))
+            # 模糊查询字段
+            search_text = DBUtils.normalize_field(data.get('SearchText'))
+            # 指定所属单位筛选字段
+            pro_code = DBUtils.normalize_field(data.get('ProCode'))
+            tun_code = DBUtils.normalize_field(data.get('TunCode'))
+
+            # 区间筛选字段
+            start = DBUtils.normalize_field(data.get('start'))
+            end = DBUtils.normalize_field(data.get('end'))
+            column = DBUtils.normalize_field(data.get('column'))
             offset = (page - 1) * page_size
         except Exception as e:
-            return {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '查找失败', 'data': {str(e)}}
+            return {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '查找失败', 'data': {'exception': str(e)}}
 
         # 校验必填字段
         if not all([str(page), str(page_size)]):
@@ -364,22 +392,91 @@ class DBUtils(object):
         try:
             dbu = DBUtils()
             con = dbu.connection(cursor_class=DictCursor)
+            values_tuple = []
             with con.cursor() as cursor:
                 # 查询总记录数
                 cursor.execute(f"SELECT COUNT(*) as total FROM {table_name}")
                 total = cursor.fetchone()['total']
 
+                # 正常查询
                 sql = f"""
-                SELECT * FROM {table_name} LIMIT %s OFFSET %s
-                """
+                        SELECT * FROM {table_name} 
+                        """
 
-                cursor.execute(sql, (page_size, offset))
+                # 是否要根据编号进行筛选
+                if pro_code is not None and tun_code is not None:
+                    sql += f" WHERE ProCode = %s AND TunCode = %s"
+                    values_tuple.append(pro_code)
+                    values_tuple.append(tun_code)
+                elif tun_code is not None:
+                    sql += f" WHERE TunCode = %s"
+                    values_tuple.append(tun_code)
+                elif pro_code is not None:
+                    sql += f" WHERE ProCode = %s"
+                    values_tuple.append(pro_code)
+
+                # 是否要在分页结果中进行模糊查询
+                if search_text is not None:
+                    # 获取数据表的字段名称 需要查数据库速度慢
+                    # db_columns = DBUtils.get_table_columns(con, table_name)
+                    db_columns = DBUtils.COLUMNS[table_name]
+
+                    if pro_code is None and tun_code is None:
+                        sql += " WHERE"
+                    else:
+                        sql += " AND"
+                    for i, value in enumerate(db_columns):
+                        values_tuple.append(f'%{search_text}%')
+                        if i == len(db_columns) - 1:
+                            sql += f" {value} LIKE %s"
+                            continue
+                        sql += f" {value} LIKE %s OR"
+
+                # 分页查询
+                sql += f"ORDER BY ID DESC LIMIT %s OFFSET %s"
+                values_tuple.append(page_size)
+                values_tuple.append(offset)
+
+                # 执行sql
+                cursor.execute(sql, values_tuple)
                 items = cursor.fetchall()
-                if not items:
+
+                # 是否要在分页结果中进行筛选(键值对筛选字段)
+                filter_items = []
+                if filter_item is not None and filter_value is not None:
+                    for v in items:
+                        if v[filter_item] == filter_value:
+                            filter_items.append(v)
+                else:
+                    filter_items = items
+
+                if not filter_items:
                     return {'code': BaseHttpStatus.ERROR.value, 'msg': '查找失败', 'data': {}}
+
+                # 是否要进行区间筛选
+                section_filter_items = []
+                if all([str(start), str(end), str(column)]):
+                    if "Time" in column:
+                        start_dt = datetime.strptime(start, "%Y-%m-%d %H:%M:%S")
+                        end_dt = datetime.strptime(end, "%Y-%m-%d %H:%M:%S")
+                        for item in filter_items:
+                            item_dt = datetime.strptime(item[column], "%Y-%m-%d %H:%M:%S")
+                            if start_dt <= item_dt <= end_dt:
+                                section_filter_items.append(item)
+                    elif "Mileage" in column:
+                        start_in = int(start)
+                        end_in = int(end)
+                        for item in filter_items:
+                            item_in = int(item[column])
+                            if start_in <= item_in <= end_in:
+                                section_filter_items.append(item)
+                else:
+                    section_filter_items = filter_items
+
                 data = {
-                    'items': items,
-                    'total': total,  # 总记录数
+                    'items': section_filter_items,
+                    # 'total': total,  # 总记录数
+                    'total': total,
                     'page': page,
                     'page_size': page_size,
                     'total_page': (total + page_size - 1) // page_size  # 总页数
@@ -389,7 +486,7 @@ class DBUtils(object):
         except Exception as e:
             if con:
                 con.rollback()
-            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}
+            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}
         finally:
             if cursor:
                 cursor.close()
@@ -397,7 +494,62 @@ class DBUtils(object):
                 DBUtils.close_connection(con)
 
     @staticmethod
-    def search_by_some_item(data, table_name, item, value):
+    def search(data):
+        try:
+            table_name = data.get('TableName')
+            columns = data.get('Columns', None)
+        except Exception as e:
+            return {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '查找失败', 'data': {'exception': str(e)}}
+
+        # 校验必填字段
+        if not all([table_name]):
+            return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}, 200
+
+            con = None
+            cursor = None
+        try:
+            dbu = DBUtils()
+            con = dbu.connection(cursor_class=DictCursor)
+            cursor = con.cursor()
+
+            if columns is not None:
+                columns_list = columns.split(',')
+                sql = None
+                for column in columns_list:
+                    if sql is None:
+                        sql = f"SELECT {column}"
+                    else:
+                        sql += f", {column}"
+                sql += f" From {table_name}"
+            else:
+                sql = f"""
+                    SELECT * FROM {table_name}
+                """
+            cursor.execute(sql)
+            res = cursor.fetchall()
+            con.commit()
+            if res:
+                return {
+                    'code': BaseHttpStatus.OK.value,
+                    'msg': '查找成功',
+                    'data': {
+                        'total': len(res),
+                        'items': res
+                    }
+                }
+            return {'code': BaseHttpStatus.ERROR.value, 'msg': '不存在符合要求的记录', 'data': {}}
+        except Exception as e:
+            if con:
+                con.rollback()
+            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}
+        finally:
+            if cursor:
+                cursor.close()
+            if con:
+                DBUtils.close_connection(con)
+
+    @staticmethod
+    def search_by_some_item(table_name, item, value, data=None):
         # 校验必填字段
         if not all([item, value]):
             return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}, 200
@@ -432,7 +584,7 @@ class DBUtils(object):
         except Exception as e:
             if con:
                 con.rollback()
-            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}
+            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}
         finally:
             if cursor:
                 cursor.close()
@@ -643,7 +795,7 @@ class DBUtils(object):
                 "Second": data.get('Second', None)
             }
         except Exception as e:
-            return {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '检索失败', 'data': {str(e)}}
+            return {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '检索失败', 'data': {'exception': str(e)}}
 
         con = None
         cursor = None
@@ -682,7 +834,7 @@ class DBUtils(object):
         except Exception as e:
             if con:
                 con.rollback()
-            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '检索失败', 'data': {str(e)}}
+            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '检索失败', 'data': {'exception': str(e)}}
         finally:
             if cursor:
                 cursor.close()
@@ -782,38 +934,21 @@ class DBUtils(object):
 
 
 if __name__ == '__main__':
-    # current_dir = os.path.dirname(os.path.abspath(__file__))
-    # print(current_dir)
-    dbu = DBUtils()
-    conn = dbu.connection('tunnel_project')
-
-    # list1 = ['ProName']
-    # tuple1 = tuple(list1)
-    # res, status = DBUtils.select_table(conn, 'project', tuple1)
-    # print("select")
-    # print(type(res), res)
-    # print(status)
-    #
-    insert = {
-        'ProCode': '1009',
-        'ProName': 'test3',
-        'ProAddress': 'test3',
-        'LinkMan': 'test3',
-        'Phone': 'test3',
-        'ProCreateTime': '2024-9-4 17:49:30',
-        'ProStatus': '100'
+    data = {
+        'Page': 1,
+        'PageSize': 10,
+        'ProCode': '1001',
+        # 'TunCode': '1002',
+        # 'SearchText': 'name1',  # 模糊查询
+        # 'Item': 'ProCode',  # 指定筛选
+        # 'Value': '1002'  # 指定筛选
     }
-    # status = DBUtils.insert_table(conn, 'project', insert)
-    # print("insert")
-    # print(status)
+    print(DBUtils.paging_display(data, 'user', data.get('Page'), data.get('PageSize')))
 
-    delete_condition = {
-        'ProCode': '1006'
-    }
-    DBUtils.delete_table(conn, 'project', delete_condition)
 
-    u_column = 'ProName'
-    u_value = 'test_update'
-    t_column = 'ProCode'
-    t_value = '1007'
-    # print(DBUtils.update_table(conn, 'project', u_column, u_value, t_column, t_value))
+# if __name__ == '__main__':
+#     data = {
+#         'TableName': 'project',
+#         'Columns': 'TunCode'
+#     }
+#     print(DBUtils.search(data))

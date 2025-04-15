@@ -9,8 +9,8 @@
 """
 from flask import jsonify, request, Blueprint
 
+from routes.local.status_code.baseHttpStatus import BaseHttpStatus
 from utils.util_database import DBUtils
-
 
 basic_local_db = Blueprint('basic_local_db', __name__)
 
@@ -35,10 +35,10 @@ def select_from_table():
             con = dbu.connection()
         else:
             con = dbu.connection(database_name)
-        res, status = DBUtils.select_table(con, table_name, table_columns)
+        res = DBUtils.select_table(con, table_name, table_columns)
         if res is None:
-            return jsonify({'res': 'database select error'}), status
-        return jsonify({'res': list(res)}), status
+            return jsonify({'res': 'database select error'}), 200
+        return jsonify({'res': list(res), 'code': BaseHttpStatus.OK.value, 'msg': '成功'}), 200
     except Exception as e:
         print(f"{e}, a error in /api/project/select")
         return jsonify({'res': 'Exception, defeat'}), 200
@@ -71,8 +71,8 @@ def insert_into_table():
             con = dbu.connection()
         else:
             con = dbu.connection(database_name)
-        res, status = DBUtils.insert_table(con, table_name, insert_data)
-        return jsonify({'res': res}), status
+        res = DBUtils.insert_table(con, table_name, insert_data)
+        return jsonify({'res': res, 'code': BaseHttpStatus.OK.value, 'msg': '成功'}), 200
     except Exception as e:
         print(f"{e}, a error in /api/project/insert")
         return jsonify({'res': 'Exception, defeat'}), 200
@@ -103,8 +103,8 @@ def delete_any_table():
             con = dbu.connection()
         else:
             con = dbu.connection(database_name)
-        res, status = DBUtils.delete_table(con, table_name, delete_condition)
-        return jsonify({'res': res}), status
+        res = DBUtils.delete_table(con, table_name, delete_condition)
+        return jsonify({'res': res, 'code': BaseHttpStatus.OK.value, 'msg': '成功'}), 200
     except Exception as e:
         print(f"{e}, a error in /api/project/delete")
         return jsonify({'res': 'Exception, defeat'}), 200
@@ -136,8 +136,8 @@ def update_table():
             con = dbu.connection()
         else:
             con = dbu.connection(database_name)
-        res, status = DBUtils.update_table(con, table_name, update_column, update_value, column, value)
-        return jsonify({'res': res}), status
+        res = DBUtils.update_table(con, table_name, update_column, update_value, column, value)
+        return jsonify({'res': res, 'code': BaseHttpStatus.OK.value, 'msg': '成功'}), 200
     except Exception as e:
         print(f"{e}, a error in /api/project/update")
         return jsonify({'res': 'Exception, defeat'}), 200

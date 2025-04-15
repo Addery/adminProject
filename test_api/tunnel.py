@@ -7,11 +7,13 @@
 @lastEditTime: 
 @Description: 接口测试-隧道表相关
 """
+import datetime
+
 import requests
 
 
-ip = "http://127.0.0.1"
-port = "5000"
+ip = "http://192.168.1.3"
+port = "8023"
 
 
 def tunnel_add():
@@ -19,17 +21,20 @@ def tunnel_add():
     添加隧道
     :return:
     """
+    time_data = datetime.datetime(2025, 3, 28, 16, 29, 43, 79043)
     url = f"{ip}:{port}/api/outer/tunnel_db/addTunnel"
     headers = {
         'Content-Type': 'application/json'
     }
     data = {
-        "TunCode": "1007",
+        "TunCode": "1011",
         "TunName": "name",
         "LinkMan": "link",
         "Phone": "12346",
         "ProCode": "1004",
-        "High": '8'
+        "High": '8',
+        "TunCycle": '60',
+        "TunCreateTime": time_data.strftime("%Y-%m-%d %H:%M:%S")
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -64,13 +69,13 @@ def tunnel_update():
         'Content-Type': 'application/json'
     }
     data = {
-        "TunCode": "1007",
+        "TunCode": "1009",
         "ProCode": "1002",
         "LinkMan": "123",
         "Phone": "123456",
         "TunName": "name",
         "High": "6",
-        "OldTunCode": "1006",
+        "OldTunCode": "1008",
         "OldProCode": "1004"
     }
     response = requests.post(url, json=data, headers=headers)
@@ -90,6 +95,8 @@ def tunnel_select():
     data = {
         'Page': 1,
         'PageSize': 10
+        # 'Item': 'ProCode',
+        # 'Value': '1002'
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -110,9 +117,21 @@ def tunnel_info_search_by_column():
     print(response.status_code)
 
 
+def tunnel_status():
+    url = f"{ip}:{port}/api/outer/tunnel_db/statisticsStatus"
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    data = {}
+    response = requests.post(url, json=data, headers=headers)
+    print(response.json())
+    print(response.status_code)
+
+
 if __name__ == "__main__":
     # tunnel_add()
     # tunnel_delete()
     # tunnel_update()
     # tunnel_select()
-    tunnel_info_search_by_column()
+    # tunnel_info_search_by_column()
+    tunnel_status()

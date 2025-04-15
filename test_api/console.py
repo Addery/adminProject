@@ -10,8 +10,8 @@
 import requests
 
 
-ip = "http://127.0.0.1"
-port = "5000"
+ip = "http://192.168.1.8"
+port = "8023"
 
 
 def console_add():
@@ -24,13 +24,14 @@ def console_add():
         'Content-Type': 'application/json'
     }
     data = {
-        "ConEquipCode": "1001",
+        "ConEquipCode": "1010",
         "ConEquipName": "e_name",
         "ConEquipIP": "localhost",
-        "ProCode": "1001",
+        "ProCode": "1002",
         "TunCode": "1001",
         "WorkSurCode": "1001",
         "StruCode": "1001",
+        "ConStatus": "2"
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -112,9 +113,26 @@ def console_info_search_by_column():
     print(response.status_code)
 
 
+def statistics_status():
+    """
+    测试统计设备状态接口
+    """
+    url = f"{ip}:{port}/api/outer/console_db/statisticsStatus"
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    data = {
+    }
+    response = requests.post(url, json=data, headers=headers)
+    print(response.json())
+    print(response.status_code)
+
+
 if __name__ == "__main__":
-    console_add()
+    # console_add()
     # console_delete()
     # console_update()
     # console_select()
     # console_info_search_by_column()
+    statistics_status()
+

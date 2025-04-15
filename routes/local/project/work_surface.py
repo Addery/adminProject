@@ -48,7 +48,7 @@ def work_sur_add():
         pro_code = data.get('ProCode')
         stru_code = data.get('StruCode')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([work_surface_code, name, tun_code, pro_code, stru_code]):
@@ -95,7 +95,7 @@ def work_sur_add():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -131,7 +131,7 @@ def work_sur_delete():
         tun_code = data.get('TunCode')
         work_surface_code = data.get('WorkSurCode')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([tun_code, work_surface_code]):
@@ -153,7 +153,7 @@ def work_sur_delete():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -191,7 +191,7 @@ def work_sur_update():
         pro_code = data.get("ProCode")
         stru_code = data.get("StruCode")
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([old_tun_code, old_work_surface_code, tun_code, name, work_surface_code, pro_code]):
@@ -252,7 +252,7 @@ def work_sur_update():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '修改失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -271,7 +271,7 @@ def work_sur_select():
         res = DBUtils.paging_display(data, 'work_surface', 1, 10)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
 
 
 @work_surface_db.route('/searchWorkSurByColumn', methods=['POST'])
@@ -282,7 +282,7 @@ def work_sur_select_by_column():
     """
     try:
         data = request.json
-        res = DBUtils.search_by_some_item(data, 'work_surface', data.get('item'), data.get('value'))
+        res = DBUtils.search_by_some_item('work_surface', data.get('Item'), data.get('Value'), data)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200

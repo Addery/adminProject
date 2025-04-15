@@ -7,6 +7,8 @@
 @lastEditTime: 
 @Description: 数据库隧道表相关路由
 """
+import datetime
+
 # import time
 
 from flask import jsonify, request, Blueprint
@@ -14,6 +16,7 @@ from flask import jsonify, request, Blueprint
 from routes.local.status_code.baseHttpStatus import BaseHttpStatus
 from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
 from utils.util_database import DBUtils
+from utils.util_statistics import StUtils
 
 tunnel_db = Blueprint('tunnel_db', __name__)
 
@@ -38,6 +41,7 @@ def tunnel_add():
         }
     }
     try:
+        now = datetime.datetime.now()
         data = request.json
         tun_code = data.get('TunCode')
         name = data.get('TunName')
@@ -46,8 +50,11 @@ def tunnel_add():
         status = data.get('TunStatus', 0)
         pro_code = data.get('ProCode')
         high = data.get('High')
+        cycle = data.get('TunCycle', 0)
+        create_time = data.get('TunCreateTime', now.strftime("%Y-%m-%d %H:%M:%S"))
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([tun_code, name, linkman, phone, pro_code, high]):
@@ -74,15 +81,15 @@ def tunnel_add():
 
         # 若为新项目则执行添加操作
         insert_sql = """
-                INSERT INTO tunnel (TunCode, TunName, LinkMan, Phone, TunStatus, ProCode, High) VALUES (%s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO tunnel (TunCode, TunName, LinkMan, Phone, TunStatus, ProCode, High, TunCycle, TunCreateTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
-        rows = cursor.execute(insert_sql, (tun_code, name, linkman, phone, status, pro_code, high))
+        rows = cursor.execute(insert_sql, (tun_code, name, linkman, phone, status, pro_code, high, cycle, create_time))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -118,7 +125,8 @@ def tunnel_delete():
         username = data.get('TunCode')
         pro_code = data.get('ProCode')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([username, pro_code]):
@@ -140,7 +148,7 @@ def tunnel_delete():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -174,6 +182,7 @@ def tunnel_update():
 
     try:
         data = request.json
+        now = datetime.datetime.now()
         old_tun_code = data.get("OldTunCode")
         old_pro_code = data.get("OldProCode")
         tun_code = data.get("TunCode")
@@ -183,8 +192,11 @@ def tunnel_update():
         pro_code = data.get("ProCode")
         high = data.get("High")
         status = data.get("TunStatus", 0)
+        cycle = data.get("TunCycle", 0)
+        create_time = data.get('TunCreateTime', now.strftime("%Y-%m-%d %H:%M:%S"))
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([old_tun_code, old_pro_code, tun_code, name, linkman, phone, pro_code, high]):
@@ -223,18 +235,18 @@ def tunnel_update():
             UPDATE 
                 tunnel 
             SET 
-                TunCode=%s, TunName=%s, LinkMan=%s, Phone=%s, TunStatus=%s, ProCode=%s, High=%s
+                TunCode=%s, TunName=%s, LinkMan=%s, Phone=%s, TunStatus=%s, ProCode=%s, High=%s, TunCycle=%s, TunCreateTime=%s
             Where 
                 TunCode=%s AND ProCode=%s;
             """
 
-        rows = cursor.execute(sql, (tun_code, name, linkman, phone, status, pro_code, high, old_tun_code, old_pro_code))
+        rows = cursor.execute(sql, (tun_code, name, linkman, phone, status, pro_code, high, cycle, create_time, old_tun_code, old_pro_code))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '修改失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -251,9 +263,20 @@ def tunnel_select():
     try:
         data = request.json
         res = DBUtils.paging_display(data, 'tunnel', 1, 10)
+
+        # 添加一个字段，res(dict) -> data(dict) -> items(list) -> tunnel记录(dict) 中添加项目名称，通过tunnel记录中的ProCode检索ProName
+        items = res.get('data').get('items')
+        for item in items:
+            pro_code = item.get('ProCode')
+            project = DBUtils.search_by_some_item('project', 'ProCode', pro_code)
+            data = project.get('data')
+            if data:  # 如果存在项目记录
+                pro_name = data.get('items')[0].get('ProName')
+                item['ProName'] = pro_name
+
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
 
 
 @tunnel_db.route('/searchTunnelByColumn', methods=['POST'])
@@ -264,7 +287,23 @@ def tunnel_select_by_column():
     """
     try:
         data = request.json
-        res = DBUtils.search_by_some_item(data, 'tunnel', data.get('item'), data.get('value'))
+        res = DBUtils.search_by_some_item('tunnel', data.get('Item'), data.get('Value'), data)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
+
+
+@tunnel_db.route('/statisticsStatus', methods=['POST'])
+def project_status():
+    """
+    统计项目状态
+    """
+    try:
+        data = request.json
+        table = data.get("table", "tunnel")
+        time_column = data.get("TunCreateTime", "TunCreateTime")
+        cycle_column = data.get("TunCycle", "TunCycle")
+        res = StUtils.get_time_and_cycle_from_table(table, time_column, cycle_column)
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '统计失败', 'data': {'exception': str(e)}}), 200

@@ -16,6 +16,7 @@ from routes.local.status_code.baseHttpStatus import BaseHttpStatus
 from routes.local.status_code.logHttpStatus import LogHttpStatus
 from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
 from utils.util_database import DBUtils
+from utils.util_statistics import StUtils
 
 anomaly_db = Blueprint('anomaly_db', __name__)
 
@@ -27,7 +28,7 @@ def anomaly_add():
         res = DBUtils.log_insert_db(data)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '失败', 'data': {'exception': str(e)}}), 200
 
 
 @anomaly_db.route('/deleteAnomaly', methods=['POST'])
@@ -53,7 +54,7 @@ def anomaly_delete():
         data = request.json
         desc_code = data.get('DescCode')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([desc_code]):
@@ -75,7 +76,7 @@ def anomaly_delete():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -90,7 +91,7 @@ def log_select():
         res = DBUtils.paging_display(data, 'anomaly_log', 1, 10)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
 
 
 @anomaly_db.route('/selectAnomalyLogDesc', methods=['POST'])
@@ -100,7 +101,7 @@ def desc_select():
         res = DBUtils.paging_display(data, 'anomaly_log_desc', 1, 10)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
 
 
 @anomaly_db.route('/searchLogByColumn', methods=['POST'])
@@ -110,14 +111,28 @@ def log_search_by_column():
         res = DBUtils.search_by_some_item(data, 'anomaly_log', data.get('item'), data.get('value'))
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
 
 
 @anomaly_db.route('/searchDescByColumn', methods=['POST'])
 def desc_search_by_column():
     try:
         data = request.json
-        res = DBUtils.search_by_some_item(data, 'anomaly_log_desc', data.get('item'), data.get('value'))
+        res = DBUtils.search_by_some_item('anomaly_log_desc', data.get('Item'), data.get('Value'), data)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
+
+
+@anomaly_db.route('/sectionFilter', methods=['POST'])
+def section_filter():
+    try:
+        data = request.json
+        column = data.get('column', None)
+        if column is None:
+            return jsonify(
+                {'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
+        res = StUtils.section_filter('anomaly_log', column, data)
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200

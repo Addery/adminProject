@@ -15,6 +15,7 @@ from flask import jsonify, request, Blueprint
 from routes.local.status_code.baseHttpStatus import BaseHttpStatus
 from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
 from utils.util_database import DBUtils
+from utils.util_statistics import StUtils
 
 project_db = Blueprint('project_db', __name__)
 
@@ -48,8 +49,10 @@ def project_add():
         phone = data.get('Phone')
         create_time = data.get('ProCreateTime', now.strftime("%Y-%m-%d %H:%M:%S"))
         status = data.get('ProStatus', 0)
+        cycle = data.get('ProCycle', 0)
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([pro_code, name, address, linkman, phone]):
@@ -71,15 +74,15 @@ def project_add():
 
         # 若为新项目则执行添加操作
         insert_sql = """
-                INSERT INTO project (ProCode, ProName, ProAddress, LinkMan, Phone, ProCreateTime, ProStatus) VALUES (%s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO project (ProCode, ProName, ProAddress, LinkMan, Phone, ProCreateTime, ProStatus, ProCycle) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 """
-        rows = cursor.execute(insert_sql, (pro_code, name, address, linkman, phone, create_time, status))
+        rows = cursor.execute(insert_sql, (pro_code, name, address, linkman, phone, create_time, status, cycle))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -89,7 +92,7 @@ def project_add():
 
 @project_db.route('/deleteProject', methods=['POST'])
 def project_delete():
-    """
+    -"""
     项目删除
     :return:
     """
@@ -114,7 +117,8 @@ def project_delete():
         data = request.json
         pro_code = data.get('ProCode')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([pro_code]):
@@ -137,7 +141,7 @@ def project_delete():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -179,8 +183,10 @@ def project_update():
         now = datetime.now()
         create_time = data.get('ProCreateTime', now.strftime("%Y-%m-%d %H:%M:%S"))
         status = data.get('ProStatus', 0)
+        cycle = data.get('ProCycle', 0)
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '更新失败', 'data': {str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '更新失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([old_pro_code, pro_code, name, address, linkman, phone]):
@@ -209,17 +215,17 @@ def project_update():
            UPDATE 
                 project 
            SET 
-                ProCode=%s, ProName=%s, ProAddress=%s, LinkMan=%s, Phone=%s, ProCreateTime=%s, ProStatus=%s
+                ProCode=%s, ProName=%s, ProAddress=%s, LinkMan=%s, Phone=%s, ProCreateTime=%s, ProStatus=%s, ProCycle=%s
            WHERE 
                 ProCode = %s
            """
-        rows = cursor.execute(sql, (pro_code, name, address, linkman, phone, create_time, status, old_pro_code))
+        rows = cursor.execute(sql, (pro_code, name, address, linkman, phone, create_time, status, cycle, old_pro_code))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '更新失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '更新失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -238,7 +244,7 @@ def project_select():
         res = DBUtils.paging_display(data, 'project', 1, 10)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
 
 
 @project_db.route('/searchProjectByColumn', methods=['POST'])
@@ -249,7 +255,23 @@ def project_search():
     """
     try:
         data = request.json
-        res = DBUtils.search_by_some_item(data, 'project', data.get('item'), data.get('value'))
+        res = DBUtils.search_by_some_item('project', data.get('Item'), data.get('Value'), data)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
+
+
+@project_db.route('/statisticsStatus', methods=['POST'])
+def project_status():
+    """
+    统计项目状态
+    """
+    try:
+        data = request.json
+        table = data.get("table", "project")
+        time_column = data.get("ProCreateTime", "ProCreateTime")
+        cycle_column = data.get("ProCycle", "ProCycle")
+        res = StUtils.get_time_and_cycle_from_table(table, time_column, cycle_column)
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '统计失败', 'data': {'exception': str(e)}}), 200

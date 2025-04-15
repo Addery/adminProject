@@ -15,6 +15,7 @@ from routes.local.status_code.baseHttpStatus import BaseHttpStatus
 from routes.local.status_code.equipHttpStatus import EquipHttpStatus
 from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
 from utils.util_database import DBUtils
+from utils.util_statistics import StUtils
 
 console_db = Blueprint('console_db', __name__)
 
@@ -51,8 +52,9 @@ def console_add():
         tun_code = data.get('TunCode')
         work_sur_code = data.get('WorkSurCode')
         stru_code = data.get('StruCode')
+        equ_status = data.get('ConStatus', 0)
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([equ_code, equ_name, equ_ip, pro_code, tun_code, work_sur_code, stru_code]):
@@ -97,15 +99,15 @@ def console_add():
 
         # 若为新项目则执行添加操作
         insert_sql = """
-                INSERT INTO eq_control (ConEquipCode, ConEquipName, ConEquipIP, ProCode, TunCode, WorkSurCode, StruCode) VALUES (%s, %s, %s, %s, %s,  %s, %s)
+                INSERT INTO eq_control (ConEquipCode, ConEquipName, ConEquipIP, ProCode, TunCode, WorkSurCode, StruCode, ConStatus) VALUES (%s, %s, %s, %s, %s,  %s, %s, %s)
                 """
-        rows = cursor.execute(insert_sql, (equ_code, equ_name, equ_ip, pro_code, tun_code, work_sur_code, stru_code))
+        rows = cursor.execute(insert_sql, (equ_code, equ_name, equ_ip, pro_code, tun_code, work_sur_code, stru_code, equ_status))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -141,7 +143,7 @@ def console_delete():
         equ_code = data.get('ConEquipCode')
         work_surface_code = data.get('WorkSurCode')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([equ_code, work_surface_code]):
@@ -163,7 +165,7 @@ def console_delete():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -202,8 +204,9 @@ def console_update():
         tun_code = data.get("TunCode")
         work_surface_code = data.get("WorkSurCode")
         stru_code = data.get("StruCode")
+        equ_status = data.get('ConStatus', 0)
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([old_equ_code, old_work_surface_code, tun_code, equ_name, equ_code, equ_ip, pro_code, tun_code,
@@ -260,18 +263,18 @@ def console_update():
                 UPDATE 
                     eq_control 
                 SET 
-                    ConEquipCode=%s, ConEquipName=%s, ConEquipIP=%s, ProCode=%s, TunCode=%s, WorkSurCode=%s, StruCode=%s
+                    ConEquipCode=%s, ConEquipName=%s, ConEquipIP=%s, ProCode=%s, TunCode=%s, WorkSurCode=%s, StruCode=%s, ConStatus=%s
                 Where 
                     ConEquipCode=%s AND WorkSurCode=%s;
                 """
         rows = cursor.execute(sql, (
-            equ_code, equ_name, equ_ip, pro_code, tun_code, work_surface_code, stru_code, old_equ_code, old_work_surface_code))
+            equ_code, equ_name, equ_ip, pro_code, tun_code, work_surface_code, stru_code, equ_status, old_equ_code, old_work_surface_code))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '修改失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -290,7 +293,7 @@ def console_select():
         res = DBUtils.paging_display(data, 'eq_control', 1, 10)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
 
 
 @console_db.route('/searchInfoByColumn', methods=['POST'])
@@ -301,7 +304,20 @@ def console_info_search_by_column():
     """
     try:
         data = request.json
-        res = DBUtils.search_by_some_item(data, 'eq_control', data.get('item'), data.get('value'))
+        res = DBUtils.search_by_some_item('eq_control', data.get('Item'), data.get('Value'), data)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
+
+
+@console_db.route('/statisticsStatus', methods=['Post'])
+def statistics_status():
+    """
+    统计设备状态
+    """
+    try:
+        data = request.json
+        res = StUtils.eq_status('eq_control', 'ConStatus')
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '统计失败', 'data': {'exception': str(e)}}), 200

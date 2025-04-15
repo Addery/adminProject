@@ -14,6 +14,7 @@ from routes.local.status_code.baseHttpStatus import BaseHttpStatus
 from routes.local.status_code.equipHttpStatus import EquipHttpStatus
 from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
 from utils.util_database import DBUtils
+from utils.util_statistics import StUtils
 
 data_acq_db = Blueprint('data_acq_db', __name__)
 
@@ -51,7 +52,7 @@ def data_acq_add():
         status = data.get('DataAcaEquipStatus', 0)
         equ_code = data.get('ConEquipCode')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([acq_code, acq_name, acq_ip, interval, distance, equ_code]):
@@ -86,7 +87,7 @@ def data_acq_add():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -122,7 +123,7 @@ def data_acq_delete():
         equ_code = data.get('ConEquipCode')
         acq_code = data.get('DataAcqEquipCode')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([equ_code, acq_code]):
@@ -144,7 +145,7 @@ def data_acq_delete():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -184,7 +185,7 @@ def data_acq_update():
         equ_code = data.get("ConEquipCode")
         status = data.get('DataAcaEquipStatus')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([old_equ_code, old_acq_code, acq_code, status, acq_name, acq_ip, interval, distance, equ_code]):
@@ -233,7 +234,7 @@ def data_acq_update():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '修改失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -252,7 +253,7 @@ def data_acq_select():
         res = DBUtils.paging_display(data, 'eq_data', 1, 10)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
 
 
 @data_acq_db.route('/searchInfoByColumn', methods=['POST'])
@@ -263,7 +264,20 @@ def data_acq_info_search_by_column():
     """
     try:
         data = request.json
-        res = DBUtils.search_by_some_item(data, 'eq_data', data.get('item'), data.get('value'))
+        res = DBUtils.search_by_some_item('eq_data', data.get('Item'), data.get('Value'), data)
         return jsonify(res), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
+
+
+@data_acq_db.route('/statisticsStatus', methods=['POST'])
+def statistics_status():
+    """
+    统计设备状态
+    """
+    try:
+        data = request.json
+        res = StUtils.eq_status('eq_data', 'DataAcaEquipStatus')
+        return jsonify(res), 200
+    except Exception as e:
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '统计失败', 'data': {'exception': str(e)}}), 200

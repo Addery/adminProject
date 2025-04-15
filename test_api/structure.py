@@ -11,8 +11,8 @@
 import requests
 
 
-ip = "http://127.0.0.1"
-port = "5000"
+ip = "http://192.168.1.8"
+port = "8023"
 
 
 def structure_add():

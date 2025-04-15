@@ -11,8 +11,8 @@ import time
 import requests
 
 
-ip = "http://127.0.0.1"
-port = "5000"
+ip = "http://192.168.1.3"
+port = "8023"
 
 
 def user_login():
@@ -40,7 +40,7 @@ def user_add():
         "PassWord": "123456",
         "RealName": "zzz",
         # "RoleClass": 1,
-        "Phone": "123",
+        "Phone": "12345678910",
         "ProCode": "1004",
     }
     response = requests.post(url, json=data, headers=headers)
@@ -54,8 +54,7 @@ def user_del():
         'Content-Type': 'application/json'
     }
     data = {
-        "UserName": "user10",
-        "ProCode": "1002"
+        "Phone": 123
     }
     response = requests.post(url, json=data, headers=headers)
     print(response.json())
@@ -68,13 +67,12 @@ def user_update():
         'Content-Type': 'application/json'
     }
     data = {
-        "OldUserName": "user12",
-        "OldProCode": "1004",
+        "OldPhone": "12345678910",
         "UserName": "user15",
         "PassWord": "8023",
         "RealName": "zzz",
         "RoleClass": 1,
-        "Phone": "123",
+        "Phone": "98765432100",
         "ProCode": "1002",
     }
     response = requests.post(url, json=data, headers=headers)
@@ -102,8 +100,7 @@ def user_password_set():
         'Content-Type': 'application/json'
     }
     data = {
-        'UserName': 'user11',
-        'ProCode': '1002',
+        'Phone': '15202411793',
         'PassWord': '1234'
     }
     response = requests.post(url, json=data, headers=headers)
@@ -131,8 +128,7 @@ def user_permission_modify():
         'Content-Type': 'application/json'
     }
     data = {
-        'UserName': 'user11',
-        'ProCode': '1002',
+        'Phone': '15202411793',
         'RoleClass': 1
     }
     response = requests.post(url, json=data, headers=headers)
@@ -146,6 +142,6 @@ if __name__ == '__main__':
     # user_del()
     # user_update()
     # user_select()
-    # user_password_set()
+    user_password_set()
     # user_info_search_by_some()
-    user_permission_modify()
+    # user_permission_modify()

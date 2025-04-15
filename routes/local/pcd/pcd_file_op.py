@@ -10,6 +10,7 @@
 import os.path
 from flask import jsonify, request, Blueprint
 
+from routes.local.status_code.baseHttpStatus import BaseHttpStatus
 from routes.local.status_code.pcdHttpStatus import PCDHttpStatus
 from utils.util_pcd import get_path, get_history, show_log, data_visual, compare_data
 
@@ -52,9 +53,9 @@ def tree():
         # 获取目录结构
         res_dict = get_path(data, INIT_PATH, 'log', 'tree')
         # res_dict[0]['config']
-        return jsonify({'code': PCDHttpStatus.OK.value, 'msg': '访问成功', 'data': res_dict}), 200
+        return jsonify({'code': BaseHttpStatus.OK.value, 'msg': '访问成功', 'data': res_dict}), 200
     except Exception as e:
-        return jsonify({'code': PCDHttpStatus.EXCEPTION.value, 'msg': 'Exception, defeat', 'data': {str(e)}}), 200
+        return jsonify({'code': PCDHttpStatus.EXCEPTION.value, 'msg': 'Exception, defeat', 'data': {'exception': str(e)}}), 200
 
 
 @pcd_file_op.route('/history', methods=['POST'])
@@ -99,9 +100,9 @@ def history():
         msg = res.get('msg')
         if msg is not None:
             return jsonify({'code': PCDHttpStatus.NO_FIND_DATA.value, 'msg': msg, 'data': {}}), 200
-        return jsonify({'code': PCDHttpStatus.OK.value, 'msg': '访问成功', 'data': {res}}), 200
+        return jsonify({'code': BaseHttpStatus.OK.value, 'msg': '访问成功', 'data': {res}}), 200
     except Exception as e:
-        return jsonify({'code': PCDHttpStatus.EXCEPTION.value, 'msg': 'Exception, defeat', 'data': {e}}), 200
+        return jsonify({'code': PCDHttpStatus.EXCEPTION.value, 'msg': 'Exception, defeat', 'data': {'exception': str(e)}}), 200
 
 
 @pcd_file_op.route('/log', methods=['POST'])
@@ -197,10 +198,10 @@ def log():
             for e in page_data
         ]
         response_data = [len(res), res_data]
-        return jsonify({'code': PCDHttpStatus.OK.value, 'msg': '访问成功', 'data': {response_data}}), 200
+        return jsonify({'code': BaseHttpStatus.OK.value, 'msg': '访问成功', 'data': {response_data}}), 200
 
     except Exception as e:
-        return jsonify({'code': PCDHttpStatus.EXCEPTION.value, 'msg': 'Exception, defeat', 'data': {e}}), 200
+        return jsonify({'code': PCDHttpStatus.EXCEPTION.value, 'msg': 'Exception, defeat', 'data': {'exception': str(e)}}), 200
 
 
 @pcd_file_op.route('/log_data_visual', methods=['POST'])
@@ -243,10 +244,10 @@ def log_data_visual():
         if res is None:
             return jsonify({'code': PCDHttpStatus.NO_FIND_LOG_FILE.value, 'msg': 'no find log file in data_visual()',
                             'data': {}}), 200
-        return jsonify({'code': PCDHttpStatus.OK.value, 'msg': '访问成功', 'data': {res}}), 200
+        return jsonify({'code': BaseHttpStatus.OK.value, 'msg': '访问成功', 'data': {res}}), 200
 
     except Exception as e:
-        return jsonify({'code': PCDHttpStatus.EXCEPTION.value, 'msg': 'Exception, defeat', 'data': {e}}), 200
+        return jsonify({'code': PCDHttpStatus.EXCEPTION.value, 'msg': 'Exception, defeat', 'data': {'exception': str(e)}}), 200
 
 
 @pcd_file_op.route('/compare', methods=['POST'])
@@ -302,7 +303,7 @@ def compare():
         msg = res.get('msg')
         if msg is not None:
             return jsonify({'code': PCDHttpStatus.NO_FIND_DATA.value, 'msg': msg, 'data': {}}), 200
-        return jsonify({'code': PCDHttpStatus.OK.value, 'msg': '访问成功', 'data': {res}}), 200
+        return jsonify({'code': BaseHttpStatus.OK.value, 'msg': '访问成功', 'data': {res}}), 200
 
     except Exception as e:
-        return jsonify({'code': PCDHttpStatus.EXCEPTION.value, 'msg': 'Exception, defeat', 'data': {e}}), 200
+        return jsonify({'code': PCDHttpStatus.EXCEPTION.value, 'msg': 'Exception, defeat', 'data': {'exception': str(e)}}), 200

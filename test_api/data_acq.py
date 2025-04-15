@@ -10,8 +10,8 @@
 import requests
 
 
-ip = "http://127.0.0.1"
-port = "5000"
+ip = "http://192.168.1.8"
+port = "8023"
 
 
 def data_acq_add():
@@ -24,7 +24,7 @@ def data_acq_add():
         'Content-Type': 'application/json'
     }
     data = {
-        "DataAcqEquipCode": "1001",
+        "DataAcqEquipCode": "1011",
         "DataAcqEquipName": "name",
         "DataAcqEquipIP": "localhost",
         "DataAcqEquipInterval": "10",
@@ -111,9 +111,25 @@ def data_acq_info_search_by_column():
     print(response.status_code)
 
 
+def statistics_status():
+    """
+    测试统计设备状态接口
+    """
+    url = f"{ip}:{port}/api/outer/data_acq_db/statisticsStatus"
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    data = {
+    }
+    response = requests.post(url, json=data, headers=headers)
+    print(response.json())
+    print(response.status_code)
+
+
 if __name__ == "__main__":
-    data_acq_add()
+    # data_acq_add()
     # data_acq_delete()
     # data_acq_update()
     # data_acq_select()
     # data_acq_info_search_by_column()
+    statistics_status()

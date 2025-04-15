@@ -38,7 +38,7 @@ def log_by_code_or_date():
         data = request.json
         return jsonify(DBUtils.get_log_by_columns(data)), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '检索失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '检索失败', 'data': {'exception': str(e)}}), 200
 
 
 @pcd_db_op.route('/historyCodeAndDate', methods=['POST'])
@@ -59,7 +59,7 @@ def history_by_code_and_date():
             "Second": data.get('Second', 0)
         }
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '检索失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '检索失败', 'data': {'exception': str(e)}}), 200
     con = None
     cursor = None
     try:
@@ -101,11 +101,11 @@ def history_by_code_and_date():
 
         # 获取历史数据
         res = get_history(init_path=init_region_path, path=data_path)
-        return jsonify({'code': 200, 'msg': '检索成功', 'data': res}), 200
+        return jsonify({'code': BaseHttpStatus.OK.value, 'msg': '检索成功', 'data': res}), 200
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '检索失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '检索失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -154,7 +154,7 @@ def compare():
             }
         }
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '检索失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '检索失败', 'data': {'exception': str(e)}}), 200
 
     try:
         start1 = time.time()
@@ -230,6 +230,6 @@ def compare():
 
         print("整体耗时：", time.time() - start1)
         # 7.返回结果
-        return jsonify({'xyz': str(coordinate_list), 'rgb': str(color_list), 'msg': compare_bas_log}), 200
+        return jsonify({'xyz': str(coordinate_list), 'rgb': str(color_list), 'msg': compare_bas_log, 'code': BaseHttpStatus.OK.value}), 200
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '对比失败', 'data': {str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '对比失败', 'data': {'exception': str(e)}}), 200

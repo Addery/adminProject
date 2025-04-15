@@ -10,8 +10,8 @@
 import requests
 
 
-ip = "http://127.0.0.1"
-port = "5000"
+ip = "http://192.168.1.8"
+port = "8023"
 
 
 def work_surface_add():
@@ -25,9 +25,9 @@ def work_surface_add():
     }
     data = {
         "TunCode": "1001",
-        "ProCode": "1001",
+        "ProCode": "1002",
         "StruCode": "1001",
-        "WorkSurCode": "1001",
+        "WorkSurCode": "1010",
         "WorkSurName": "test",
     }
     response = requests.post(url, json=data, headers=headers)
@@ -109,8 +109,8 @@ def work_surface_info_search_by_column():
 
 
 if __name__ == "__main__":
-    # work_surface_add()
+    work_surface_add()
     # work_surface_delete()
-    work_surface_update()
+    # work_surface_update()
     # work_surface_select()
     # work_surface_info_search_by_column()
