@@ -62,6 +62,7 @@ def role_add():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 验证 UserCode 是否存在
         user_code_sql = "SELECT * From user WHERE UserCode = {}".format(f"'{user_code}'")
@@ -127,6 +128,7 @@ def role_delete():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         sql = """
         DELETE FROM role WHERE ID = %s 
@@ -194,6 +196,7 @@ def role_update():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 校验待修改的用户是否已经存在
         select_old_sql = "SELECT * From role WHERE ID={}".format(old_id)

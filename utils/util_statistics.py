@@ -22,19 +22,29 @@ class StUtils(object):
     """
 
     @staticmethod
-    def eq_status(table, column):
+    def eq_status(table, column, data):
         """
         统计设备状态
         """
+
+        try:
+            item = data.get('Item', None)
+            value = data.get('Value', None)
+        except Exception as e:
+            return {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}
+
         con = None
         cursor = None
+        sql = f"SELECT {column} FROM {table}"
         try:
             dbu = DBUtils()
             con = dbu.connection(cursor_class=DictCursor)
             cursor = con.cursor()
+            con.autocommit(False)
 
             # 查找设备表中状态字段数据
-            sql = f"SELECT {column} FROM {table}"
+            if all([item, value]):
+                sql = f"SELECT {column} FROM {table} WHERE {item} = '{value}'"
             cursor.execute(sql)
             res = cursor.fetchall()
             # 分状态统计
@@ -43,9 +53,9 @@ class StUtils(object):
             # 返回结果
             return {
                 "total": len(res),
-                "off_line": counter.get(0),  # 0: 离线
-                "on_line": counter.get(1),  # 1: 在线
-                "fault": counter.get(2),  # 2: 故障
+                "off_line": counter.get(0, 0),  # 0: 离线
+                "on_line": counter.get(1, 0),  # 1: 在线
+                "fault": counter.get(2, 0),  # 2: 故障
                 'code': BaseHttpStatus.OK.value,
                 'msg': '成功'
             }
@@ -103,19 +113,23 @@ class StUtils(object):
         }
 
     @staticmethod
-    def get_time_and_cycle_from_table(table, time_column, cycle_column):
+    def get_time_and_cycle_from_table(table, time_column, cycle_column, item, value):
         """
         获取表中的 create_time 和 cycle
         """
         create_times, pro_cycles = [], []
         con = None
         cursor = None
+        sql = f"SELECT {time_column}, {cycle_column} FROM {table}"
         try:
             dbu = DBUtils()
             con = dbu.connection(cursor_class=DictCursor)
             cursor = con.cursor()
+            con.autocommit(False)
 
-            sql = f"SELECT {time_column}, {cycle_column} FROM {table}"
+            if all([item, value]):
+                sql = f"SELECT {time_column}, {cycle_column} FROM {table} WHERE {item} = '{value}'"
+
             cursor.execute(sql)
             res = cursor.fetchall()
 
@@ -140,8 +154,8 @@ class StUtils(object):
         根据区间筛选
         """
         try:
-            start = data.get('start')
-            end = data.get('end')
+            start = data.get('Start')
+            end = data.get('End')
         except Exception as e:
             return {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '筛选失败', 'data': {'exception': str(e)}}
 
@@ -157,17 +171,18 @@ class StUtils(object):
             dbu = DBUtils()
             con = dbu.connection(cursor_class=DictCursor)
             cursor = con.cursor()
+            con.autocommit(False)
+
             if column in and_list:
                 sql = f"SELECT * FROM {table} WHERE {column} BETWEEN '{start}' AND '{end}'"
-                print(sql)
             cursor.execute(sql)
             res = cursor.fetchall()
             return {
-                    'items': res,
-                    'total': len(res),
-                    'code': BaseHttpStatus.OK.value,
-                    'msg': '成功'
-                }
+                'items': res,
+                'total': len(res),
+                'code': BaseHttpStatus.OK.value,
+                'msg': '成功'
+            }
         except Exception as e:
             if con:
                 con.rollback()
@@ -177,6 +192,80 @@ class StUtils(object):
                 cursor.close()
             if con:
                 DBUtils.close_connection(con)
+
+    @staticmethod
+    def get_table_record_count(table, column, value):
+        # 校验必填字段
+        if not all([table, column, value]):  # 校验必填字段
+            return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}
+
+        con = None
+        cursor = None
+        res = 0
+        try:
+            dbu = DBUtils()
+            con = dbu.connection()
+            cursor = con.cursor()
+            con.autocommit(False)
+
+            sql = f"SELECT COUNT(*) FROM {table} WHERE {column} = '{value}'"
+            cursor.execute(sql)
+            res = cursor.fetchone()[0]
+            con.commit()
+            return {'code': BaseHttpStatus.OK.value, 'msg': '统计成功', 'data': {'count': res}}
+        except Exception as e:
+            if con:
+                con.rollback()
+            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '统计失败', 'data': {'exception': str(e)}}
+        finally:
+            if cursor:
+                cursor.close()
+            if con:
+                DBUtils.close_connection(con)
+
+    # @staticmethod
+    # def get_batch_table_record_count(column, value):
+    #     # 校验必填字段
+    #     if not all([column, value]):  # 校验必填字段
+    #         return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}
+    #
+    #     tables = ['project', 'tunnel', 'eq_control', 'eq_data']
+    #
+    #     con = None
+    #     cursor = None
+    #     res = 0
+    #     try:
+    #         dbu = DBUtils()
+    #         con = dbu.connection()
+    #         cursor = con.cursor()
+    #         con.autocommit(False)
+    #
+    #         sql = f"""
+    #         SELECT
+    #             p.COUNT(*) as project_count,
+    #             t.COUNT(*) as tunnel_count,
+    #             eqc.COUNT(*) as eq_control_count,
+    #             eqd.COUNT(*) as eq_data_count
+    #         FROM
+    #             project p
+    #         LEFT JOIN tunnel t ON p.{column} = t.{column}
+    #         LEFT JOIN eq_control eqc ON p.{column} = eqc.{column}
+    #         LEFT JOIN eq_data eqd ON p.{column} = eqd.{column}
+    #         WHERE p.{column} = '{value}'
+    #         """
+    #         cursor.execute(sql)
+    #         res = cursor.fetchone()[0]
+    #         con.commit()
+    #         return {'code': BaseHttpStatus.OK.value, 'msg': '统计成功', 'data': {'count': res}}
+    #     except Exception as e:
+    #         if con:
+    #             con.rollback()
+    #         return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '统计失败', 'data': {'exception': str(e)}}
+    #     finally:
+    #         if cursor:
+    #             cursor.close()
+    #         if con:
+    #             DBUtils.close_connection(con)
 
 
 if __name__ == '__main__':
@@ -194,10 +283,16 @@ if __name__ == '__main__':
     # cycle_column = "TunCycle"
     # print(StUtils.get_time_and_cycle_from_table(table, time_column, cycle_column))
     # StUtils.section_filter('pcd_log', 'Mileage', '60', '70')
-    start_time = datetime.datetime(2025, 4, 1, 0, 0, 0)
-    end_time = datetime.datetime(2025, 5, 1, 0, 0, 0)
-    data = {
-        "start": start_time.strftime("%Y-%m-%d %H:%M:%S"),
-        "end": end_time.strftime("%Y-%m-%d %H:%M:%S")
-    }
-    print(StUtils.section_filter('pcd_log', 'AnomalyTime', data))
+
+    # start_time = datetime.datetime(2025, 4, 1, 0, 0, 0)
+    # end_time = datetime.datetime(2025, 5, 1, 0, 0, 0)
+    # data = {
+    #     "start": start_time.strftime("%Y-%m-%d %H:%M:%S"),
+    #     "end": end_time.strftime("%Y-%m-%d %H:%M:%S")
+    # }
+    # print(StUtils.section_filter('pcd_log', 'AnomalyTime', data))
+    # StUtils.get_table_record_count('role')
+    # print(StUtils.get_time_and_cycle_from_table('project', 'ProCreateTime', 'ProCycle', 'CompanyCode',
+    #                                             '07361dfa-defc-4a08-ba11-5a495db9e565'))
+
+    print(StUtils.get_batch_table_record_count('CompanyCode', '07361dfa-defc-4a08-ba11-5a495db9e565'))

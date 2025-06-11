@@ -1,20 +1,6 @@
-DROP TABLE IF EXISTS anomaly_log;
+# DROP TABLE IF EXISTS anomaly_log;
 
-DROP TABLE IF EXISTS anomaly_log_desc;
-
-CREATE TABLE anomaly_log_desc
-(
-    ID             int AUTO_INCREMENT COMMENT '自增主键',
-    DescCode       VARCHAR(255) NOT NULL COMMENT '详细信息编号',
-    Identification VARCHAR(255) NOT NULL COMMENT '标识',
-    Degree         VARCHAR(32)  NOT NULL COMMENT '异常等级',
-    Region         VARCHAR(64)  NOT NULL COMMENT '异常区域索引',
-    Position       VARCHAR(64)  NOT NULL COMMENT '异常区域位置',
-    Bas            VARCHAR(128) NOT NULL COMMENT '异常区域偏移量',
-    PRIMARY KEY (ID),
-    UNIQUE (DescCode),
-    INDEX (Identification) -- 添加索引
-) COMMENT ='预警信息详情表';
+# DROP TABLE IF EXISTS anomaly_log_desc;
 
 CREATE TABLE anomaly_log
 (
@@ -35,6 +21,24 @@ CREATE TABLE anomaly_log
     Minute           int          NOT NULL COMMENT '异常发生时间-分',
     Second           int          NOT NULL COMMENT '异常发生时间-秒',
     PRIMARY KEY (ID),
-    FOREIGN KEY (Identification) REFERENCES anomaly_log_desc (Identification) ON UPDATE CASCADE ON DELETE CASCADE -- anomaly_log_desc Identification
+    UNIQUE (Identification)
 ) COMMENT ='预警信息记录表';
+
+
+CREATE TABLE anomaly_log_desc
+(
+    ID             int AUTO_INCREMENT COMMENT '自增主键',
+#     DescCode       VARCHAR(255) NOT NULL COMMENT '详细信息编号',
+    Identification VARCHAR(255) NOT NULL COMMENT '标识',
+    Degree         VARCHAR(32)  NOT NULL COMMENT '异常等级',
+    Region         VARCHAR(64)  NOT NULL COMMENT '异常区域索引',
+    Position       VARCHAR(64)  NOT NULL COMMENT '异常区域位置',
+    Bas            VARCHAR(128) NOT NULL COMMENT '异常区域偏移量',
+    PRIMARY KEY (ID),
+    FOREIGN KEY (Identification) REFERENCES anomaly_log (Identification) ON UPDATE CASCADE ON DELETE CASCADE, -- anomaly_log Identification
+#     UNIQUE (DescCode),
+    INDEX (Identification) -- 添加索引
+) COMMENT ='预警信息详情表';
+
+
 

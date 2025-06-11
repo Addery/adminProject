@@ -1,0 +1,7 @@
+
+CREATE TABLE wechat_user_temp (
+    OffAccOpenID VARCHAR(64) PRIMARY KEY,
+    UnionID VARCHAR(64),
+    SubscribeTime DATETIME,
+    SyncTime DATETIME DEFAULT CURRENT_TIMESTAMP
+);

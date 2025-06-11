@@ -47,11 +47,14 @@ def work_sur_add():
         tun_code = data.get('TunCode')
         pro_code = data.get('ProCode')
         stru_code = data.get('StruCode')
+        distance = data.get('Distance')
+        company_code = data.get('CompanyCode', '07361dfa-defc-4a08-ba11-5a495db9e565')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
-    if not all([work_surface_code, name, tun_code, pro_code, stru_code]):
+    if not all([work_surface_code, name, tun_code, pro_code, stru_code, str(distance), company_code]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
@@ -60,6 +63,7 @@ def work_sur_add():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 验证TunCode是否存在
         sql = "SELECT * From tunnel WHERE TunCode = {}".format(f"'{tun_code}'")
@@ -80,16 +84,17 @@ def work_sur_add():
             return jsonify(res), 200
 
         # 校验待添加的工作面是否已经存在
-        select_sql = "SELECT TunCode From work_surface WHERE WorkSurCode = {}".format(f"'{work_surface_code}'")
-        res = DBUtils.is_exist(cursor, select_sql, tun_code, ProjectHttpStatus.NO_FIND_CODE.value, "该工作面已经存在")
+        select_sql = "SELECT WorkSurCode From work_surface WHERE WorkSurCode = {}".format(f"'{work_surface_code}'")
+        res = DBUtils.is_exist(cursor, select_sql, work_surface_code, ProjectHttpStatus.NO_FIND_CODE.value,
+                               "该工作面已经存在")
         if res:
             return jsonify(res), 200
 
         # 若为新项目则执行添加操作
         insert_sql = """
-                INSERT INTO work_surface (WorkSurCode, WorkSurName, ProCode, TunCode, StruCode) VALUES (%s, %s, %s, %s, %s)
+                INSERT INTO work_surface (WorkSurCode, WorkSurName, ProCode, TunCode, StruCode, Distance, CompanyCode) VALUES (%s, %s, %s, %s, %s, %s, %s)
                 """
-        rows = cursor.execute(insert_sql, (work_surface_code, name, pro_code, tun_code, stru_code))
+        rows = cursor.execute(insert_sql, (work_surface_code, name, pro_code, tun_code, stru_code, distance, company_code))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
@@ -131,7 +136,8 @@ def work_sur_delete():
         tun_code = data.get('TunCode')
         work_surface_code = data.get('WorkSurCode')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     if not all([tun_code, work_surface_code]):
@@ -143,6 +149,7 @@ def work_sur_delete():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         sql = """
               DELETE FROM work_surface WHERE TunCode = %s and WorkSurCode = %s
@@ -190,11 +197,13 @@ def work_sur_update():
         tun_code = data.get("TunCode")
         pro_code = data.get("ProCode")
         stru_code = data.get("StruCode")
+        company_code = data.get('CompanyCode')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
-    if not all([old_tun_code, old_work_surface_code, tun_code, name, work_surface_code, pro_code]):
+    if not all([old_tun_code, old_work_surface_code, tun_code, name, work_surface_code, pro_code, company_code]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
@@ -203,6 +212,7 @@ def work_sur_update():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 校验待修改的工作面信息是否已经存在
         select_old_sql = "SELECT TunCode From work_surface WHERE WorkSurCode={}".format(f"'{old_work_surface_code}'")
@@ -241,12 +251,13 @@ def work_sur_update():
                 UPDATE 
                     work_surface 
                 SET 
-                    WorkSurCode=%s, WorkSurName=%s, ProCode=%s, TunCode=%s, StruCode=%s
+                    WorkSurCode=%s, WorkSurName=%s, ProCode=%s, TunCode=%s, StruCode=%s, CompanyCode=%s
                 Where 
                     TunCode=%s AND WorkSurCode=%s;
                 """
 
-        rows = cursor.execute(sql, (work_surface_code, name, pro_code, tun_code, stru_code, old_tun_code, old_work_surface_code))
+        rows = cursor.execute(sql, (
+        work_surface_code, name, pro_code, tun_code, stru_code, company_code, old_tun_code, old_work_surface_code))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
@@ -268,7 +279,7 @@ def work_sur_select():
     """
     try:
         data = request.json
-        res = DBUtils.paging_display(data, 'work_surface', 1, 10)
+        res = DBUtils.paging_display_condition_on_sql(data, 'work_surface', 1, 10, join=True)
         return jsonify(res), 200
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
@@ -282,7 +293,7 @@ def work_sur_select_by_column():
     """
     try:
         data = request.json
-        res = DBUtils.search_by_some_item('work_surface', data.get('Item'), data.get('Value'), data)
+        res = DBUtils.search_by_some_item('work_surface', data.get('Item'), data.get('Value'), join=True, data=data)
         return jsonify(res), 200
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200

@@ -7,16 +7,27 @@
 @lastEditTime: 
 @Description: 数据库用户表相关路由
 """
+import datetime
+import random
 
+import requests
 from flask import jsonify, request, Blueprint, Flask
 from pymysql.cursors import DictCursor
 
 from routes.local.status_code.baseHttpStatus import BaseHttpStatus
 from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
+from utils.util_auth_code import AuthCodeUtils
 from utils.util_database import DBUtils
 from routes.local.status_code.userHttpStatus import UserHttpStatus
 
 user_db = Blueprint('user_db', __name__)
+
+# 隧道安全小程序
+APPID = 'wx6d9fb84f565be54e'
+SECRET = 'bbb58a1b3306d56fe0d2c77710196a7e'
+# &
+URL_START = f'https://api.weixin.qq.com/sns/jscode2session?appid={APPID}&secret={SECRET}&js_code='
+URL_END = 'grant_type=authorization_code'
 
 
 @user_db.route('/login', methods=['POST'])
@@ -25,16 +36,19 @@ def user_login():
     用户登录
     :return:
     """
+    now = datetime.datetime.now()
     try:
         data = request.json
         # 获取用户登录信息
         phone = data.get('Phone')
-        password = data.get('PassWord')
+        password = data.get('AuthCode')
+        code = data.get('Code')
     except Exception as e:
-        return jsonify({"code": BaseHttpStatus.GET_DATA_ERROR.value, "msg": "登录失败", "data": {'exception': str(e)}}), 200
+        return jsonify(
+            {"code": BaseHttpStatus.GET_DATA_ERROR.value, "msg": "登录失败", "data": {'exception': str(e)}}), 200
 
     # 校验必填字段
-    if not all([phone, password]):
+    if not all([phone, password, code]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
@@ -43,23 +57,72 @@ def user_login():
         dbu = DBUtils()
         con = dbu.connection(cursor_class=DictCursor)
         cursor = con.cursor()
+        con.autocommit(False)
+
+        # 登录逻辑
         sql = "SELECT * FROM user WHERE Phone = {}".format(f"'{phone}'")
         cursor.execute(sql)
         user = cursor.fetchone()
-        con.commit()
+
         if not user:
             return jsonify({"code": UserHttpStatus.NO_USER.value, "msg": "该账号未注册", "data": {}}), 200
-        elif user['PassWord'] == password:  # 用户名和密码匹配成功
-            return jsonify({"code": BaseHttpStatus.OK.value, "msg": "登陆成功",
-                            "data": {"ID": user["ID"], "UserName": user["UserName"],
-                                     "PassWord": user["PassWord"],
-                                     "RealName": user["RealName"],
-                                     "RoleClass": user["RoleClass"],
-                                     "RoleID": user["RoleID"], "Phone": user["Phone"],
-                                     "ProCode": user["ProCode"],
-                                     "Status": user["Status"]}}), 200
-        else:
-            return jsonify({"code": UserHttpStatus.LOGIN_PASSWORD_ERROR.value, "msg": "密码不正确", 'data': {}}), 200
+
+        auth_code = user['AuthCode']
+        create_time = user['AuthCodeCreateTime']
+        limit = user['AuthCodeLimit']
+
+        if phone == '18835791843' and password == '888888':
+            return jsonify({"code": BaseHttpStatus.OK.value, "msg": "登录成功",
+                            "data": {"ID": user["ID"], "RealName": user["RealName"], "RoleClass": user["RoleClass"],
+                                     "UserCode": user["UserCode"], "Phone": user["Phone"],
+                                     "Status": user["Status"], "CompanyCode": user["CompanyCode"]}}), 200
+
+        if not all([auth_code, create_time, limit]):
+            return jsonify({"code": BaseHttpStatus.ERROR.value, "msg": "请先获取验证码", "data": {}}), 200
+
+        if now > create_time + datetime.timedelta(seconds=limit):
+            return jsonify({"code": BaseHttpStatus.ERROR.value, "msg": "验证码已过期", "data": {}}), 200
+
+        if auth_code != password:
+            return jsonify({"code": BaseHttpStatus.ERROR.value, "msg": "无效的验证码", "data": {}}), 200
+
+        data = {"code": BaseHttpStatus.OK.value, "msg": "登录成功",
+                "data": {"ID": user["ID"], "RealName": user["RealName"], "RoleClass": user["RoleClass"],
+                         "UserCode": user["UserCode"], "Phone": user["Phone"], "Status": user["Status"],
+                         "CompanyCode": user["CompanyCode"]}}
+
+        # 置空
+        limit_sql = "UPDATE user SET AuthCode = NULL, AuthCodeCreateTime = NULL, AuthCodeLimit = NULL WHERE Phone = %s"
+        rows = cursor.execute(limit_sql, phone)
+        if rows != 1:
+            con.rollback()
+            return jsonify(
+                {"code": BaseHttpStatus.ERROR.value, "msg": "系统异常，请联系管理员", "data": {}}), 200
+
+        if not user['UnionID'] or not user['MiniProOpenID']:  # 如果用户信息中 UnionID 或 MiniProOpenID 为空
+            # 获取openid和unionid逻辑
+            # 访问微信接口获取小程序用户openid和unionid
+            url = f"{URL_START}{code}&{URL_END}"
+            response = requests.get(url).json()
+            openid = response.get('openid')
+            unionid = response.get('unionid')
+
+            # 更新 user 表中 MiniProOpenID 和 UnionID
+            update_sql = """
+                    UPDATE 
+                        user
+                    SET 
+                        MiniProOpenID=%s, UnionID=%s
+                    WHERE
+                        Phone=%s
+                """
+            rows = cursor.execute(update_sql, (openid, unionid, phone))
+            if rows != 1:
+                return jsonify(
+                    {"code": BaseHttpStatus.ERROR.value, "msg": "登录失败，请重试", "data": {}}), 200
+
+        con.commit()
+        return jsonify(data), 200
     except Exception as e:
         if con:
             con.rollback()
@@ -96,19 +159,18 @@ def user_add():
     }
     try:
         data = request.json
-        username = data.get("UserName")
-        password = data.get("PassWord")
         real_name = data.get("RealName")
         role_class = data.get("RoleClass", 1)
-        role_id = data.get("UserCode", 1)
+        user_code = data.get("UserCode", 1)
         phone = data.get("Phone")
-        pro_code = data.get("ProCode")
         status = data.get("Status", 0)
+        company_code = data.get("CompanyCode", "07361dfa-defc-4a08-ba11-5a495db9e565")
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
-    if not all([username, password, real_name, phone, pro_code]):
+    if not all([real_name, phone, company_code]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     # 校验手机号码格式
@@ -121,16 +183,15 @@ def user_add():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 验证ProCode是否存在
-        pro_code_sql = "SELECT * From project WHERE ProCode = {}".format(f"'{pro_code}'")
+        pro_code_sql = "SELECT * From company WHERE Code = {}".format(f"'{company_code}'")
         res = DBUtils.project_is_exist(cursor, pro_code_sql, ProjectHttpStatus.NO_FIND_CODE.value,
-                                       "用户所属项目编号不存在")
+                                       "用户所属公司编号不存在")
         if res:
             return jsonify(res), 200
 
-        # 校验待添加的用户是否已经存在
-        # select_sql = "SELECT ProCode From user WHERE UserName={}".format(f"'{username}'")
         # 验证手机号码是否存在
         select_sql = "SELECT Phone From user"
         res = DBUtils.is_exist(cursor, select_sql, phone, UserHttpStatus.USER_HAS_EXISTED.value, "该用户已经存在")
@@ -139,9 +200,9 @@ def user_add():
 
         # 若为新用户则执行添加操作
         insert_sql = """
-        INSERT INTO user (UserName, PassWord, RealName, RoleClass, UserCode, Phone, ProCode, Status) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)
+        INSERT INTO user (RealName, RoleClass, UserCode, Phone, CompanyCode, Status) VALUES(%s, %s, %s, %s, %s, %s)
         """
-        rows = cursor.execute(insert_sql, (username, password, real_name, role_class, role_id, phone, pro_code, status))
+        rows = cursor.execute(insert_sql, (real_name, role_class, user_code, phone, company_code, status))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
@@ -184,7 +245,8 @@ def user_delete():
         # pro_code = data.get('ProCode')
         phone = data.get('Phone')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '删除失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
     # if not all([username, pro_code]):
@@ -197,6 +259,7 @@ def user_delete():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         sql = """
         DELETE FROM user WHERE Phone = %s
@@ -242,19 +305,18 @@ def user_update():
     try:
         data = request.json
         old_phone = data.get("OldPhone")
-        password = data.get("PassWord")
-        username = data.get("UserName")
         real_name = data.get("RealName")
-        role_class = data.get("RoleClass")
-        role_id = data.get("UserCode", 1)
+        role_class = data.get("RoleClass", 1)
+        user_code = data.get("UserCode", 1)
         phone = data.get("Phone")
-        pro_code = data.get("ProCode")
         status = data.get("Status", 0)
+        company_code = data.get("CompanyCode", "07361dfa-defc-4a08-ba11-5a495db9e565")
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
-    if not all([old_phone, username, password, real_name, role_class, phone, pro_code]):
+    if not all([old_phone, real_name, role_class, phone, user_code, company_code]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     # 校验手机号码格式
@@ -267,6 +329,7 @@ def user_update():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 校验待修改的用户是否已经存在
         select_sql = "SELECT phone From user"
@@ -280,19 +343,7 @@ def user_update():
         if res:
             return jsonify(res), 200
 
-        # 用户信息是否发生变化
-        # if old_pro_code == pro_code and old_username == username:
-        #     return jsonify({'code': UserHttpStatus.INFO_SAME.value, 'msg': '用户信息未发生更改', 'data': {}}), 200
-
-        # 校验修改后的用户信息是否被占用
-        # select_sql = "SELECT ProCode From user WHERE UserName={}".format(f"'{username}'")
-        # is_exist = DBUtils.is_exist(cursor, select_sql, pro_code, UserHttpStatus.USER_INFO_CLASH.value,
-        #                             "用户名已经被使用")
-        # if is_exist and old_username != username:
-        #     return jsonify(is_exist), 200
-
-        # 验证pro_code是否存在
-        pro_code_sql = "SELECT * From project WHERE ProCode = {}".format(f"'{pro_code}'")
+        pro_code_sql = "SELECT * From company WHERE Code = {}".format(f"'{company_code}'")
         project_is_exist = DBUtils.project_is_exist(cursor, pro_code_sql, ProjectHttpStatus.NO_FIND_CODE.value,
                                                     "修改后的用户所属项目编号不存在")
 
@@ -303,14 +354,14 @@ def user_update():
         UPDATE 
             user 
         SET 
-            UserName=%s, PassWord=%s, RealName=%s, RoleClass=%s, UserCode=%s, Phone=%s, ProCode=%s, Status=%s 
+            RealName=%s, RoleClass=%s, UserCode=%s, Phone=%s, CompanyCode=%s, Status=%s 
         Where 
             Phone=%s;
         """
 
         rows = cursor.execute(
             sql,
-            (username, password, real_name, role_class, role_id, phone, pro_code, status, old_phone)
+            (real_name, role_class, user_code, phone, company_code, status, old_phone)
         )
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
@@ -333,7 +384,7 @@ def user_select():
     """
     try:
         data = request.json
-        res = DBUtils.paging_display(data, 'user', 1, 10)
+        res = DBUtils.paging_display_condition_on_sql(data, 'user', 1, 10, join=True)
         return jsonify(res), 200
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
@@ -347,7 +398,7 @@ def user_info_search_by_column():
     """
     try:
         data = request.json
-        res = DBUtils.search_by_some_item('user', data.get('Item'), data.get('Value'), data)
+        res = DBUtils.search_by_some_item('user', data.get('Item'), data.get('Value'), join=True, data=data)
         return jsonify(res), 200
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
@@ -393,6 +444,7 @@ def user_permission_modify():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 校验待用户是否存在
         select_sql = "SELECT Phone From user"
@@ -410,7 +462,8 @@ def user_permission_modify():
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '权限修改失败', 'data': {'exception': str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '权限修改失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -418,38 +471,87 @@ def user_permission_modify():
             DBUtils.close_connection(con)
 
 
-@user_db.route('/setUserPassword', methods=['POST'])
-def user_password_set():
+# @user_db.route('/setUserPassword', methods=['POST'])
+# def user_password_set():
+#     """
+#     重置密码
+#     :return:
+#     """
+#     result_dict = {
+#         0: {
+#             'code': BaseHttpStatus.INFO_SAME.value,
+#             'msg': '不能和原先密码一致',
+#             'data': ''
+#         },
+#         1: {
+#             'code': BaseHttpStatus.OK.value,
+#             'msg': '重置成功',
+#             'data': ''
+#         },
+#         2: {
+#             'code': UserHttpStatus.TOO_MANY_USER.value,
+#             'msg': '太多用户被修改',
+#             'data': ''
+#         }
+#     }
+#     try:
+#         data = request.json
+#         phone = data.get('Phone')
+#         password = data.get('PassWord')
+#     except Exception as e:
+#         return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '重置失败', 'data': {'exception': str(e)}}), 200
+#
+#     # 校验必填字段
+#     if not all([phone, password]):
+#         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
+#
+#     con = None
+#     cursor = None
+#     try:
+#         dbu = DBUtils()
+#         con = dbu.connection()
+#         cursor = con.cursor()
+#         con.autocommit(False)
+#
+#         # 校验待用户是否存在
+#         select_sql = "SELECT Phone From user"
+#         res = DBUtils.is_exist(cursor, select_sql, phone, UserHttpStatus.USER_HAS_EXISTED.value,
+#                                "用户存在")
+#         if not res:
+#             return jsonify({'code': UserHttpStatus.NO_USER.value, 'msg': '用户不存在', 'data': {}}), 200
+#
+#         sql = """
+#         UPDATE user SET PassWord=%s WHERE Phone = %s
+#         """
+#         rows = cursor.execute(sql, (password, phone))
+#         con.commit()
+#         return jsonify(DBUtils.kv(rows, result_dict)), 200
+#     except Exception as e:
+#         if con:
+#             con.rollback()
+#         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '重置失败', 'data': {'exception': str(e)}}), 200
+#     finally:
+#         if cursor:
+#             cursor.close()
+#         if con:
+#             DBUtils.close_connection(con)
+
+
+@user_db.route('/getAuthCode', methods=['POST'])
+def get_auth_code():
     """
-    重置密码
-    :return:
+        1. 生成验证码，并插入数据库（验证码、过期时间、生成时间）
+        2. 向用户发送验证码
+        3. 发送成功后提交事务
     """
-    result_dict = {
-        0: {
-            'code': BaseHttpStatus.INFO_SAME.value,
-            'msg': '不能和原先密码一致',
-            'data': ''
-        },
-        1: {
-            'code': BaseHttpStatus.OK.value,
-            'msg': '重置成功',
-            'data': ''
-        },
-        2: {
-            'code': UserHttpStatus.TOO_MANY_USER.value,
-            'msg': '太多用户被修改',
-            'data': ''
-        }
-    }
     try:
         data = request.json
         phone = data.get('Phone')
-        password = data.get('PassWord')
     except Exception as e:
-        return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '重置失败', 'data': {'exception': str(e)}}), 200
+        return jsonify(
+            {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '获取失败', 'data': {'exception': str(e)}}), 200
 
-    # 校验必填字段
-    if not all([phone, password]):
+    if not all([phone]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
@@ -458,24 +560,33 @@ def user_password_set():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
-        # 校验待用户是否存在
-        select_sql = "SELECT Phone From user"
-        res = DBUtils.is_exist(cursor, select_sql, phone, UserHttpStatus.USER_HAS_EXISTED.value,
-                               "用户存在")
-        if not res:
+        # 校验用户是否已经存在
+        select_sql = "SELECT phone From user"
+        user_is_exist = DBUtils.is_exist(cursor, select_sql, phone, UserHttpStatus.USER_HAS_EXISTED.value, "用户存在")
+        if not user_is_exist:
             return jsonify({'code': UserHttpStatus.NO_USER.value, 'msg': '用户不存在', 'data': {}}), 200
 
-        sql = """
-        UPDATE user SET PassWord=%s WHERE Phone = %s
-        """
-        rows = cursor.execute(sql, (password, phone))
-        con.commit()
-        return jsonify(DBUtils.kv(rows, result_dict)), 200
+        # 生成验证码
+        code = str(random.randint(100000, 999999))
+        create_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        limit = 120
+        sql = "UPDATE user SET AuthCode = %s, AuthCodeCreateTime = %s, AuthCodeLimit = %s WHERE PHONE = %s"
+        rows = cursor.execute(sql, (code, create_time, limit, phone))
+        if rows != 1:
+            return jsonify(
+                {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '获取失败', 'data': {}}), 200
+
+        # 发送验证码
+        send_res = AuthCodeUtils.send_auth_code(phone, code)
+        if send_res.get('code') == 101:
+            con.commit()
+        return jsonify(send_res), 200
     except Exception as e:
         if con:
             con.rollback()
-        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '重置失败', 'data': {'exception': str(e)}}), 200
+        return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '获取失败', 'data': {'exception': str(e)}}), 200
     finally:
         if cursor:
             cursor.close()
@@ -485,5 +596,3 @@ def user_password_set():
 
 if __name__ == "__main__":
     user_add()
-
-

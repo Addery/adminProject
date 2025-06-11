@@ -7,10 +7,14 @@
 @lastEditTime: 
 @Description: 
 """
+import ast
 import os
 import time
+import uuid
 from datetime import datetime
 
+import cv2
+from PIL import Image
 from pymysql.connections import Connection
 import logging
 import configparser
@@ -18,11 +22,13 @@ import configparser
 from pymysql.cursors import Cursor, DictCursor
 
 from dao.bin.local_db_table import TunnelTable, ProjectTable, WorkSurfaceTable, StructureTable, UserTable, \
-    AnomalyLogTable, AnomalyLodDescTable, EqControlTable, EqDataTable, PcdLogTable, RoleTable
+    AnomalyLogTable, AnomalyLodDescTable, EqControlTable, EqDataTable, PcdLogTable, RoleTable, EqControlConfTable, \
+    EqDataConfTable, AnomalyLodImgTable
 from rabiitmq.construct import Tunnel
 from routes.local.status_code.baseHttpStatus import BaseHttpStatus
 from routes.local.status_code.logHttpStatus import LogHttpStatus
 from routes.local.status_code.projectHttpStatus import ProjectHttpStatus
+from utils.util_picture import IMGUtils
 
 
 class DBUtils(object):
@@ -30,7 +36,7 @@ class DBUtils(object):
     数据库操作类
     """
 
-    DEFAULT_DATABASE = "tunnel_project"
+    DEFAULT_DATABASE = "tunneladmintest"
     CURRENT_PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
     DEFAULT_CONFIG_PATH = os.path.join(CURRENT_PROJECT_PATH, "../config/database_config.ini")
     DEFAULT_LOG_PATH = os.path.join(CURRENT_PROJECT_PATH, "../log/database.log")
@@ -50,11 +56,55 @@ class DBUtils(object):
         'user': UserTable().columns_dict(),
         'anomaly_log': AnomalyLogTable().columns_dict(),
         'anomaly_log_desc': AnomalyLodDescTable().columns_dict(),
+        'anomaly_log_img': AnomalyLodImgTable().columns_dict(),
         'eq_control': EqControlTable().columns_dict(),
         'eq_data': EqDataTable().columns_dict(),
         'pcd_log': PcdLogTable().columns_dict(),
-        'role': RoleTable().columns_dict()
+        'role': RoleTable().columns_dict(),
+        'eq_control_conf': EqControlConfTable().columns_dict(),
+        'eq_data_conf': EqDataConfTable().columns_dict()
     }
+
+    JOIN_SQL = {
+        'project': {
+            'select_sql': "SELECT p.*, c.Name FROM project p LEFT JOIN company c ON p.CompanyCode = c.Code",
+            'count_sql': "SELECT COUNT(*) as total FROM project p",
+            'alias': "p."
+        },
+        'tunnel': {
+            'select_sql': "SELECT t.*, p.ProName FROM tunnel t LEFT JOIN project p ON t.ProCode = p.ProCode",
+            'count_sql': "SELECT COUNT(*) as total FROM tunnel t",
+            'alias': "t."
+        },
+        'work_surface': {
+            'select_sql': "SELECT w.*, p.ProName, t.TunName, s.StruName FROM work_surface w LEFT JOIN project p ON w.ProCode = p.ProCode LEFT JOIN tunnel t ON w.TunCode = t.TunCode LEFT JOIN structure s ON w.StruCode = s.StruCode",
+            'count_sql': "SELECT COUNT(*) as total FROM work_surface w",
+            'alias': "w."
+        },
+        'user': {
+            'select_sql': "SELECT u.*, c.Name FROM user u LEFT JOIN company c ON u.CompanyCode = c.Code",
+            'count_sql': "SELECT COUNT(*) as total FROM user u",
+            'alias': "u."
+        },
+        'eq_control': {
+            'select_sql': "SELECT eqc.*, p.ProName, t.TunName, w.WorkSurName, s.StruName FROM eq_control eqc LEFT JOIN project p ON eqc.ProCode = p.ProCode LEFT JOIN tunnel t ON eqc.TunCode = t.TunCode LEFT JOIN work_surface w ON eqc.WorkSurCode = w.WorkSurCode LEFT JOIN structure s ON eqc.StruCode = s.StruCode",
+            'count_sql': "SELECT COUNT(*) as total FROM eq_control eqc",
+            'alias': "eqc."
+        },
+        'eq_data': {
+            'select_sql': "SELECT eqd.*, eqc.ConEquipName FROM eq_data eqd LEFT JOIN eq_control eqc ON eqd.ConEquipCode = eqc.ConEquipCode",
+            'count_sql': "SELECT COUNT(*) as total FROM eq_data eqd",
+            'alias': "eqd."
+        },
+        'anomaly_log': {
+            'select_sql': "SELECT alog.*, p.ProName, t.TunName, w.WorkSurName, s.StruName, eqc.ConEquipName, eqd.DataAcqEquipName FROM anomaly_log alog LEFT JOIN project p ON alog.ProCode = p.ProCode LEFT JOIN tunnel t ON alog.TunCode = t.TunCode LEFT JOIN work_surface w ON alog.WorkSurCode = w.WorkSurCode LEFT JOIN structure s ON alog.StruCode = s.StruCode LEFT JOIN eq_control eqc ON alog.ConEquipCode = eqc.ConEquipCode LEFT JOIN eq_data eqd ON alog.DataAcqEquipCode = eqd.DataAcqEquipCode",
+            'count_sql': "SELECT COUNT(*) as total FROM anomaly_log alog",
+            'alias': "alog."
+        }
+    }
+
+    DEFAULT_DATA_SAVE_ROOT_DIR = 'D:/tunnelProject/adminProject/data'
+    DEFAULT_DATA_SAVE_DB_ROOT_DIR = 'https://sat.jovysoft.net:8066'
 
     def __init__(self, config_path=None):
         self.config_path = config_path or DBUtils.DEFAULT_CONFIG_PATH
@@ -392,6 +442,8 @@ class DBUtils(object):
         try:
             dbu = DBUtils()
             con = dbu.connection(cursor_class=DictCursor)
+            con.autocommit(False)
+
             values_tuple = []
             with con.cursor() as cursor:
                 # 查询总记录数
@@ -433,7 +485,12 @@ class DBUtils(object):
                         sql += f" {value} LIKE %s OR"
 
                 # 分页查询
-                sql += f"ORDER BY ID DESC LIMIT %s OFFSET %s"
+                # TODO：如果是 anomaly_log 表需要现根据等级排序，在等级中根据时间排序
+                if table_name == 'anomaly_log':
+                    sql += f"ORDER BY MaxDegree ASC, AnomalyTime ASC LIMIT %s OFFSET %s"
+                else:
+                    sql += f"ORDER BY ID DESC LIMIT %s OFFSET %s"
+
                 values_tuple.append(page_size)
                 values_tuple.append(offset)
 
@@ -455,7 +512,7 @@ class DBUtils(object):
 
                 # 是否要进行区间筛选
                 section_filter_items = []
-                if all([str(start), str(end), str(column)]):
+                if all([start, end, column]):
                     if "Time" in column:
                         start_dt = datetime.strptime(start, "%Y-%m-%d %H:%M:%S")
                         end_dt = datetime.strptime(end, "%Y-%m-%d %H:%M:%S")
@@ -494,6 +551,129 @@ class DBUtils(object):
                 DBUtils.close_connection(con)
 
     @staticmethod
+    def modify_sql_by_join(table_name):
+        """
+        根据 table_name 拼接联表查询语句
+        """
+        join_data = DBUtils.JOIN_SQL[table_name]
+        return join_data['select_sql'], join_data['count_sql'], join_data['alias']
+
+    @staticmethod
+    def paging_display_condition_on_sql(data, table_name, p, ps, join=False):
+        con = None
+        cursor = None
+        select_sql = f"SELECT * FROM {table_name}"
+        count_sql = f"SELECT COUNT(*) as total FROM {table_name}"
+        alias = ""
+        if join:
+            select_sql, count_sql, alias = DBUtils.modify_sql_by_join(table_name)
+        try:
+            page = data.get('Page', p)
+            page_size = data.get('PageSize', ps)
+            offset = (page - 1) * page_size
+
+            if page <= 0 or page_size <= 0:
+                return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '分页参数不合法', 'data': {}}
+
+            # 构建动态 WHERE 子句
+            where_clauses = []
+            params = []
+
+            # 编号筛选
+            pro_code = DBUtils.normalize_field(data.get('ProCode'))
+            tun_code = DBUtils.normalize_field(data.get('TunCode'))
+            if pro_code:
+                where_clauses.append(f"{alias}ProCode = %s")
+                params.append(pro_code)
+            if tun_code:
+                where_clauses.append(f"{alias}TunCode = %s")
+                params.append(tun_code)
+
+            # 模糊查询
+            search_text = DBUtils.normalize_field(data.get('SearchText'))
+            if search_text:
+                db_columns = DBUtils.COLUMNS[table_name]
+                like_clauses = [f"{alias}{col} LIKE %s" for col in db_columns]
+                where_clauses.append(f"({' OR '.join(like_clauses)})")
+                params.extend([f"%{search_text}%"] * len(db_columns))
+
+            # 键值对筛选
+            filter_items = DBUtils.normalize_field(data.get('Item'))
+            filter_values = DBUtils.normalize_field(data.get('Value'))
+            if filter_items and filter_values and len(filter_items) == len(filter_values):
+                for filter_item, filter_value in zip(filter_items, filter_values):
+                    if filter_item and filter_value is not None:
+                        where_clauses.append(f"{alias}{filter_item} = %s")
+                        params.append(filter_value)
+
+            # 区间筛选
+            start = DBUtils.normalize_field(data.get('Start'))
+            end = DBUtils.normalize_field(data.get('End'))
+            column = DBUtils.normalize_field(data.get('Column'))
+            if start and end and column:
+                if "AnomalyTime" in column:
+                    where_clauses.append(f"{alias}{column} BETWEEN %s AND %s")
+                    params.extend([start, end])
+                elif "Mileage" in column:
+                    where_clauses.append(f"{alias}{column} BETWEEN %s AND %s")
+                    params.extend([int(start), int(end)])
+
+            # 拼接 WHERE 子句
+            where_sql = "WHERE " + " AND ".join(where_clauses) if where_clauses else ""
+
+            # SQL 拼接
+            if table_name == 'anomaly_log':
+                sql_data = f"""
+                    {select_sql}
+                    {where_sql}
+                    ORDER BY Sign DESC, MaxDegree ASC, AnomalyTime ASC LIMIT %s OFFSET %s
+                """
+            else:
+                sql_data = f"""
+                    {select_sql}
+                    {where_sql}
+                    ORDER BY ID DESC
+                    LIMIT %s OFFSET %s
+                """
+            sql_count = f"""
+                {count_sql}
+                {where_sql}
+            """
+            params_for_data = params + [page_size, offset]
+
+            # 执行
+            con = DBUtils().connection(cursor_class=DictCursor)
+            con.autocommit(False)
+            with con.cursor() as cursor:
+                cursor.execute(sql_count, params)
+                total = cursor.fetchone()['total']
+
+                cursor.execute(sql_data, params_for_data)
+                items = cursor.fetchall()
+
+            total_page = (total + page_size - 1) // page_size
+            return {
+                'code': BaseHttpStatus.OK.value,
+                'msg': '查找成功',
+                'data': {
+                    'items': items,
+                    'total': total,
+                    'page': page,
+                    'page_size': page_size,
+                    'total_page': total_page
+                }
+            }
+        except Exception as e:
+            if con:
+                con.rollback()
+            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}
+        finally:
+            if cursor:
+                cursor.close()
+            if con:
+                DBUtils.close_connection(con)
+
+    @staticmethod
     def search(data):
         try:
             table_name = data.get('TableName')
@@ -510,6 +690,7 @@ class DBUtils(object):
         try:
             dbu = DBUtils()
             con = dbu.connection(cursor_class=DictCursor)
+            con.autocommit(False)
             cursor = con.cursor()
 
             if columns is not None:
@@ -549,38 +730,70 @@ class DBUtils(object):
                 DBUtils.close_connection(con)
 
     @staticmethod
-    def search_by_some_item(table_name, item, value, data=None):
+    def search_by_some_item(table_name, item, value, join=False, data=None):
         # 校验必填字段
         if not all([item, value]):
             return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}, 200
 
         con = None
         cursor = None
+        select_sql = f"SELECT * FROM {table_name}"
+        count_sql = f"SELECT COUNT(*) as total FROM {table_name}"
+        alias = ""
+        if join:
+            select_sql, count_sql, alias = DBUtils.modify_sql_by_join(table_name)
         try:
             dbu = DBUtils()
             con = dbu.connection(cursor_class=DictCursor)
             cursor = con.cursor()
+            con.autocommit(False)
 
-            # 统计符合要求的记录总数量
-            cursor.execute(f"SELECT COUNT(*) as total FROM {table_name} Where {item} = %s", value)
-            total = cursor.fetchone()['total']
+            where_sql = "WHERE"
+            params = []
+            if item and value and len(item) == len(value):
+                for i, v in zip(item, value):
+                    if i and v is not None:
+                        where_sql += f" {alias}{i} = %s AND"
+                        params.append(v)
+                where_sql += " 1 = 1;"
 
-            sql = f"""
-                SELECT * FROM {table_name} WHERE {item} = %s
+            sql_count = f"""
+                {count_sql}
+                {where_sql}
             """
-            cursor.execute(sql, value)
-            res = cursor.fetchall()
+
+            sql_data = f"""
+                {select_sql}
+                {where_sql}
+            """
+
+            with con.cursor() as cursor:
+                cursor.execute(sql_count, params)
+                total = cursor.fetchone()['total']
+
+                cursor.execute(sql_data, params)
+                items = cursor.fetchall()
+
+            # # 统计符合要求的记录总数量
+            # cursor.execute(f"SELECT COUNT(*) as total FROM {table_name} Where {item} = %s", value)
+            # total = cursor.fetchone()['total']
+            #
+            # sql = f"""
+            #     SELECT * FROM {table_name} WHERE {item} = %s
+            # """
+            # cursor.execute(sql, value)
+            # res = cursor.fetchall()
             con.commit()
-            if res:
-                return {
-                    'code': BaseHttpStatus.OK.value,
-                    'msg': '查找成功',
-                    'data': {
-                        'total': total,
-                        'items': res
-                    }
+            # if res:
+            return {
+                'code': BaseHttpStatus.OK.value,
+                'msg': '查找成功',
+                'data': {
+                    'total': total,
+                    'items': items
                 }
-            return {'code': BaseHttpStatus.ERROR.value, 'msg': '不存在符合要求的记录', 'data': {}}
+            }
+            # return {'code': BaseHttpStatus.ERROR.value, 'msg': '不存在符合要求的记录', 'data': {}}
         except Exception as e:
             if con:
                 con.rollback()
@@ -665,8 +878,124 @@ class DBUtils(object):
             if con:
                 DBUtils.close_connection(con)
 
+    # @staticmethod
+    # def log_insert_db(data):
+    #     result_dict = {
+    #         0: {
+    #             'code': BaseHttpStatus.ERROR.value,
+    #             'msg': '添加失败',
+    #             'data': ''
+    #         },
+    #         1: {
+    #             'code': BaseHttpStatus.OK.value,
+    #             'msg': '添加成功',
+    #             'data': ''
+    #         },
+    #         2: {
+    #             'code': LogHttpStatus.TOO_MANY_PROJECT.value,
+    #             'msg': '添加了多个日志',
+    #             'data': ''
+    #         }
+    #     }
+    #     try:
+    #         desc_code = data.get('DescCode', str(time.time()))
+    #         degree = data.get('Degree')
+    #         identification = data.get('Identification')
+    #         region = data.get('Region')
+    #         position = data.get('Position')
+    #         bas = data.get('Bas')
+    #         pro_code = data.get('ProCode')
+    #         tun_code = data.get('TunCode')
+    #         work_sur_code = data.get('WorkSurCode')
+    #         stru_code = data.get('StruCode')
+    #         mileage = data.get('Mileage')
+    #         equ_code = data.get('ConEquipCode')
+    #         acq_code = data.get('DataAcqEquipCode')
+    #         anomaly_time = data.get('AnomalyTime')
+    #     except Exception as e:
+    #         return {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {str(e)}}
+    #
+    #     # 校验必填字段
+    #     if not all(
+    #             [desc_code, degree, region, position, bas, pro_code, tun_code, work_sur_code, stru_code, mileage,
+    #              equ_code, acq_code, anomaly_time, identification]):
+    #         return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}
+    #
+    #     con = None
+    #     cursor = None
+    #     try:
+    #         dbu = DBUtils()
+    #         con = dbu.connection()
+    #         cursor = con.cursor()
+    #         con.autocommit(False)
+    #
+    #         # 验证DescCode是否存在
+    #         sql = "SELECT * From anomaly_log_desc WHERE DescCode = {}".format(f"'{desc_code}'")
+    #         res = DBUtils.project_is_exist(cursor, sql, LogHttpStatus.NO_FIND_CODE.value, "不存在")
+    #         if not res:
+    #             return {'code': LogHttpStatus.EXIST_CODE.value, 'msg': '日志已经存在', 'data': {}}
+    #
+    #         # 验证各个Code
+    #         checks = [
+    #             ('tunnel', 'TunCode', tun_code, ProjectHttpStatus.NO_FIND_CODE.value, "该隧道不存在"),
+    #             ('project', 'ProCode', pro_code, ProjectHttpStatus.NO_FIND_CODE.value, "该项目不存在"),
+    #             ('structure', 'StruCode', stru_code, ProjectHttpStatus.NO_FIND_CODE.value, "该结构物不存在"),
+    #             ('work_surface', 'WorkSurCode', work_sur_code, ProjectHttpStatus.NO_FIND_CODE.value,
+    #              "该工作面不存在"),
+    #             ('eq_control', 'ConEquipCode', equ_code, ProjectHttpStatus.NO_FIND_CODE.value, "该中控设备不存在"),
+    #             ('eq_data', 'DataAcqEquipCode', acq_code, ProjectHttpStatus.NO_FIND_CODE.value,
+    #              "该数据采集器不存在"),
+    #         ]
+    #         for table, column, code, error_code, error_msg in checks:
+    #             res = DBUtils.check_existence(cursor, table, column, code, error_code, error_msg)
+    #             if res:
+    #                 return res
+    #
+    #         desc_sql = """
+    #             INSERT INTO anomaly_log_desc
+    #             (DescCode, Identification, Degree, Region, Position, Bas) VALUES (%s, %s, %s, %s, %s, %s)
+    #             """
+    #         log_sql = """
+    #             INSERT INTO
+    #             anomaly_log
+    #             (
+    #             Identification, ProCode, TunCode, WorkSurCode, StruCode, Mileage, ConEquipCode, DataAcqEquipCode,
+    #             AnomalyTime, Year, Month, Day, Hour, Minute, Second
+    #             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    #             """
+    #
+    #         anomaly_len = len(degree)
+    #         if anomaly_len <= 0:
+    #             return {'code': LogHttpStatus.NO_ANOMALY_DATA.value, 'msg': '添加失败', 'data': {}}
+    #         if anomaly_len == 1:
+    #             cursor.execute(desc_sql, (
+    #                 desc_code, identification, str(degree[0]), str(region[0]), str(position[0]), str(bas[0])))
+    #         else:
+    #             for d, r, p, b in zip(degree, region, position, bas):
+    #                 cursor.execute(desc_sql, (desc_code, identification, str(d), str(r), str(p), str(b)))
+    #                 desc_code = str(float(desc_code) + 1)
+    #
+    #         now = datetime.strptime(anomaly_time, '%Y-%m-%d %H:%M:%S')
+    #         rows = cursor.execute(log_sql, (
+    #             identification, pro_code, tun_code, work_sur_code, stru_code, mileage, equ_code, acq_code,
+    #             anomaly_time, now.year, now.month, now.day, now.hour, now.minute, now.second))
+    #         con.commit()
+    #         return DBUtils.kv(rows, result_dict)
+    #     except Exception as e:
+    #         if con:
+    #             con.rollback()
+    #         return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '添加失败', 'data': {str(e)}}
+    #     finally:
+    #         if cursor:
+    #             cursor.close()
+    #         if con:
+    #             DBUtils.close_connection(con)
+
     @staticmethod
-    def log_insert_db(data):
+    def anomaly_log_insert(data):
+        """
+        在 anomaly_log 表中插入记录
+        """
         result_dict = {
             0: {
                 'code': BaseHttpStatus.ERROR.value,
@@ -685,28 +1014,29 @@ class DBUtils(object):
             }
         }
         try:
-            desc_code = data.get('DescCode', str(time.time()))
-            degree = data.get('Degree')
-            identification = data.get('Identification')
-            region = data.get('Region')
-            position = data.get('Position')
-            bas = data.get('Bas')
-            pro_code = data.get('ProCode')
-            tun_code = data.get('TunCode')
-            work_sur_code = data.get('WorkSurCode')
-            stru_code = data.get('StruCode')
-            mileage = data.get('Mileage')
-            equ_code = data.get('ConEquipCode')
-            acq_code = data.get('DataAcqEquipCode')
-            anomaly_time = data.get('AnomalyTime')
+            log_data = data.get('LogData')
+            desc_data = data.get('DescData')
+            img_data = data.get('ImgData')
+
+            pro_code = log_data.get('ProCode')
+            tun_code = log_data.get('TunCode')
+            work_sur_code = log_data.get('WorkSurCode')
+            stru_code = log_data.get('StruCode')
+            mileage = log_data.get('Mileage')
+            equ_code = log_data.get('ConEquipCode')
+            acq_code = log_data.get('DataAcqEquipCode')
+            anomaly_time = log_data.get('AnomalyTime')
+            identification = log_data.get('Identification', f'{pro_code}_{tun_code}_{work_sur_code}_{str(time.time())}')
+            sign = log_data.get('Sign', 2)  # 2待处理，1已处理
+            degree = desc_data.get('Degree')
+            company_code = data.get('CompanyCode', '07361dfa-defc-4a08-ba11-5a495db9e565')
+            warn_class = log_data.get('WarnClass', 0)
         except Exception as e:
             return {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {str(e)}}
 
-        # 校验必填字段
-        if not all(
-                [desc_code, degree, region, position, bas, pro_code, tun_code, work_sur_code, stru_code, mileage,
-                 equ_code, acq_code, anomaly_time, identification]):
-            return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}
+        if not all([identification, pro_code, tun_code, work_sur_code, stru_code, mileage, equ_code, acq_code,
+                    anomaly_time, str(sign), degree, company_code, str(warn_class)]):
+            return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '插入记录时缺少必要的字段', 'data': {}}
 
         con = None
         cursor = None
@@ -714,12 +1044,7 @@ class DBUtils(object):
             dbu = DBUtils()
             con = dbu.connection()
             cursor = con.cursor()
-
-            # 验证DescCode是否存在
-            sql = "SELECT * From anomaly_log_desc WHERE DescCode = {}".format(f"'{desc_code}'")
-            res = DBUtils.project_is_exist(cursor, sql, LogHttpStatus.NO_FIND_CODE.value, "不存在")
-            if not res:
-                return {'code': LogHttpStatus.EXIST_CODE.value, 'msg': '日志已经存在', 'data': {}}
+            con.autocommit(False)
 
             # 验证各个Code
             checks = [
@@ -730,43 +1055,48 @@ class DBUtils(object):
                  "该工作面不存在"),
                 ('eq_control', 'ConEquipCode', equ_code, ProjectHttpStatus.NO_FIND_CODE.value, "该中控设备不存在"),
                 ('eq_data', 'DataAcqEquipCode', acq_code, ProjectHttpStatus.NO_FIND_CODE.value,
-                 "该数据采集器不存在"),
+                 "该数据采集器不存在")
             ]
             for table, column, code, error_code, error_msg in checks:
                 res = DBUtils.check_existence(cursor, table, column, code, error_code, error_msg)
                 if res:
                     return res
 
-            desc_sql = """
-                INSERT INTO anomaly_log_desc 
-                (DescCode, Identification, Degree, Region, Position, Bas) VALUES (%s, %s, %s, %s, %s, %s)
-                """
+            # identification 是否已经存在
+            id_sql = f"SELECT * FROM anomaly_log WHERE Identification = '{identification}'"
+            res = DBUtils.project_is_exist(cursor, id_sql, BaseHttpStatus.OK.value, "预警详情记录不存在")
+            if not res:
+                raise Exception('预警详情记录已经存在')
+
             log_sql = """
                 INSERT INTO 
                 anomaly_log 
                 (
                 Identification, ProCode, TunCode, WorkSurCode, StruCode, Mileage, ConEquipCode, DataAcqEquipCode, 
-                AnomalyTime, Year, Month, Day, Hour, Minute, Second
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                """
+                AnomalyTime, Year, Month, Day, Hour, Minute, Second, Sign, MaxDegree, CompanyCode, WarnClass
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """
 
-            anomaly_len = len(degree)
-            if anomaly_len <= 0:
-                return {'code': LogHttpStatus.NO_ANOMALY_DATA.value, 'msg': '添加失败', 'data': {}}
-            if anomaly_len == 1:
-                cursor.execute(desc_sql, (
-                    desc_code, identification, str(degree[0]), str(region[0]), str(position[0]), str(bas[0])))
-            else:
-                for d, r, p, b in zip(degree, region, position, bas):
-                    cursor.execute(desc_sql, (desc_code, identification, str(d), str(r), str(p), str(b)))
-                    desc_code = str(float(desc_code) + 1)
+            # 取出 Degree 中最大的预警等级
+            max_degree = max(degree)
 
             now = datetime.strptime(anomaly_time, '%Y-%m-%d %H:%M:%S')
             rows = cursor.execute(log_sql, (
-                identification, pro_code, tun_code, work_sur_code, stru_code, mileage, equ_code, acq_code,
-                anomaly_time, now.year, now.month, now.day, now.hour, now.minute, now.second))
+                identification, pro_code, tun_code, work_sur_code, stru_code, mileage, equ_code, acq_code, anomaly_time,
+                now.year, now.month, now.day, now.hour, now.minute, now.second, sign, max_degree, company_code,
+                warn_class))
+            res = DBUtils.kv(rows, result_dict)
+            if res.get('code') != 101:
+                return res
+
+            # anomaly_log_desc_insert
+            DBUtils.anomaly_log_desc_insert(identification, desc_data, cursor)
+
+            # anomaly_log_img_insert
+            DBUtils.anomaly_log_img_insert(identification, img_data, cursor, pro_code, tun_code, equ_code, acq_code)
+
             con.commit()
-            return DBUtils.kv(rows, result_dict)
+            return {'code': BaseHttpStatus.OK.value, 'msg': '添加成功', 'data': {}}
         except Exception as e:
             if con:
                 con.rollback()
@@ -776,6 +1106,85 @@ class DBUtils(object):
                 cursor.close()
             if con:
                 DBUtils.close_connection(con)
+
+    @staticmethod
+    def anomaly_log_desc_insert(identification, desc_data, cursor):
+        """
+        在 anomaly_log_desc 表中插入详细记录
+        """
+        try:
+            degree = desc_data.get('Degree')
+            region = desc_data.get('Region')
+            position = desc_data.get('Position')
+            bas = desc_data.get('Bas')
+        except Exception as e:
+            raise Exception(f"添加失败, {BaseHttpStatus.GET_DATA_ERROR.value}")
+
+        if not all([identification, degree, region, position, bas]):
+            raise Exception(f'插入详情缺少必要的字段, {BaseHttpStatus.PARAMETER.value}')
+
+        try:
+            # identification 是否已经存在
+            id_sql = f"SELECT * FROM anomaly_log_desc WHERE Identification = '{identification}'"
+            res = DBUtils.project_is_exist(cursor, id_sql, BaseHttpStatus.OK.value, "预警详情记录不存在")
+            if not res:
+                raise Exception('预警详情记录已经存在')
+
+            insert_sql = "INSERT INTO anomaly_log_desc (Identification, Degree, Region, Position, Bas) VALUES(%s, %s, %s, %s, %s)"
+            # for d, r, p, b in zip(degree, region, position, bas):
+            #     row = cursor.execute(insert_sql, (identification, str(d), str(r), str(p), str(b)))
+            row = cursor.execute(insert_sql, (identification, str(degree), str(region), str(position), str(bas)))
+            if row != 1:
+                raise Exception('插入预警详细内容失败')
+        except Exception as e:
+            raise Exception(f'{str(e)}')
+
+    @staticmethod
+    def anomaly_log_img_insert(identification, img_data, cursor, pro_code, tun_code, equ_code, acq_code):
+        """
+        在 anomaly_log_img 表中插入图像数据
+        """
+        try:
+            url_start = 'https://sat.jovysoft.net:8066'
+            url_start_real = r'D:\tunnelProject\adminProject\data'
+            folder = f'img/project_{pro_code}/tunnel_{tun_code}/control_{equ_code}/avia_{acq_code}'
+            write_path = os.path.join(url_start_real, folder)
+            db_path = f'{url_start}/{folder}'
+            os.makedirs(write_path, exist_ok=True)
+
+            avia_img = IMGUtils.base642image(img_data.get('AviaPicturePath'))
+            camera_img = IMGUtils.base642image(img_data.get('CameraPicturePath'))
+
+            avia_img_filename = f'avia_img_{time.time()}_{identification}.png'
+            camera_img_filename = f'camera_img_{time.time()}_{identification}.png'
+        except Exception as e:
+            raise Exception(f'添加失败, {BaseHttpStatus.GET_DATA_ERROR.value}')
+
+        if not all([identification, avia_img.any(), camera_img.any()]):
+            raise Exception(f'插入图片时缺少必要的字段, {BaseHttpStatus.PARAMETER.value}')
+
+        try:
+            # identification 是否已经存在
+            id_sql = f"SELECT * FROM anomaly_log_img WHERE Identification = '{identification}'"
+            res = DBUtils.project_is_exist(cursor, id_sql, BaseHttpStatus.OK.value, "预警详情记录不存在")
+            if not res:
+                raise Exception('预警详情记录已经存在')
+
+            insert_sql = "INSERT INTO anomaly_log_img (Identification, AviaPicturePath, CameraPicturePath) VALUES (%s, %s, %s)"
+            row = cursor.execute(insert_sql,
+                                 (identification, f'{db_path}/{avia_img_filename}', f'{db_path}/{camera_img_filename}'))
+            if row != 1:
+                raise Exception('插入预警详细图片内容失败')
+
+            # 将图片保存至服务器本地文件系统
+            save_path_avia = os.path.join(write_path, avia_img_filename)
+            save_path_camera = os.path.join(write_path, camera_img_filename)
+            success_avia = cv2.imwrite(save_path_avia, avia_img)
+            success_camera = cv2.imwrite(save_path_camera, camera_img)
+            if not (success_avia, success_camera):
+                raise Exception('保存图片失败')
+        except Exception as e:
+            raise Exception(f'{str(e)}')
 
     @staticmethod
     def get_log_by_columns(data: dict):
@@ -803,6 +1212,7 @@ class DBUtils(object):
             dbu = DBUtils()
             con = dbu.connection(cursor_class=DictCursor)
             cursor = con.cursor()
+            con.autocommit(False)
 
             # 构建动态查询语句
             sql = "SELECT Identification, AnomalyTime FROM anomaly_log WHERE 1=1"
@@ -932,23 +1342,142 @@ class DBUtils(object):
             if con:
                 DBUtils.close_connection(con)
 
+    @staticmethod
+    def get_calculation_result(calculation_uuid):
+        con = None
+        cursor = None
+        try:
+            dub = DBUtils()
+            con = dub.connection(cursor_class=DictCursor)
+            cursor = con.cursor()
+            sql = "SELECT * FROM space_calculation WHERE CalculationUUID = %s"
+            cursor.execute(sql, calculation_uuid)
+            res = cursor.fetchall()
+            if len(res) != 1:
+                return {'code': BaseHttpStatus.ERROR.value, 'msg': '计算失败', 'data': {}}
 
-if __name__ == '__main__':
-    data = {
-        'Page': 1,
-        'PageSize': 10,
-        'ProCode': '1001',
-        # 'TunCode': '1002',
-        # 'SearchText': 'name1',  # 模糊查询
-        # 'Item': 'ProCode',  # 指定筛选
-        # 'Value': '1002'  # 指定筛选
-    }
-    print(DBUtils.paging_display(data, 'user', data.get('Page'), data.get('PageSize')))
+            # 组合返回数据
+            item = res[0]
+            intact_surface = item['IntactSurface']
+            intact_volume = item['IntactVolume']
+            region = {}
+            region_path = str(item['RegionPath'])
+            region_path = str(region_path).replace(DBUtils.DEFAULT_DATA_SAVE_DB_ROOT_DIR, DBUtils.DEFAULT_DATA_SAVE_ROOT_DIR)
+            with os.scandir(region_path) as entries:
+                for entry in entries:
+                    if entry.is_file() and entry.name.endswith('.txt'):
+                        index = entry.name.split('.')[0]
+                        with open(entry.path, 'r', encoding='utf-8') as file:
+                            region_data = file.read()
+                            region[index] = ast.literal_eval(region_data)
+
+            res = {
+                'intact_surface_area': intact_surface,
+                'intact_volume': intact_volume,
+                'region': region
+            }
+
+            return {'code': BaseHttpStatus.OK.value, 'msg': '计算成功', 'data': res}
+        except Exception as e:
+            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '计算失败', 'data': {'exception': str(e)}}
+        finally:
+            if cursor:
+                cursor.close()
+            if con:
+                DBUtils.close_connection(con)
+
+    @staticmethod
+    def update_space_calculation_log(log_uuid, save_path, size, intact_surface_area, intact_volume):
+        con = None
+        cursor = None
+        try:
+            save_path = str(save_path).replace(DBUtils.DEFAULT_DATA_SAVE_ROOT_DIR, DBUtils.DEFAULT_DATA_SAVE_DB_ROOT_DIR)
+            dbu = DBUtils()
+            con = dbu.connection()
+            cursor = con.cursor()
+            con.autocommit(False)
+            space_calculation_uuid = str(uuid.uuid4())
+            now = datetime.now()
+            update_pcd_log_sql = "UPDATE pcd_log SET CalculationUUID =%s WHERE PCDLogUID = %s"
+            update_pcd_log_row = cursor.execute(update_pcd_log_sql, (space_calculation_uuid, log_uuid))
+            if update_pcd_log_row != 1:
+                raise Exception('更新 PCDLogUID 失败')
+
+            update_space_calculation_sql = "INSERT INTO space_calculation (CalculationUUID, RegionPath, Size, CalculationTime, IntactSurface, IntactVolume) VALUES (%s, %s, %s, %s, %s, %s)"
+            update_space_calculation_row = cursor.execute(update_space_calculation_sql, (space_calculation_uuid, save_path, size, now.strftime("%Y-%m-%d %H:%M:%S"), intact_surface_area, intact_volume))
+            if update_space_calculation_row != 1:
+                raise Exception('插入空间计算记录失败')
+
+            con.commit()
+            return {'code': BaseHttpStatus.OK.value, 'msg': '计算成功', 'data': {}}
+        except Exception as e:
+            return {'code': BaseHttpStatus.EXCEPTION.value, 'msg': '计算失败', 'data': {'exception': str(e)}}
+        finally:
+            if cursor:
+                cursor.close()
+            if con:
+                DBUtils.close_connection(con)
 
 
 # if __name__ == '__main__':
 #     data = {
-#         'TableName': 'project',
-#         'Columns': 'TunCode'
+#         'Page': 1,
+#         'PageSize': 10,
+#         'ProCode': '1001',
+#         # 'TunCode': '1002',
+#         # 'SearchText': 'name1',  # 模糊查询
+#         # 'Item': 'ProCode',  # 指定筛选
+#         # 'Value': '1002'  # 指定筛选
 #     }
-#     print(DBUtils.search(data))
+#     print(DBUtils.paging_display(data, 'user', data.get('Page'), data.get('PageSize')))
+
+if __name__ == '__main__':
+    # start = datetime(2025, 4, 27, 10, 10, 50)
+    # end = datetime(2025, 4, 27, 10, 11, 0)
+    # data = {
+    #     'Page': 1,
+    #     'PageSize': 10,
+    #     # 'ProCode': '1001',
+    #     # 'SearchText': '27',
+    #     # 'Item': 'Hour',
+    #     # 'Value': 10,
+    #     # 'Start': start,
+    #     # 'End': end,
+    #     # 'Column': 'AnomalyTime'
+    # }
+    # start = time.time()
+    # print(DBUtils.paging_display_condition_on_sql(data, 'tunnel', 1, 10, join=True))
+    # print(DBUtils.paging_display(data, 'anomaly_log', 1, 10))
+    # print(time.time() - start)
+    # print(DBUtils.search_by_some_item('anomaly_log', 'ProCode', '1003'))
+    # pcd_img = Image.open(r'E:\07-code\tunnelProject\adminProject\data\pic\pcd.png')
+    # pcd_img = IMGUtils.img2base64(pcd_img)
+    # camera_img = Image.open(r'E:\07-code\tunnelProject\adminProject\data\pic\camera.png')
+    # camera_img = IMGUtils.img2base64(camera_img)
+    #
+    # now = datetime.now()
+    # data = {
+    #     'LogData': {
+    #         'ProCode': '1001',
+    #         'TunCode': '1001',
+    #         'WorkSurCode': '1001',
+    #         'StruCode': '1001',
+    #         'Mileage': '80',
+    #         'ConEquipCode': '1001',
+    #         'DataAcqEquipCode': '1001',
+    #         "AnomalyTime": f'{now.strftime("%Y-%m-%d %H:%M:%S")}'
+    #     },
+    #     'DescData': {
+    #         "Degree": ['一', '二', '三'],
+    #         "Region": [1, 2, 3],
+    #         "Position": [(1, 2, 3), (1, 2, 3), (1, 2, 3)],
+    #         "Bas": [3, 3, 3]
+    #     },
+    #     'ImgData': {
+    #         'AviaPicturePath': f'{pcd_img}',
+    #         'CameraPicturePath': f'{camera_img}'
+    #     }
+    # }
+    # print(DBUtils.anomaly_log_insert(data))
+
+    print(DBUtils.get_calculation_result(1))

@@ -12,6 +12,10 @@ from flask import Flask
 from flask_cors import CORS
 
 from routes.local.basic.select import base_select_db
+from routes.local.company.company import company_db
+from routes.local.config.eq_control_conf import eq_con_conf_db
+from routes.local.config.eq_data_conf import eq_data_conf_db
+from routes.local.config.file import config_file_db
 from routes.local.equipment.console import console_db
 from routes.local.equipment.data import data_acq_db
 from routes.local.log.anomaly import anomaly_db
@@ -24,7 +28,10 @@ from routes.local.project.work_surface import work_surface_db
 from routes.local.pcd.pcd_file_op import pcd_file_op
 from routes.local.user.user import user_db
 from routes.local.user.role import role_db
-
+from routes.miniprogram.monitor_atten import monitor_db
+from routes.miniprogram.property import property_db
+from routes.miniprogram.user_info import info_db
+from routes.miniprogram.warn import mp_warn_db
 
 app = Flask(__name__)
 CORS(app)
@@ -44,7 +51,16 @@ app.register_blueprint(data_acq_db, url_prefix='/api/outer/data_acq_db')
 app.register_blueprint(anomaly_db, url_prefix='/api/outer/anomaly_db')
 app.register_blueprint(history_db, url_prefix='/api/outer/history_db')
 app.register_blueprint(base_select_db, url_prefix='/api/outer/basic/select')
+app.register_blueprint(config_file_db, url_prefix='/api/outer/config_file_db')
+app.register_blueprint(mp_warn_db, url_prefix='/api/outer/mp_warn_db')
+app.register_blueprint(eq_con_conf_db, url_prefix='/api/outer/eq_con_conf_db')
+app.register_blueprint(eq_data_conf_db, url_prefix='/api/outer/eq_data_conf_db')
+app.register_blueprint(company_db, url_prefix='/api/outer/company_db')
+app.register_blueprint(property_db, url_prefix='/api/mp/property_db')
+app.register_blueprint(info_db, url_prefix='/api/mp/info_db')
+app.register_blueprint(monitor_db, url_prefix='/api/mp/monitor_db')
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.1.3', port=8023)
+    app.run(host='0.0.0.0', port=8023)
+

@@ -50,12 +50,21 @@ def project_add():
         create_time = data.get('ProCreateTime', now.strftime("%Y-%m-%d %H:%M:%S"))
         status = data.get('ProStatus', 0)
         cycle = data.get('ProCycle', 0)
+        company_code = data.get('CompanyCode', "07361dfa-defc-4a08-ba11-5a495db9e565")
+
+        # 解析日期
+        year = str(now.year)
+        month = str(now.month)
+        day = str(now.day)
+        hour = str(now.hour)
+        minute = str(now.minute)
+        second = str(now.second)
     except Exception as e:
         return jsonify(
             {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
-    if not all([pro_code, name, address, linkman, phone]):
+    if not all([pro_code, name, address, linkman, phone, company_code, year, month, day, hour, minute, second]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
@@ -64,6 +73,7 @@ def project_add():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 验证ProCode是否存在
         pro_code_sql = "SELECT * From project WHERE ProCode = {}".format(f"'{pro_code}'")
@@ -74,9 +84,12 @@ def project_add():
 
         # 若为新项目则执行添加操作
         insert_sql = """
-                INSERT INTO project (ProCode, ProName, ProAddress, LinkMan, Phone, ProCreateTime, ProStatus, ProCycle) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO project (ProCode, ProName, ProAddress, LinkMan, Phone, ProCreateTime, ProStatus, ProCycle, CompanyCode, Year, Month, Day, Hour, Minute, Second)
+                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
-        rows = cursor.execute(insert_sql, (pro_code, name, address, linkman, phone, create_time, status, cycle))
+        rows = cursor.execute(insert_sql,
+                              (pro_code, name, address, linkman, phone, create_time, status, cycle, company_code, year,
+                               month, day, hour, minute, second))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
@@ -92,7 +105,7 @@ def project_add():
 
 @project_db.route('/deleteProject', methods=['POST'])
 def project_delete():
-    -"""
+    """
     项目删除
     :return:
     """
@@ -130,6 +143,7 @@ def project_delete():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 项目存在执行删除操作
         sql = """
@@ -180,16 +194,33 @@ def project_update():
         address = data.get('ProAddress')
         linkman = data.get('LinkMan')
         phone = data.get('Phone')
-        now = datetime.now()
-        create_time = data.get('ProCreateTime', now.strftime("%Y-%m-%d %H:%M:%S"))
+        # now = datetime.now()
+        create_time = data.get('ProCreateTime')
+
+        try:
+            # 若为标准格式，如 "YYYY-MM-DD HH:MM:SS"
+            create_time = datetime.strptime(create_time, "%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            # 若为 ISO 格式（自动识别）
+            create_time = datetime.fromisoformat(create_time)
+
+        year = str(create_time.year)
+        month = str(create_time.month)
+        day = str(create_time.day)
+        hour = str(create_time.hour)
+        minute = str(create_time.minute)
+        second = str(create_time.second)
+
         status = data.get('ProStatus', 0)
         cycle = data.get('ProCycle', 0)
+        company_code = data.get('CompanyCode', "07361dfa-defc-4a08-ba11-5a495db9e565")
     except Exception as e:
         return jsonify(
             {'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '更新失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
-    if not all([old_pro_code, pro_code, name, address, linkman, phone]):
+    if not all([old_pro_code, pro_code, name, address, linkman, phone, company_code, year, month, day, hour, minute,
+                second]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
@@ -198,6 +229,7 @@ def project_update():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 验证old_pro_code是否存在
         pro_code_sql = "SELECT * From project WHERE ProCode = {}".format(f"'{old_pro_code}'")
@@ -215,11 +247,14 @@ def project_update():
            UPDATE 
                 project 
            SET 
-                ProCode=%s, ProName=%s, ProAddress=%s, LinkMan=%s, Phone=%s, ProCreateTime=%s, ProStatus=%s, ProCycle=%s
+                ProCode=%s, ProName=%s, ProAddress=%s, LinkMan=%s, Phone=%s, ProCreateTime=%s, ProStatus=%s, ProCycle=%s, 
+                CompanyCode = %s, Year = %s, Month = %s, Day = %s, Hour = %s , Minute = %s, Second = %s
            WHERE 
                 ProCode = %s
            """
-        rows = cursor.execute(sql, (pro_code, name, address, linkman, phone, create_time, status, cycle, old_pro_code))
+        rows = cursor.execute(sql, (
+            pro_code, name, address, linkman, phone, create_time, status, cycle, company_code, year, month, day, hour,
+            minute, second, old_pro_code))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
@@ -241,7 +276,7 @@ def project_select():
     """
     try:
         data = request.json
-        res = DBUtils.paging_display(data, 'project', 1, 10)
+        res = DBUtils.paging_display_condition_on_sql(data, 'project', 1, 10, join=True)
         return jsonify(res), 200
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
@@ -255,7 +290,7 @@ def project_search():
     """
     try:
         data = request.json
-        res = DBUtils.search_by_some_item('project', data.get('Item'), data.get('Value'), data)
+        res = DBUtils.search_by_some_item('project', data.get('Item'), data.get('Value'), join=True, data=data)
         return jsonify(res), 200
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
@@ -268,10 +303,12 @@ def project_status():
     """
     try:
         data = request.json
-        table = data.get("table", "project")
+        table = data.get("Table", "project")
         time_column = data.get("ProCreateTime", "ProCreateTime")
         cycle_column = data.get("ProCycle", "ProCycle")
-        res = StUtils.get_time_and_cycle_from_table(table, time_column, cycle_column)
+        item = data.get('Item', None)
+        value = data.get('Value', None)
+        res = StUtils.get_time_and_cycle_from_table(table, time_column, cycle_column, item, value)
         return jsonify(res), 200
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '统计失败', 'data': {'exception': str(e)}}), 200

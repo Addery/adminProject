@@ -47,11 +47,12 @@ def structure_add():
         fir_level = data.get('FirWarningLevel')
         sec_level = data.get('SecWarningLevel')
         thir_level = data.get('ThirWarningLevel')
+        company_code = data.get('CompanyCode', '07361dfa-defc-4a08-ba11-5a495db9e565')
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '添加失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
-    if not all([code, name, fir_level, sec_level, thir_level]):
+    if not all([code, name, fir_level, sec_level, thir_level, company_code]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
@@ -60,6 +61,7 @@ def structure_add():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 校验待添加的结构物是否已经存在
         select_sql = "SELECT StruCode From structure WHERE StruCode = {}".format(f"'{code}'")
@@ -69,9 +71,9 @@ def structure_add():
 
         # 若为新项目则执行添加操作
         insert_sql = """
-                INSERT INTO structure (StruCode, StruName, FirWarningLevel, SecWarningLevel, ThirWarningLevel) VALUES (%s, %s, %s, %s, %s)
+                INSERT INTO structure (StruCode, StruName, FirWarningLevel, SecWarningLevel, ThirWarningLevel, CompanyCode) VALUES (%s, %s, %s, %s, %s, %s)
                 """
-        rows = cursor.execute(insert_sql, (code, name, fir_level, sec_level, thir_level))
+        rows = cursor.execute(insert_sql, (code, name, fir_level, sec_level, thir_level, company_code))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
@@ -124,6 +126,7 @@ def structure_delete():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         sql = """
               DELETE FROM structure WHERE StruCode = %s
@@ -170,11 +173,12 @@ def structure_update():
         fir_level = data.get("FirWarningLevel")
         sec_level = data.get("SecWarningLevel")
         thir_level = data.get("ThirWarningLevel")
+        company_code = data.get('CompanyCode')
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.GET_DATA_ERROR.value, 'msg': '修改失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
-    if not all([old_code, code, name, fir_level, sec_level, thir_level]):
+    if not all([old_code, code, name, fir_level, sec_level, thir_level, company_code]):
         return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
@@ -183,6 +187,7 @@ def structure_update():
         dbu = DBUtils()
         con = dbu.connection()
         cursor = con.cursor()
+        con.autocommit(False)
 
         # 校验待修改的结构物信息是否已经存在
         select_old_sql = "SELECT StruCode From structure WHERE StruCode={}".format(f"'{old_code}'")
@@ -203,12 +208,12 @@ def structure_update():
                     UPDATE 
                         structure 
                     SET 
-                        StruCode=%s, StruName=%s, FirWarningLevel=%s, SecWarningLevel=%s, ThirWarningLevel=%s
+                        StruCode=%s, StruName=%s, FirWarningLevel=%s, SecWarningLevel=%s, ThirWarningLevel=%s, CompanyCode=%s
                     Where 
                         StruCode=%s
                     """
 
-        rows = cursor.execute(sql, (code, name, fir_level, sec_level, thir_level, old_code))
+        rows = cursor.execute(sql, (code, name, fir_level, sec_level, thir_level, company_code, old_code))
         con.commit()
         return jsonify(DBUtils.kv(rows, result_dict)), 200
     except Exception as e:
@@ -230,7 +235,7 @@ def structure_select():
     """
     try:
         data = request.json
-        res = DBUtils.paging_display(data, 'structure', 1, 10)
+        res = DBUtils.paging_display_condition_on_sql(data, 'structure', 1, 10)
         return jsonify(res), 200
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200
@@ -244,7 +249,7 @@ def structure_select_by_column():
     """
     try:
         data = request.json
-        res = DBUtils.search_by_some_item('structure', data.get('Item'), data.get('Value'), data)
+        res = DBUtils.search_by_some_item('structure', data.get('Item'), data.get('Value'), data=data)
         return jsonify(res), 200
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '查找失败', 'data': {'exception': str(e)}}), 200

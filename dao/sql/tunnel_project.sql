@@ -30,8 +30,8 @@ CREATE TABLE tunnel
     ProCode   VARCHAR(128) NOT NULL COMMENT '项目编号，外键',
     PRIMARY KEY (TunID),
     FOREIGN KEY (ProCode) REFERENCES project (ProCode) ON UPDATE CASCADE ON DELETE CASCADE, -- project ProCode
-    UNIQUE (TunCode, ProCode)
-) COMMENT ='隧道表，存储隧道的基本信息，(TunCode, ProCode)唯一';
+    UNIQUE (TunCode)
+) COMMENT ='隧道表，存储隧道的基本信息，(TunCode)唯一';
 
 CREATE TABLE structure
 (
@@ -60,12 +60,12 @@ CREATE TABLE work_surface
     TunCode     VARCHAR(64) NOT NULL COMMENT '隧道编号，外键',
     StruCode    VARCHAR(64) NOT NULL COMMENT '结构物编号，外键',
     PRIMARY KEY (WorkSurID),
-    FOREIGN KEY (StruCode) REFERENCES structure (StruCode) ON UPDATE CASCADE ON DELETE CASCADE, -- structure StruCode
+#     FOREIGN KEY (StruCode) REFERENCES structure (StruCode) ON UPDATE CASCADE ON DELETE CASCADE, -- structure StruCode
     FOREIGN KEY (ProCode) REFERENCES project (ProCode) ON UPDATE CASCADE ON DELETE CASCADE,     -- project ProCode
     FOREIGN KEY (TunCode) REFERENCES tunnel (TunCode) ON UPDATE CASCADE ON DELETE CASCADE,      -- tunnel TunCode
 
-    UNIQUE (WorkSurCode, TunCode)
-) COMMENT ='工作面表，存储工作面的基本信息，(WorkSurCode, TunCode)唯一';
+    UNIQUE (WorkSurCode)
+) COMMENT ='工作面表，存储工作面的基本信息，(WorkSurCode)唯一';
 
 CREATE TABLE eq_control
 (
@@ -81,7 +81,7 @@ CREATE TABLE eq_control
     FOREIGN KEY (ProCode) REFERENCES project (ProCode) ON UPDATE CASCADE ON DELETE CASCADE,              -- project ProCode
     FOREIGN KEY (TunCode) REFERENCES tunnel (TunCode) ON UPDATE CASCADE ON DELETE CASCADE,               -- tunnel TunCode
     FOREIGN KEY (WorkSurCode) REFERENCES work_surface (WorkSurCode) ON UPDATE CASCADE ON DELETE CASCADE, -- work_surface WorkSurCode
-    FOREIGN KEY (StruCode) REFERENCES structure (StruCode) ON UPDATE CASCADE ON DELETE CASCADE,          -- structure StruCode
+#     FOREIGN KEY (StruCode) REFERENCES structure (StruCode) ON UPDATE CASCADE ON DELETE CASCADE,          -- structure StruCode
 #     UNIQUE (ConEquipCode, WorkSurCode)
     UNIQUE (ConEquipCode)
 # ) COMMENT ='中控设备表，存储中控设备的基本信息，(ConEquipCode, WorkSurCode)唯一';
