@@ -96,14 +96,15 @@ def upload_init_file():
         project_code = data.get('ProCode')
         tunnel_code = data.get('TunCode')
         control_code = data.get('ConEquipCode')
+        update_time = data.get('updateTime')
         log_uuid = data.get('LogUUID')
         # avia_code = data.get('TunCode', None)
     except Exception as e:
         return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '上传失败', 'data': {'exception': str(e)}}), 200
 
     # 校验必填字段
-    if not all([region, intact_data, project_code, tunnel_code, control_code, log_uuid]):
-        return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}
+    if not all([region, intact_data, project_code, tunnel_code, control_code, update_time, log_uuid]):
+        return jsonify({'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}), 200
 
     con = None
     cursor = None
@@ -122,6 +123,8 @@ def upload_init_file():
         # 解包 intact_data
         decode = base64.b64decode(intact_data)
         intact_data_df = pickle.loads(decode)
+        if intact_data_df is None:
+            raise Exception('原始点云数据为空')
         intact_data_df.to_csv(f'{intact_save_dir}/{log_uuid}.csv', index=False, encoding='utf-8')
 
         # 解包区域数据并写入
@@ -131,6 +134,8 @@ def upload_init_file():
             region_save_path = f"{region_save_dir}/{k}.csv"
             index_data = base64.b64decode(v)
             index_data_df = pickle.loads(index_data)
+            if index_data_df is None:
+                continue
             index_data_df.to_csv(region_save_path, index=False, encoding='utf-8')
             # for row in index_data_df.itertuples(index=False):
             # region_list.extend([row.X, row.Y, row.Z, row.Reflectivity])
@@ -141,15 +146,15 @@ def upload_init_file():
 
         """ 记录数据库 """
         log_insert_sql = """
-            INSERT INTO pcd_init (ConEquipCode, InitPCDPath, InitRegionPath) VALUES (%s, %s, %s)
+            INSERT INTO pcd_init (ConEquipCode, InitPCDPath, InitRegionPath, updateTime) VALUES (%s, %s, %s, %s)
         """
         intact_save_dir_db = f'{intact_save_dir}/{log_uuid}.csv'.replace(ANOMALY_ROOT_DIR,
                                                                          'https://sat.jovysoft.net:8066')
         region_save_dir_db = region_save_dir.replace(ANOMALY_ROOT_DIR, 'https://sat.jovysoft.net:8066')
-        rows = cursor.execute(log_insert_sql, (control_code, intact_save_dir_db, region_save_dir_db))
+        rows = cursor.execute(log_insert_sql, (control_code, intact_save_dir_db, region_save_dir_db, update_time))
         res = DBUtils.kv(rows, result_dict)
         if res.get('code') != 101:
-            return res
+            return jsonify({'code': BaseHttpStatus.EXCEPTION.value, 'msg': '插入失败', 'data': {}}), 200
 
         con.commit()
         return jsonify({'code': BaseHttpStatus.OK.value, 'msg': '插入成功', 'data': {}}), 200
@@ -166,7 +171,7 @@ def upload_init_file():
 def upload_anomaly_file():
     try:
         data = request.json
-        pre_data = data.get('PreData')
+        # pre_data = data.get('PreData')
         region = data.get('Region')
         describe = data.get('Describe')
         project_code = data.get('ProCode')
@@ -175,20 +180,20 @@ def upload_anomaly_file():
         log_uuid = data.get('LogUUID')
         # avia_code = data.get('TunCode', None)
         # 校验必填字段
-        if not all([pre_data, region, describe, project_code, tunnel_code, control_code, log_uuid]):
+        if not all([region, describe, project_code, tunnel_code, control_code, log_uuid]):
             return {'code': BaseHttpStatus.PARAMETER.value, 'msg': '缺少必要的字段', 'data': {}}
 
-        pre_data_save_dir = f"{ANOMALY_ROOT_DIR}/data/project_{project_code}/tunnel_{tunnel_code}/control_{control_code}/uuid_{log_uuid}/anomaly/pre"
+        # pre_data_save_dir = f"{ANOMALY_ROOT_DIR}/data/project_{project_code}/tunnel_{tunnel_code}/control_{control_code}/uuid_{log_uuid}/anomaly/pre"
         region_save_dir = f"{ANOMALY_ROOT_DIR}/data/project_{project_code}/tunnel_{tunnel_code}/control_{control_code}/uuid_{log_uuid}/anomaly/region"
         describe_save_dir = f"{ANOMALY_ROOT_DIR}/data/project_{project_code}/tunnel_{tunnel_code}/control_{control_code}/uuid_{log_uuid}/anomaly/describe"
         os.makedirs(region_save_dir, exist_ok=True)
         os.makedirs(describe_save_dir, exist_ok=True)
-        os.makedirs(pre_data_save_dir, exist_ok=True)
+        # os.makedirs(pre_data_save_dir, exist_ok=True)
 
         # 写入预处理后的数据
-        pre_data_decode = base64.b64decode(pre_data)
-        pre_data_df = pickle.loads(pre_data_decode)
-        pre_data_df.to_csv(f'{pre_data_save_dir}/{log_uuid}.csv', index=False, encoding='utf-8')
+        # pre_data_decode = base64.b64decode(pre_data)
+        # pre_data_df = pickle.loads(pre_data_decode)
+        # pre_data_df.to_csv(f'{pre_data_save_dir}/{log_uuid}.csv', index=False, encoding='utf-8')
 
         for r, d in zip(region.items(), describe.items()):
             region_index, anomaly_data = r
@@ -210,7 +215,7 @@ def upload_anomaly_file():
                 'data': {
                     'AnomalyRegionPath': region_save_dir,
                     'AnomalyDescribePath': describe_save_dir,
-                    'AnomalyPrePath': f'{pre_data_save_dir}/{log_uuid}.csv'
+                    # 'AnomalyPrePath': f'{pre_data_save_dir}/{log_uuid}.csv'
                 }
             }
         ), 200

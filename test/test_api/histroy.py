@@ -103,14 +103,15 @@ def upload_init_file():
                 df_region = pd.read_csv(csv_path)
                 binary_region = base64.b64encode(pickle.dumps(df_region)).decode('utf-8')
                 region[entry.name.split('.')[0]] = json.dumps(binary_region)
-
+    now = datetime.datetime.now()
     data = {
         'Region': region,
         'IntactData': str_df,
         'ProCode': '1001',
         'TunCode': '1001',
         'ConEquipCode': '1001',
-        'LogUUID': 'test'
+        'LogUUID': 'test',
+        'updateTime': now.strftime('%Y-%m-%d %H:%M:%S')
     }
 
     response = requests.post(url, json=data)

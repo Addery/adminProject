@@ -42649,3 +42649,158 @@ TypeError: The view function for 'user_db.get_auth_code' did not return a valid 
 2025-06-11 10:16:48,529 - INFO - 数据库配置成功加载
 2025-06-11 10:16:48,676 - INFO - MySQL数据库连接成功
 2025-06-11 10:16:48,714 - INFO - 192.168.1.10 - - [11/Jun/2025 10:16:48] "POST /api/outer/anomaly_db/statisticsStatus HTTP/1.1" 200 -
+2025-06-12 19:50:41,807 - INFO - 数据库配置成功加载
+2025-06-12 19:50:41,969 - INFO - MySQL数据库连接成功
+2025-06-12 19:50:42,111 - INFO - 192.168.1.10 - - [12/Jun/2025 19:50:42] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:50:43,994 - INFO - 数据库配置成功加载
+2025-06-12 19:50:44,139 - INFO - MySQL数据库连接成功
+2025-06-12 19:50:45,206 - INFO - 192.168.1.10 - - [12/Jun/2025 19:50:45] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:50:45,277 - INFO - 数据库配置成功加载
+2025-06-12 19:50:45,424 - INFO - MySQL数据库连接成功
+2025-06-12 19:50:45,567 - INFO - 192.168.1.10 - - [12/Jun/2025 19:50:45] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:50:47,423 - INFO - 数据库配置成功加载
+2025-06-12 19:50:47,566 - INFO - MySQL数据库连接成功
+2025-06-12 19:50:48,499 - INFO - 192.168.1.10 - - [12/Jun/2025 19:50:48] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:50:48,567 - INFO - 数据库配置成功加载
+2025-06-12 19:50:48,712 - INFO - MySQL数据库连接成功
+2025-06-12 19:50:48,932 - INFO - 192.168.1.10 - - [12/Jun/2025 19:50:48] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:50:50,800 - INFO - 数据库配置成功加载
+2025-06-12 19:50:50,944 - INFO - MySQL数据库连接成功
+2025-06-12 19:50:51,924 - INFO - 192.168.1.10 - - [12/Jun/2025 19:50:51] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:50:51,996 - INFO - 数据库配置成功加载
+2025-06-12 19:50:52,141 - INFO - MySQL数据库连接成功
+2025-06-12 19:50:52,283 - INFO - 192.168.1.10 - - [12/Jun/2025 19:50:52] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:50:54,157 - INFO - 数据库配置成功加载
+2025-06-12 19:50:54,299 - INFO - MySQL数据库连接成功
+2025-06-12 19:50:55,216 - INFO - 192.168.1.10 - - [12/Jun/2025 19:50:55] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:50:55,286 - INFO - 数据库配置成功加载
+2025-06-12 19:50:56,936 - INFO - MySQL数据库连接成功
+2025-06-12 19:50:57,078 - INFO - 192.168.1.10 - - [12/Jun/2025 19:50:57] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:50:58,932 - INFO - 数据库配置成功加载
+2025-06-12 19:50:59,075 - INFO - MySQL数据库连接成功
+2025-06-12 19:50:59,989 - INFO - 192.168.1.10 - - [12/Jun/2025 19:50:59] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:51:28,848 - INFO - 数据库配置成功加载
+2025-06-12 19:51:28,991 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:29,131 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:29] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:51:30,971 - INFO - 数据库配置成功加载
+2025-06-12 19:51:31,115 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:32,011 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:32] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:51:32,083 - INFO - 数据库配置成功加载
+2025-06-12 19:51:32,226 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:32,368 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:32] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:51:34,217 - INFO - 数据库配置成功加载
+2025-06-12 19:51:34,361 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:35,252 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:35] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:51:35,320 - INFO - 数据库配置成功加载
+2025-06-12 19:51:35,463 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:35,605 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:35] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:51:37,464 - INFO - 数据库配置成功加载
+2025-06-12 19:51:37,610 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:38,497 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:38] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:51:38,568 - INFO - 数据库配置成功加载
+2025-06-12 19:51:38,712 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:38,855 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:38] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:51:40,893 - INFO - 数据库配置成功加载
+2025-06-12 19:51:41,038 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:41,950 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:41] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:51:42,018 - INFO - 数据库配置成功加载
+2025-06-12 19:51:42,905 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:43,048 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:43] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:51:44,861 - INFO - 数据库配置成功加载
+2025-06-12 19:51:45,005 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:51,750 - INFO - 数据库配置成功加载
+2025-06-12 19:51:51,893 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:52,034 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:52] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:51:53,868 - INFO - 数据库配置成功加载
+2025-06-12 19:51:54,013 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:54,933 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:54] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:51:55,004 - INFO - 数据库配置成功加载
+2025-06-12 19:51:55,149 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:55,290 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:55] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:51:57,196 - INFO - 数据库配置成功加载
+2025-06-12 19:51:57,340 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:58,265 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:58] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:51:58,337 - INFO - 数据库配置成功加载
+2025-06-12 19:51:58,484 - INFO - MySQL数据库连接成功
+2025-06-12 19:51:58,642 - INFO - 192.168.1.10 - - [12/Jun/2025 19:51:58] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:52:00,449 - INFO - 数据库配置成功加载
+2025-06-12 19:52:00,594 - INFO - MySQL数据库连接成功
+2025-06-12 19:52:01,494 - INFO - 192.168.1.10 - - [12/Jun/2025 19:52:01] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:52:47,010 - INFO - 数据库配置成功加载
+2025-06-12 19:52:47,154 - INFO - MySQL数据库连接成功
+2025-06-12 19:52:47,297 - INFO - 192.168.1.10 - - [12/Jun/2025 19:52:47] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:52:49,272 - INFO - 数据库配置成功加载
+2025-06-12 19:52:49,415 - INFO - MySQL数据库连接成功
+2025-06-12 19:52:50,335 - INFO - 192.168.1.10 - - [12/Jun/2025 19:52:50] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:52:50,409 - INFO - 数据库配置成功加载
+2025-06-12 19:52:50,556 - INFO - MySQL数据库连接成功
+2025-06-12 19:52:50,699 - INFO - 192.168.1.10 - - [12/Jun/2025 19:52:50] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:52:52,510 - INFO - 数据库配置成功加载
+2025-06-12 19:52:52,658 - INFO - MySQL数据库连接成功
+2025-06-12 19:52:53,560 - INFO - 192.168.1.10 - - [12/Jun/2025 19:52:53] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:52:53,629 - INFO - 数据库配置成功加载
+2025-06-12 19:52:53,775 - INFO - MySQL数据库连接成功
+2025-06-12 19:52:53,915 - INFO - 192.168.1.10 - - [12/Jun/2025 19:52:53] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:52:55,778 - INFO - 数据库配置成功加载
+2025-06-12 19:52:55,921 - INFO - MySQL数据库连接成功
+2025-06-12 19:52:56,827 - INFO - 192.168.1.10 - - [12/Jun/2025 19:52:56] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:52:56,894 - INFO - 数据库配置成功加载
+2025-06-12 19:52:57,038 - INFO - MySQL数据库连接成功
+2025-06-12 19:52:57,178 - INFO - 192.168.1.10 - - [12/Jun/2025 19:52:57] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:52:59,161 - INFO - 数据库配置成功加载
+2025-06-12 19:52:59,305 - INFO - MySQL数据库连接成功
+2025-06-12 19:53:00,221 - INFO - 192.168.1.10 - - [12/Jun/2025 19:53:00] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:53:29,291 - INFO - 数据库配置成功加载
+2025-06-12 19:53:29,434 - INFO - MySQL数据库连接成功
+2025-06-12 19:53:29,575 - INFO - 192.168.1.10 - - [12/Jun/2025 19:53:29] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:53:31,330 - INFO - 数据库配置成功加载
+2025-06-12 19:53:31,473 - INFO - MySQL数据库连接成功
+2025-06-12 19:53:32,392 - INFO - 192.168.1.10 - - [12/Jun/2025 19:53:32] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:53:32,462 - INFO - 数据库配置成功加载
+2025-06-12 19:53:32,606 - INFO - MySQL数据库连接成功
+2025-06-12 19:53:32,749 - INFO - 192.168.1.10 - - [12/Jun/2025 19:53:32] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:53:34,562 - INFO - 数据库配置成功加载
+2025-06-12 19:53:34,706 - INFO - MySQL数据库连接成功
+2025-06-12 19:53:35,627 - INFO - 192.168.1.10 - - [12/Jun/2025 19:53:35] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:53:35,688 - INFO - 数据库配置成功加载
+2025-06-12 19:53:35,833 - INFO - MySQL数据库连接成功
+2025-06-12 19:53:35,986 - INFO - 192.168.1.10 - - [12/Jun/2025 19:53:35] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:53:37,827 - INFO - 数据库配置成功加载
+2025-06-12 19:53:37,972 - INFO - MySQL数据库连接成功
+2025-06-12 19:53:38,875 - INFO - 192.168.1.10 - - [12/Jun/2025 19:53:38] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:53:38,938 - INFO - 数据库配置成功加载
+2025-06-12 19:53:39,085 - INFO - MySQL数据库连接成功
+2025-06-12 19:53:39,228 - INFO - 192.168.1.10 - - [12/Jun/2025 19:53:39] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:53:41,011 - INFO - 数据库配置成功加载
+2025-06-12 19:53:41,160 - INFO - MySQL数据库连接成功
+2025-06-12 19:53:42,069 - INFO - 192.168.1.10 - - [12/Jun/2025 19:53:42] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:54:32,509 - INFO - 数据库配置成功加载
+2025-06-12 19:54:32,651 - INFO - MySQL数据库连接成功
+2025-06-12 19:54:32,791 - INFO - 192.168.1.10 - - [12/Jun/2025 19:54:32] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:54:34,675 - INFO - 数据库配置成功加载
+2025-06-12 19:54:34,821 - INFO - MySQL数据库连接成功
+2025-06-12 19:54:40,901 - INFO - 192.168.1.10 - - [12/Jun/2025 19:54:40] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 19:54:40,966 - INFO - 数据库配置成功加载
+2025-06-12 19:54:41,110 - INFO - MySQL数据库连接成功
+2025-06-12 19:54:41,252 - INFO - 192.168.1.10 - - [12/Jun/2025 19:54:41] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 19:54:43,137 - INFO - 数据库配置成功加载
+2025-06-12 19:54:43,280 - INFO - MySQL数据库连接成功
+2025-06-12 19:54:49,133 - INFO - 192.168.1.10 - - [12/Jun/2025 19:54:49] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 20:00:04,147 - INFO - 数据库配置成功加载
+2025-06-12 20:00:04,290 - INFO - MySQL数据库连接成功
+2025-06-12 20:00:04,431 - INFO - 192.168.1.10 - - [12/Jun/2025 20:00:04] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 20:00:06,284 - INFO - 数据库配置成功加载
+2025-06-12 20:00:06,428 - INFO - MySQL数据库连接成功
+2025-06-12 20:00:12,239 - INFO - 192.168.1.10 - - [12/Jun/2025 20:00:12] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 20:00:12,308 - INFO - 数据库配置成功加载
+2025-06-12 20:00:13,456 - INFO - MySQL数据库连接成功
+2025-06-12 20:00:13,599 - INFO - 192.168.1.10 - - [12/Jun/2025 20:00:13] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 20:00:15,444 - INFO - 数据库配置成功加载
+2025-06-12 20:00:15,588 - INFO - MySQL数据库连接成功
+2025-06-12 20:00:21,300 - INFO - 192.168.1.10 - - [12/Jun/2025 20:00:21] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -
+2025-06-12 20:00:21,371 - INFO - 数据库配置成功加载
+2025-06-12 20:00:21,515 - INFO - MySQL数据库连接成功
+2025-06-12 20:00:21,657 - INFO - 192.168.1.10 - - [12/Jun/2025 20:00:21] "POST /api/outer/console_db/searchInfoByColumn HTTP/1.1" 200 -
+2025-06-12 20:00:23,508 - INFO - 数据库配置成功加载
+2025-06-12 20:00:34,602 - ERROR - (2003, "Can't connect to MySQL server on 'rm-uf661u5k51222zy6eao.mysql.rds.aliyuncs.com' (timed out)"): MySQL数据库连接失败
+2025-06-12 20:00:34,623 - INFO - 192.168.1.10 - - [12/Jun/2025 20:00:34] "POST /api/outer/history_db/uploadInitFile HTTP/1.1" 200 -

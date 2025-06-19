@@ -28,6 +28,7 @@ from routes.local.project.work_surface import work_surface_db
 from routes.local.pcd.pcd_file_op import pcd_file_op
 from routes.local.user.user import user_db
 from routes.local.user.role import role_db
+from routes.local.wx.wx import wx_db
 from routes.miniprogram.monitor_atten import monitor_db
 from routes.miniprogram.property import property_db
 from routes.miniprogram.user_info import info_db
@@ -59,6 +60,7 @@ app.register_blueprint(company_db, url_prefix='/api/outer/company_db')
 app.register_blueprint(property_db, url_prefix='/api/mp/property_db')
 app.register_blueprint(info_db, url_prefix='/api/mp/info_db')
 app.register_blueprint(monitor_db, url_prefix='/api/mp/monitor_db')
+app.register_blueprint(wx_db, url_prefix='/api/wx/wx_db')
 
 
 if __name__ == '__main__':
